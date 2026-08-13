@@ -10155,8 +10155,8 @@
                                 "showChoice",
                                 "選択肢の表示",
                                 {
-                                    "messageText": "シーンを全開放しますか？\n",
-                                    "choices": "[\"{\\\"label\\\":\\\"はい\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"いいえ\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
+                                    "messageText": "Bạn có muốn mở khóa toàn bộ phân cảnh không?\n",
+                                    "choices": "[\"{\\\"label\\\":\\\"Có\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"Không\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
                                     "cancelType": "true",
@@ -10175,14 +10175,14 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "質問メッセージ = シーンを全開放しますか？ "
+                                "質問メッセージ = Bạn có muốn mở khóa toàn bộ phân cảnh không? "
                             ]
                         },
                         {
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "選択肢リスト = [\"{\\\"label\\\":\\\"はい\\\",\\\"switchId\\\":\\\"\\\",\\\"re…"
+                                "選択肢リスト = [\"{\\\"label\\\":\\\"Có\\\",\\\"switchId\\\":\\\"\\\",\\\"re…"
                             ]
                         },
                         {
@@ -10288,8 +10288,8 @@
                                 "showChoice",
                                 "選択肢の表示",
                                 {
-                                    "messageText": "本当に全開放しますか？\n",
-                                    "choices": "[\"{\\\"label\\\":\\\"はい\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"いいえ\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
+                                    "messageText": "Bạn có chắc muốn mở khóa toàn bộ phân cảnh không?\n",
+                                    "choices": "[\"{\\\"label\\\":\\\"Có\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"Không\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
                                     "cancelType": "true",
@@ -10308,14 +10308,14 @@
                             "code": 657,
                             "indent": 4,
                             "parameters": [
-                                "質問メッセージ = 本当に全開放しますか？ "
+                                "質問メッセージ = Bạn có chắc muốn mở khóa toàn bộ phân cảnh không? "
                             ]
                         },
                         {
                             "code": 657,
                             "indent": 4,
                             "parameters": [
-                                "選択肢リスト = [\"{\\\"label\\\":\\\"はい\\\",\\\"switchId\\\":\\\"\\\",\\\"re…"
+                                "選択肢リスト = [\"{\\\"label\\\":\\\"Có\\\",\\\"switchId\\\":\\\"\\\",\\\"re…"
                             ]
                         },
                         {

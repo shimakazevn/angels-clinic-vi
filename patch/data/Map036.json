@@ -5483,7 +5483,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -5491,7 +5491,7 @@
                             "code": 657,
                             "indent": 6,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -6942,7 +6942,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -6950,7 +6950,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {

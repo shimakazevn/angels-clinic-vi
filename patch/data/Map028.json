@@ -1788,7 +1788,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Khả năng hồi phục của Anh đã được tăng cường!"
+                                    "text": "Khả năng hồi phục của \\N[1] đã được tăng cường!"
                                 }
                             ]
                         },
@@ -1796,7 +1796,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = Khả năng hồi phục của Anh đã được tăng cường!"
+                                "テキスト = Khả năng hồi phục của \\N[1] đã được tăng cường!"
                             ]
                         },
                         {
@@ -5404,7 +5404,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -5412,7 +5412,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -7081,7 +7081,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -7089,7 +7089,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {

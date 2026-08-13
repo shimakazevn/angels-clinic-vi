@@ -5021,7 +5021,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -5029,7 +5029,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -5312,7 +5312,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Này, thế được rồi đúng không? Em hứa không giận đâu, anh emu thua em có được không...?"
+                                "Này, thế được rồi đúng không? Em hứa không giận đâu, anh chịu thua em có được không...?"
                             ]
                         },
                         {
@@ -5474,7 +5474,7 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Hì hì...♡ Cuối cùng anh cũng emu khuất phục rồi...♡"
+                                "Hì hì...♡ Cuối cùng anh cũng chịu khuất phục rồi...♡"
                             ]
                         },
                         {
@@ -7081,7 +7081,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -7089,7 +7089,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -7372,7 +7372,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Này, thế được rồi đúng không? Em hứa không giận đâu, anh emu thua em có được không...?"
+                                "Này, thế được rồi đúng không? Em hứa không giận đâu, anh chịu thua em có được không...?"
                             ]
                         },
                         {
@@ -7534,7 +7534,7 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Hì hì...♡ Cuối cùng anh cũng emu khuất phục rồi...♡"
+                                "Hì hì...♡ Cuối cùng anh cũng chịu khuất phục rồi...♡"
                             ]
                         },
                         {

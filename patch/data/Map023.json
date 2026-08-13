@@ -5325,7 +5325,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -5333,7 +5333,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -6410,7 +6410,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bị Sera trói giữ mất rồi!"
+                                    "text": "\\N[1] đã bị Sera trói giữ mất rồi!"
                                 }
                             ]
                         },
@@ -6418,7 +6418,7 @@
                             "code": 657,
                             "indent": 7,
                             "parameters": [
-                                "テキスト = Anh đã bị Sera trói giữ mất rồi!"
+                                "テキスト = \\N[1] đã bị Sera trói giữ mất rồi!"
                             ]
                         },
                         {
@@ -6635,7 +6635,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Hết emu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
+                                    "text": "　　　Hết chịu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
                                 }
                             ]
                         },
@@ -6643,7 +6643,7 @@
                             "code": 657,
                             "indent": 6,
                             "parameters": [
-                                "テキスト = 　　　Hết emu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
+                                "テキスト = 　　　Hết chịu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
                             ]
                         },
                         {
@@ -8387,7 +8387,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -8395,7 +8395,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -9467,7 +9467,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bị Sera trói giữ mất rồi!"
+                                    "text": "\\N[1] đã bị Sera trói giữ mất rồi!"
                                 }
                             ]
                         },
@@ -9475,7 +9475,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Anh đã bị Sera trói giữ mất rồi!"
+                                "テキスト = \\N[1] đã bị Sera trói giữ mất rồi!"
                             ]
                         },
                         {
@@ -9692,7 +9692,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Hết emu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
+                                    "text": "　　　Hết chịu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
                                 }
                             ]
                         },
@@ -9700,7 +9700,7 @@
                             "code": 657,
                             "indent": 4,
                             "parameters": [
-                                "テキスト = 　　　Hết emu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
+                                "テキスト = 　　　Hết chịu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
                             ]
                         },
                         {

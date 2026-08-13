@@ -4702,7 +4702,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắt đầu thủ dâm mất rồi!"
+                                    "text": "\\N[1] đã bắt đầu thủ dâm mất rồi!"
                                 }
                             ]
                         },
@@ -4710,7 +4710,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Anh đã bắt đầu thủ dâm mất rồi!"
+                                "テキスト = \\N[1] đã bắt đầu thủ dâm mất rồi!"
                             ]
                         },
                         {
@@ -5254,7 +5254,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -5262,7 +5262,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -5447,7 +5447,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Ờm... Anh không emu thua trước sự quyến rũ của em sao?"
+                                "Ờm... Anh không chịu thua trước sự quyến rũ của em sao?"
                             ]
                         },
                         {
@@ -7338,7 +7338,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắt đầu thủ dâm mất rồi!"
+                                    "text": "\\N[1] đã bắt đầu thủ dâm mất rồi!"
                                 }
                             ]
                         },
@@ -7346,7 +7346,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Anh đã bắt đầu thủ dâm mất rồi!"
+                                "テキスト = \\N[1] đã bắt đầu thủ dâm mất rồi!"
                             ]
                         },
                         {
@@ -7652,7 +7652,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Anh đã bắn tinh mất rồi!"
+                                    "text": "\\N[1] đã bắn tinh mất rồi!"
                                 }
                             ]
                         },
@@ -7660,7 +7660,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Anh đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
                             ]
                         },
                         {
@@ -7845,7 +7845,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Ờm... Anh không emu thua trước sự quyến rũ của em sao?"
+                                "Ờm... Anh không chịu thua trước sự quyến rũ của em sao?"
                             ]
                         },
                         {
