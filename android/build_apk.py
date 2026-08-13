@@ -223,6 +223,43 @@ def copy_game_to_assets(game_dir: Path):
     ok(f"Tong cong: {total_files} files, {size_mb:.1f} MB")
     warn(f"APK cuoi se nang khoang {size_mb * 1.05:.0f} MB (sau khi dong goi)")
 
+# ========== Android WebView Compatibility Patch ==========
+
+def patch_for_android():
+    """Patch cac file JS de tuong thich voi Android WebView.
+
+    Van de goc re:
+    - RPG Maker MZ dung Utils.isNwjs() de detect moi truong NW.js:
+        return typeof require === "function" && typeof process === "object";
+    - Tren Android WebView, 'process' duoc inject boi vorbisdecoder.js (WASM)
+      nen Utils.isNwjs() tra ve TRUE nhung thuc ra khong co NW.js.
+    - Hau qua: StorageManager.isLocalMode() = true -> game goi require('fs')
+      khong ton tai trong WebView -> crash ngay khi khoi dong -> man hinh den.
+
+    Fix: Dung 'typeof nw === "object"' de detect NW.js chinh xac.
+    """
+    header("BUOC 3.5: Patch JS cho Android WebView")
+
+    # --- Patch 1: rmmz_core.js - Utils.isNwjs() ---
+    core_js = ASSETS_DIR / "js" / "rmmz_core.js"
+    if not core_js.exists():
+        warn("  Khong tim thay rmmz_core.js -- bo qua patch")
+        return
+
+    OLD_NWJS = 'return typeof require === "function" && typeof process === "object";'
+    NEW_NWJS = 'return typeof nw === "object"; // Android fix: avoid false positive from vorbisdecoder.js'
+
+    content = core_js.read_text(encoding="utf-8")
+    if OLD_NWJS in content:
+        content = content.replace(OLD_NWJS, NEW_NWJS, 1)
+        core_js.write_text(content, encoding="utf-8")
+        ok("  rmmz_core.js: da patch Utils.isNwjs() -> typeof nw === 'object'")
+    elif NEW_NWJS in content:
+        ok("  rmmz_core.js: da duoc patch truoc do, bo qua")
+    else:
+        warn("  rmmz_core.js: KHONG tim thay doan can patch -- kiem tra thu cong!")
+        warn(f"    Can tim: {OLD_NWJS}")
+
 # ========== Build APK ==========
 
 def build_apk(sdk_dir: Path):
@@ -330,6 +367,9 @@ def main():
 
     # -- Buoc 3: Copy game files --
     copy_game_to_assets(game_dir)
+
+    # -- Buoc 3.5: Patch JS cho Android WebView --
+    patch_for_android()
 
     # -- Buoc 4: Build --
     if not build_apk(sdk_dir):
