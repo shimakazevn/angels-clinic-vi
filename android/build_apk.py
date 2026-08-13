@@ -252,13 +252,80 @@ def patch_for_android():
     content = core_js.read_text(encoding="utf-8")
     if OLD_NWJS in content:
         content = content.replace(OLD_NWJS, NEW_NWJS, 1)
-        core_js.write_text(content, encoding="utf-8")
         ok("  rmmz_core.js: da patch Utils.isNwjs() -> typeof nw === 'object'")
     elif NEW_NWJS in content:
-        ok("  rmmz_core.js: da duoc patch truoc do, bo qua")
+        ok("  rmmz_core.js: da duoc patch Utils.isNwjs truoc do, bo qua")
     else:
-        warn("  rmmz_core.js: KHONG tim thay doan can patch -- kiem tra thu cong!")
-        warn(f"    Can tim: {OLD_NWJS}")
+        warn("  rmmz_core.js: KHONG tim thay doan Utils.isNwjs can patch -- kiem tra thu cong!")
+
+    OLD_PIXI = '} catch (e) {\n        this._app = null;\n    }'
+    NEW_PIXI = '} catch (e) {\n        console.error("PIXI App Creation Failed:", e);\n        this._app = null;\n    }'
+    if OLD_PIXI in content and NEW_PIXI not in content:
+        content = content.replace(OLD_PIXI, NEW_PIXI, 1)
+        ok("  rmmz_core.js: da patch _createPixiApp de log loi")
+        
+    # --- Patch 5: rmmz_core.js - WebGL Workarounds for Android WebView ---
+    OLD_SETUP = 'Graphics._setupPixi = function() {\n    PIXI.utils.skipHello();'
+    NEW_SETUP = 'Graphics._setupPixi = function() {\n    PIXI.utils.skipHello();\n    PIXI.settings.SPRITE_MAX_TEXTURES = 1;\n    PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.MEDIUM;'
+    if OLD_SETUP in content and 'PIXI.settings.SPRITE_MAX_TEXTURES = 1;' not in content:
+        content = content.replace(OLD_SETUP, NEW_SETUP, 1)
+        ok("  rmmz_core.js: da patch WebGL SPRITE_MAX_TEXTURES=1 de sua loi den man hinh")
+    # removed content2 manipulation here
+        
+    # --- Patch 3: main.js - isPathRandomized() ---
+    OLD_APP = 'this._app = new PIXI.Application({\n            view: this._canvas,\n            autoStart: false\n        });'
+    NEW_APP = 'this._app = new PIXI.Application({\n            view: this._canvas,\n            autoStart: false,\n            transparent: true,\n            backgroundAlpha: 0,\n            preserveDrawingBuffer: true,\n            forceCanvas: true\n        });'
+    if OLD_APP in content:
+        content = content.replace(OLD_APP, NEW_APP, 1)
+        ok("  rmmz_core.js: da patch PIXI.Application them forceCanvas=true de fix mumu")
+    # For idempotence if OLD_APP already replaced:
+    elif 'preserveDrawingBuffer: true' in content and 'forceCanvas: true' not in content:
+        content = content.replace('preserveDrawingBuffer: true', 'preserveDrawingBuffer: true,\n            forceCanvas: true')
+        ok("  rmmz_core.js: da patch PIXI.Application them forceCanvas=true")
+        
+    core_js.write_text(content, encoding="utf-8")
+
+    main_js = ASSETS_DIR / "js" / "main.js"
+    if not main_js.exists():
+        warn("  Khong tim thay main.js -- bo qua patch")
+        return
+
+    OLD_PROCESS = 'typeof process === "object" &&'
+    NEW_PROCESS = 'typeof process === "object" && process.mainModule &&'
+
+    main_content = main_js.read_text(encoding="utf-8")
+    if OLD_PROCESS in main_content and NEW_PROCESS not in main_content:
+        main_content = main_content.replace(OLD_PROCESS, NEW_PROCESS, 1)
+        ok("  main.js: da patch isPathRandomized() de tranh crash TypeError")
+    elif NEW_PROCESS in main_content:
+        ok("  main.js: isPathRandomized() da duoc patch truoc do, bo qua")
+        
+    if '"js/libs/pixi.js"' in main_content:
+        main_content = main_content.replace('"js/libs/pixi.js"', '"js/libs/pixi-legacy.js"')
+        ok("  main.js: da patch de su dung pixi-legacy.js (Canvas fallback)")
+    else:
+        warn("  main.js: KHONG tim thay doan isPathRandomized can patch -- kiem tra thu cong!")
+
+    # --- Patch 4: main.js - onWindowError() ---
+    OLD_ONERROR = 'function onWindowError(event) {\n    if (event.filename) {\n        PluginManager.setup($plugins);\n        SceneManager.catchException(event.error);\n    }\n}'
+    NEW_ONERROR = 'function onWindowError(event) {\n    console.error("Window Error:", event.error);\n    if (Graphics && Graphics.printError) {\n        Graphics.printError("Error", event.error ? event.error.message : event.message);\n    }\n}'
+    if OLD_ONERROR in main_content and NEW_ONERROR not in main_content:
+        main_content = main_content.replace(OLD_ONERROR, NEW_ONERROR, 1)
+        ok("  main.js: da patch onWindowError() de show loi tren man hinh")
+        
+    # Inject a debug interval to print canvas size
+    DEBUG_LOG = '''
+setInterval(function() {
+    if (window.Graphics && Graphics._canvas) {
+        console.log("DEBUG: window.innerWidth=" + window.innerWidth + " window.innerHeight=" + window.innerHeight + " canvas.width=" + Graphics._canvas.width + " canvas.style.width=" + Graphics._canvas.style.width + " scale=" + Graphics._realScale);
+    }
+}, 3000);
+'''
+    if "DEBUG: window.innerWidth" not in main_content:
+        main_content = main_content + DEBUG_LOG
+        ok("  main.js: da them debug log interval")
+        
+    main_js.write_text(main_content, encoding="utf-8")
 
 # ========== Build APK ==========
 

@@ -69,9 +69,7 @@ public class MainActivity extends Activity {
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
 
-        // Hardware acceleration is set at window level; LAYER_TYPE_HARDWARE
-        // enables GPU compositing for WebGL. Do NOT use LAYER_TYPE_SOFTWARE
-        // as it disables WebGL entirely.
+        // Hardware acceleration is required for WebGL compositing.
         mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         // WebChromeClient is REQUIRED for WebGL to work in Android WebView.
