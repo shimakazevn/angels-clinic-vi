@@ -1481,8 +1481,8 @@
                                 "showChoice",
                                 "選択肢の表示",
                                 {
-                                    "messageText": "OPをスキップしますか？\n\n※スキップした場合、あらすじの後\n　戦闘チュートリアルを開始します。",
-                                    "choices": "[\"{\\\"label\\\":\\\"OPを見る（初回推奨）\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"スキップする\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
+                                    "messageText": "Bạn có muốn bỏ qua OP không?\n\n※Nếu bỏ qua, sau tóm tắt câu chuyện\n　sẽ bắt đầu hướng dẫn trận chiến.",
+                                    "choices": "[\"{\\\"label\\\": \\\"Xem OP (Khuyên dùng cho lần đầu)\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\", \"{\\\"label\\\": \\\"Bỏ qua\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
                                     "cancelType": "false",
@@ -1501,14 +1501,14 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "質問メッセージ = OPをスキップしますか？  ※スキップした場合…"
+                                "質問メッセージ = Bạn có muốn bỏ qua OP không?  ※Nếu bỏ qua…"
                             ]
                         },
                         {
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "選択肢リスト = [\"{\\\"label\\\":\\\"OPを見る（初回推奨）\\\",\\\"swit…"
+                                "選択肢リスト = [\"{\\\"label\\\":\\\"Xem OP (Khuyên dùng cho lần đầu)\\\",\\\"swit…"
                             ]
                         },
                         {
@@ -1529,7 +1529,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "キャンセル許可 = false"
+                                "Hủy許可 = false"
                             ]
                         },
                         {
