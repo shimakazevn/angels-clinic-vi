@@ -5567,6 +5567,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "sóc cu bằng chân hết sức cơ đấy."
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 5,
                             "parameters": [
@@ -5725,7 +5732,14 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Anh có hứng thú không? Muốn trải nghiệm một chút vào phút cuối không?"
+                                "Anh có hứng thú không?"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "Muốn trải nghiệm một chút vào phút cuối không?"
                             ]
                         },
                         {
@@ -5768,8 +5782,8 @@
                             "indent": 5,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -6414,7 +6428,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },
@@ -8029,6 +8043,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "sóc cu bằng chân hết sức cơ đấy."
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 3,
                             "parameters": [
@@ -8187,7 +8208,14 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Anh có hứng thú không? Muốn trải nghiệm một chút vào phút cuối không?"
+                                "Anh có hứng thú không?"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "Muốn trải nghiệm một chút vào phút cuối không?"
                             ]
                         },
                         {
@@ -8230,8 +8258,8 @@
                             "indent": 3,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -8876,7 +8904,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },

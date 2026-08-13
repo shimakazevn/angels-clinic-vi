@@ -10137,7 +10137,7 @@
                                 0,
                                 0,
                                 2,
-                                "\\c[18]※Lưu Ý※"
+                                "\\c[18]※Chú ý※"
                             ]
                         },
                         {
@@ -10148,6 +10148,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "Tuy nhiên, \\c[18]không thể hoàn tác lại trạng thái chưa mở khóa\\c[0]."
+                            ]
+                        },
+                        {
                             "code": 357,
                             "indent": 3,
                             "parameters": [
@@ -10155,7 +10162,7 @@
                                 "showChoice",
                                 "選択肢の表示",
                                 {
-                                    "messageText": "Bạn có muốn mở khóa toàn bộ cảnh không?\n",
+                                    "messageText": "Bạn có muốn mở khóa toàn bộ phân cảnh không?\n",
                                     "choices": "[\"{\\\"label\\\": \\\"Có\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\", \"{\\\"label\\\": \\\"Không\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
@@ -10288,7 +10295,7 @@
                                 "showChoice",
                                 "選択肢の表示",
                                 {
-                                    "messageText": "Bạn có chắc chắn muốn mở khóa toàn bộ không?\n",
+                                    "messageText": "Bạn có chắc muốn mở khóa toàn bộ phân cảnh không?\n",
                                     "choices": "[\"{\\\"label\\\": \\\"Có\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\", \"{\\\"label\\\": \\\"Không\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
@@ -10810,7 +10817,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Đã mở khóa toàn bộ phân cảnh."
+                                "Đã mở khóa toàn bộ cảnh quay."
                             ]
                         },
                         {

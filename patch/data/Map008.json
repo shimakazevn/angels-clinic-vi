@@ -1501,14 +1501,14 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "質問メッセージ = Bạn có muốn bỏ qua OP không?  ※Nếu bỏ qua…"
+                                "質問メッセージ = Bạn có muốn bỏ qua phần Mở đầu không?  ※Nếu bỏ qua, sau phần Tóm tắt sẽ bắt đầu Hướng dẫn chiến đấu.…"
                             ]
                         },
                         {
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "選択肢リスト = [\"{\\\"label\\\":\\\"Xem OP (Khuyên dùng cho lần đầu)\\\",\\\"swit…"
+                                "選択肢リスト = [\"{\\\"label\\\":\\\"Xem phần Mở đầu (nên xem lần đầu)\\\",\\\"swit…"
                             ]
                         },
                         {
@@ -1755,6 +1755,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "luôn trăn trở vì chứng xuất tinh quá sớm của mình."
+                            ]
+                        },
+                        {
                             "code": 221,
                             "indent": 1,
                             "parameters": []
@@ -1823,7 +1830,14 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "Tình cờ bước vào một phòng khám chuyên trị xuất tinh sớm, anh đã gặp gỡ Sera — cô y tá Thiên Sứ với khuôn mặt lạnh lùng."
+                                "Tại phòng khám chuyên trị liệu xuất tinh sớm mà anh tình cờ bước vào,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "Gặp gỡ cô y tá Thiên Sứ vô cảm, Sera."
                             ]
                         },
                         {
@@ -1909,7 +1923,21 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "Để chữa trị chứng xuất tinh sớm cho nhân vật chính, Sera đã đề xuất liệu pháp trị liệu \"Tự mình làm chuyện dâm dục với anh để anh quen dần\"."
+                                "Để chữa chứng xuất tinh sớm cho nhân vật chính,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "Sera đã đề xuất phương pháp trị liệu \"làm chuyện 18+"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 1,
+                            "parameters": [
+                                "với cô ấy để quen dần\"."
                             ]
                         },
                         {

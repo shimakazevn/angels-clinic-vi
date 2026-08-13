@@ -5838,6 +5838,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "anh đang muốn bắn tinh lắm rồi đúng không?"
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 5,
                             "parameters": [
@@ -5996,7 +6003,14 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Anh có muốn em dùng màn sóc cu liếm núm vú hết sức làm tinh dịch đậm đặc ủ lâu trút ra phọt phọt... không?"
+                                "Lượng tinh dịch đặc quánh ủ lâu ngày,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "anh có muốn em dùng tuyệt chiêu liếm ti sục cu làm nó phọt ra không?"
                             ]
                         },
                         {
@@ -6039,8 +6053,8 @@
                             "indent": 5,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -6215,7 +6229,14 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Ôi dội, bị nhịn bắn tinh làm đầu óc không suy nghĩ nổi nữa rồi sao. Tội nghiệp chưa."
+                                "Ôi chao, bị nhấp nhả làm đầu óc mụ mị mất rồi sao."
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 6,
+                            "parameters": [
+                                "Thật tội nghiệp."
                             ]
                         },
                         {
@@ -6398,7 +6419,7 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Thế thì bây giờ em sẽ giúp anh giải tỏa nhé?♡"
+                                "Vậy thì bây giờ em sẽ làm cho anh nhẹ nhõm sảng khoái nhé?♡"
                             ]
                         },
                         {
@@ -6849,7 +6870,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },
@@ -8658,6 +8679,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "anh đang muốn bắn tinh lắm rồi đúng không?"
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 3,
                             "parameters": [
@@ -8816,7 +8844,14 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Anh có muốn em dùng màn sóc cu liếm núm vú hết sức làm tinh dịch đậm đặc ủ lâu trút ra phọt phọt... không?"
+                                "Lượng tinh dịch đặc quánh ủ lâu ngày,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "anh có muốn em dùng tuyệt chiêu liếm ti sục cu làm nó phọt ra không?"
                             ]
                         },
                         {
@@ -8859,8 +8894,8 @@
                             "indent": 3,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -9035,7 +9070,14 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Ôi dội, bị nhịn bắn tinh làm đầu óc không suy nghĩ nổi nữa rồi sao. Tội nghiệp chưa."
+                                "Ôi chao, bị nhấp nhả làm đầu óc mụ mị mất rồi sao."
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 4,
+                            "parameters": [
+                                "Thật tội nghiệp."
                             ]
                         },
                         {
@@ -9218,7 +9260,7 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Thế thì bây giờ em sẽ giúp anh giải tỏa nhé?♡"
+                                "Vậy thì bây giờ em sẽ làm cho anh nhẹ nhõm sảng khoái nhé?♡"
                             ]
                         },
                         {
@@ -9669,7 +9711,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },

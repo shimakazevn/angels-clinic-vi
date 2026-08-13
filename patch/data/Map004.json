@@ -5590,6 +5590,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "rất mong muốn con cu của anh, tiếc thật đấy."
+                            ]
+                        },
+                        {
                             "code": 355,
                             "indent": 5,
                             "parameters": [
@@ -5691,7 +5698,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "...Em xin hỏi anh lại một lần cuối cùng."
+                                "...Lần cuối em xin hỏi lại anh một lần nữa."
                             ]
                         },
                         {
@@ -5796,7 +5803,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Thực sự anh có muốn làm tình nồng nàn mặn nồng với em không?"
+                                "Thật ra anh rất muốn làm tình ân ái nồng cháy với em đúng không?"
                             ]
                         },
                         {
@@ -5839,8 +5846,8 @@
                             "indent": 5,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -5965,7 +5972,14 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Hì hì. Thế sao. Vậy thì chúng ta hãy làm thôi nào."
+                                "Hì hì. Ra vậy sao."
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 6,
+                            "parameters": [
+                                "Vậy thì chúng ta tiến hành thôi nào."
                             ]
                         },
                         {
@@ -6176,7 +6190,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },
@@ -7859,6 +7873,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "rất mong muốn con cu của anh, tiếc thật đấy."
+                            ]
+                        },
+                        {
                             "code": 355,
                             "indent": 3,
                             "parameters": [
@@ -7960,7 +7981,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "...Em xin hỏi anh lại một lần cuối cùng."
+                                "...Lần cuối em xin hỏi lại anh một lần nữa."
                             ]
                         },
                         {
@@ -8065,7 +8086,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Thực sự anh có muốn làm tình nồng nàn mặn nồng với em không?"
+                                "Thật ra anh rất muốn làm tình ân ái nồng cháy với em đúng không?"
                             ]
                         },
                         {
@@ -8108,8 +8129,8 @@
                             "indent": 3,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -8234,7 +8255,14 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Hì hì. Thế sao. Vậy thì chúng ta hãy làm thôi nào."
+                                "Hì hì. Ra vậy sao."
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 4,
+                            "parameters": [
+                                "Vậy thì chúng ta tiến hành thôi nào."
                             ]
                         },
                         {
@@ -8445,7 +8473,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },

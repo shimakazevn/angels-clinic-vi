@@ -5401,6 +5401,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "rất là tiếc đấy."
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 5,
                             "parameters": [
@@ -5559,7 +5566,14 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Nếu anh gia hạn thời gian, em sẽ mút cu tra tấn cho anh bủn rủn hông luôn cơ đấy."
+                                "Nếu anh gia hạn thêm thời gian,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "em sẽ mút cu tra tấn cho anh bủn rủn cả hông luôn cơ."
                             ]
                         },
                         {
@@ -5721,7 +5735,14 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Anh tính sao? Có gia hạn không?"
+                                "Anh tính sao?"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "Có gia hạn không?"
                             ]
                         },
                         {
@@ -5764,8 +5785,8 @@
                             "indent": 5,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -5968,7 +5989,14 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Thế thì em sẽ chuyển sang gói mút cu cưỡng ép thua trận nhé...?♡"
+                                "Thế thì em sẽ chuyển sang gói mút cu cưỡng ép thua trận"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 6,
+                            "parameters": [
+                                "nhé...?♡"
                             ]
                         },
                         {
@@ -6447,7 +6475,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Nhịn được như vậy thật tuyệt vời,"
+                                    "text": "Sera「Chịu đựng được giỏi thế này thì tuyệt quá rồi,"
                                 }
                             ]
                         },
@@ -6466,7 +6494,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Anh trai?」"
+                                    "text": "   anh trai?」"
                                 }
                             ]
                         },
@@ -8116,6 +8144,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "rất là tiếc đấy."
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 3,
                             "parameters": [
@@ -8274,7 +8309,14 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Nếu anh gia hạn thời gian, em sẽ mút cu tra tấn cho anh bủn rủn hông luôn cơ đấy."
+                                "Nếu anh gia hạn thêm thời gian,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "em sẽ mút cu tra tấn cho anh bủn rủn cả hông luôn cơ."
                             ]
                         },
                         {
@@ -8436,7 +8478,14 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Anh tính sao? Có gia hạn không?"
+                                "Anh tính sao?"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "Có gia hạn không?"
                             ]
                         },
                         {
@@ -8479,8 +8528,8 @@
                             "indent": 3,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -8683,7 +8732,14 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Thế thì em sẽ chuyển sang gói mút cu cưỡng ép thua trận nhé...?♡"
+                                "Thế thì em sẽ chuyển sang gói mút cu cưỡng ép thua trận"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 4,
+                            "parameters": [
+                                "nhé...?♡"
                             ]
                         },
                         {
@@ -9162,7 +9218,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Nhịn được như vậy thật tuyệt vời,"
+                                    "text": "Sera「Chịu đựng được giỏi thế này thì tuyệt quá rồi,"
                                 }
                             ]
                         },
@@ -9181,7 +9237,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Anh trai?」"
+                                    "text": "   anh trai?」"
                                 }
                             ]
                         },

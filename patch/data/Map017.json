@@ -5556,6 +5556,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "cũng hoàn toàn được mà..."
+                            ]
+                        },
+                        {
                             "code": 355,
                             "indent": 5,
                             "parameters": [
@@ -5657,7 +5664,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Anh chưa cất con cu vào quần ngay đúng không?"
+                                "Anh vẫn chưa cất con cu đi đúng không?"
                             ]
                         },
                         {
@@ -5700,8 +5707,8 @@
                             "indent": 5,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -5826,7 +5833,14 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Thế thì tinh dịch sôi trào vì trị liệu, hãy cho em đi nào...♡"
+                                "Nếu vậy thì lượng tinh dịch nóng bỏng từ buổi trị liệu,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 6,
+                            "parameters": [
+                                "Hãy trao hết cho em nhé...♡"
                             ]
                         },
                         {
@@ -6084,7 +6098,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã chấp nhận lời mời gọi của Sera mất rồi!"
+                                    "text": "Đã chấp nhận sự quyến rũ của Sera!"
                                 }
                             ]
                         },
@@ -6262,7 +6276,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },
@@ -7954,6 +7968,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "cũng hoàn toàn được mà..."
+                            ]
+                        },
+                        {
                             "code": 355,
                             "indent": 3,
                             "parameters": [
@@ -8055,7 +8076,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Anh chưa cất con cu vào quần ngay đúng không?"
+                                "Anh vẫn chưa cất con cu đi đúng không?"
                             ]
                         },
                         {
@@ -8098,8 +8119,8 @@
                             "indent": 3,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -8224,7 +8245,14 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Thế thì tinh dịch sôi trào vì trị liệu, hãy cho em đi nào...♡"
+                                "Nếu vậy thì lượng tinh dịch nóng bỏng từ buổi trị liệu,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 4,
+                            "parameters": [
+                                "Hãy trao hết cho em nhé...♡"
                             ]
                         },
                         {
@@ -8482,7 +8510,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã chấp nhận lời mời gọi của Sera mất rồi!"
+                                    "text": "Đã chấp nhận sự quyến rũ của Sera!"
                                 }
                             ]
                         },
@@ -8660,7 +8688,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
                                 }
                             ]
                         },

@@ -5588,6 +5588,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "Nhưng không bắn tinh như vậy có ổn không?"
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 5,
                             "parameters": [
@@ -5746,7 +5753,14 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Vừa nghe tiếng rên thương hại rót vào tai vừa làm tình giả lập rồi bắn tinh..."
+                                "Vừa được nghe tiếng rên thương hại rót vào tai,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "vừa làm tình giả lập rồi bắn tinh..."
                             ]
                         },
                         {
@@ -5908,7 +5922,14 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Em thấy cực kỳ cảm giác tội lỗi mà sướng lắm đấy. Cho nên... \"Hãy bắn đầy vào trong em đi♡\""
+                                "Em nghĩ cảm giác tội lỗi đó sẽ sướng lắm đấy."
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 5,
+                            "parameters": [
+                                "Vì thế... 『Hãy bắn thật nhiều vào bên trong em đi nào♡』"
                             ]
                         },
                         {
@@ -5951,8 +5972,8 @@
                             "indent": 5,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -6127,7 +6148,14 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Hì hì... Thế em sẽ cho anh lên đỉnh trong màn làm tình nồng nàn trong tưởng tượng nhé."
+                                "Hi hi... Vậy thì hãy dùng màn làm tình ân ái trong tưởng tượng"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 6,
+                            "parameters": [
+                                "Em sẽ cho anh lên đỉnh nhé."
                             ]
                         },
                         {
@@ -6410,7 +6438,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bị Sera trói giữ mất rồi!"
+                                    "text": "\\N[1] đã bị Sera trói chặt khống chế!"
                                 }
                             ]
                         },
@@ -6616,7 +6644,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「『A♡ A♡ Không được♡"
+                                    "text": "Sera「『A♡ A♡ Không được đâu♡"
                                 }
                             ]
                         },
@@ -6635,7 +6663,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Hết chịu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
+                                    "text": "   Không chịu nổi nữa rồi♡ Ra mất thôi♡』」"
                                 }
                             ]
                         },
@@ -6720,7 +6748,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「『Sướ……ng quá……♡』」"
+                                    "text": "Sera「『Ra... ư ư... rồi♡』」"
                                 }
                             ]
                         },
@@ -6995,7 +7023,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Đã đến lúc trở thành kẻ bị công kích,"
+                                    "text": "Sera「Anh đã muốn quay lại làm bên"
                                 }
                             ]
                         },
@@ -7014,7 +7042,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Muốn quay về rồi à?」"
+                                    "text": "   bị hành hạ chưa nào?」"
                                 }
                             ]
                         },
@@ -8650,6 +8678,13 @@
                             ]
                         },
                         {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "Nhưng không bắn tinh như vậy có ổn không?"
+                            ]
+                        },
+                        {
                             "code": 111,
                             "indent": 3,
                             "parameters": [
@@ -8808,7 +8843,14 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Vừa nghe tiếng rên thương hại rót vào tai vừa làm tình giả lập rồi bắn tinh..."
+                                "Vừa được nghe tiếng rên thương hại rót vào tai,"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "vừa làm tình giả lập rồi bắn tinh..."
                             ]
                         },
                         {
@@ -8970,7 +9012,14 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Em thấy cực kỳ cảm giác tội lỗi mà sướng lắm đấy. Cho nên... \"Hãy bắn đầy vào trong em đi♡\""
+                                "Em nghĩ cảm giác tội lỗi đó sẽ sướng lắm đấy."
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 3,
+                            "parameters": [
+                                "Vì thế... 『Hãy bắn thật nhiều vào bên trong em đi nào♡』"
                             ]
                         },
                         {
@@ -9013,8 +9062,8 @@
                             "indent": 3,
                             "parameters": [
                                 [
-                                    "\\c[2]Có",
-                                    "Không"
+                                    "\\c[2]はい",
+                                    "いいえ"
                                 ],
                                 -1,
                                 -1,
@@ -9189,7 +9238,14 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Hì hì... Thế em sẽ cho anh lên đỉnh trong màn làm tình nồng nàn trong tưởng tượng nhé."
+                                "Hi hi... Vậy thì hãy dùng màn làm tình ân ái trong tưởng tượng"
+                            ]
+                        },
+                        {
+                            "code": 401,
+                            "indent": 4,
+                            "parameters": [
+                                "Em sẽ cho anh lên đỉnh nhé."
                             ]
                         },
                         {
@@ -9467,7 +9523,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bị Sera trói giữ mất rồi!"
+                                    "text": "\\N[1] đã bị Sera trói chặt khống chế!"
                                 }
                             ]
                         },
@@ -9673,7 +9729,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「『A♡ A♡ Không được♡"
+                                    "text": "Sera「『A♡ A♡ Không được đâu♡"
                                 }
                             ]
                         },
@@ -9692,7 +9748,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Hết chịu nổi rồi♡ Sắp lên đỉnh mất rồi♡』」"
+                                    "text": "   Không chịu nổi nữa rồi♡ Ra mất thôi♡』」"
                                 }
                             ]
                         },
@@ -9777,7 +9833,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「『Sướ……ng quá……♡』」"
+                                    "text": "Sera「『Ra... ư ư... rồi♡』」"
                                 }
                             ]
                         },
@@ -9993,7 +10049,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Đã đến lúc trở thành kẻ bị công kích,"
+                                    "text": "Sera「Anh đã muốn quay lại làm bên"
                                 }
                             ]
                         },
@@ -10012,7 +10068,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Muốn quay về rồi à?」"
+                                    "text": "   bị hành hạ chưa nào?」"
                                 }
                             ]
                         },
