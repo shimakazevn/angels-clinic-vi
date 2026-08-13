@@ -31,13 +31,11 @@ for src_file in sorted(DATA_VN.glob("*.json")):
 
 print(f"Synced {synced} files from data_vn -> {[str(d) for d in target_dirs]}")
 
-# Also sync AutoWordWrap.js to patch dirs
-game_js_1 = ROOT / "Tenshi_no_Hayarou_Clinic_VN" / "Game" / "js" / "plugins" / "AutoWordWrap.js"
-game_js_2 = ROOT / "天使の早漏治療クリニック - TEST" / "Game" / "js" / "plugins" / "AutoWordWrap.js"
-game_js = game_js_1 if game_js_1.exists() else game_js_2
-
-for js_dst in [ROOT / "patch" / "js" / "plugins", ROOT / "patch-release" / "patch" / "js" / "plugins"]:
-    js_dst.mkdir(parents=True, exist_ok=True)
-    if game_js.exists():
-        shutil.copy2(game_js, js_dst / "AutoWordWrap.js")
-        print(f"Synced AutoWordWrap.js to {js_dst}")
+# Also sync AutoWordWrap.js & DarkPlasma_TextLog.js to patch dirs
+for plugin_name in ["AutoWordWrap.js", "DarkPlasma_TextLog.js"]:
+    game_js = ROOT / "天使の早漏治療クリニック - TEST" / "Game" / "js" / "plugins" / plugin_name
+    for js_dst in [ROOT / "patch" / "js" / "plugins", ROOT / "patch-release" / "patch" / "js" / "plugins"]:
+        js_dst.mkdir(parents=True, exist_ok=True)
+        if game_js.exists():
+            shutil.copy2(game_js, js_dst / plugin_name)
+            print(f"Synced {plugin_name} to {js_dst}")

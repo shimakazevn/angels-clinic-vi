@@ -584,9 +584,7 @@
   class Window_TextLog extends Window_Selectable {
     convertEscapeCharacters(text) {
       if (!text) return '';
-      text = Window_Base.prototype.convertEscapeCharacters.call(this, text);
-      text = text.replace(/\\N\[\d+\]/gi, '').replace(/\x1bN\[\d+\]/gi, '');
-      return text;
+      return Window_Base.prototype.convertEscapeCharacters.call(this, text);
     }
     initialize(rect) {
       super.initialize(rect);
