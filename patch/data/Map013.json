@@ -3750,7 +3750,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "質問メッセージ = シーンを全開放しますか？ "
+                                "質問メッセージ = Bạn có muốn mở khóa toàn bộ phân cảnh không? "
                             ]
                         },
                         {
@@ -3883,7 +3883,7 @@
                             "code": 657,
                             "indent": 4,
                             "parameters": [
-                                "質問メッセージ = 本当に全開放しますか？ "
+                                "質問メッセージ = Bạn có chắc muốn mở khóa toàn bộ phân cảnh không? "
                             ]
                         },
                         {
