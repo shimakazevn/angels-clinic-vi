@@ -1839,11 +1839,11 @@ CommonEvents,404,ショップ初回,買い物,UI_Shop,,\N[1],（ちゃんと店�
 CommonEvents,404,ショップ初回,買い物,UI_Shop,サキュバス,\C[5]サキュバス,"あとね～、これは私だからこそ売れる
 スペシャルアイテムなんだけど～、","Ngoài ra nè~, đây là vật phẩm đặc biệt chỉ mình em mới bán được thôi~"
 CommonEvents,404,ショップ初回,買い物,UI_Shop,サキュバス,\C[5]サキュバス,"インキュバスが執筆した夜のテクニックのハウツー本もあるよ♡
-魔物の間じゃ定番なんだぁ。",Sách hướng dẫn kỹ thuật phòng trung do Incubus biên soạn đấy♡ Vật phẩm kinh điển của giới quái vật đó.
+魔物の間じゃ定番なんだぁ。",Sách hướng dẫn kỹ thuật giường chiếu do Incubus biên soạn đấy♡ Vật phẩm kinh điển của giới quái vật đó.
 CommonEvents,404,ショップ初回,買い物,UI_Shop,サキュバス,\C[5]サキュバス,"お兄さんみたいな女の子に弱～い人には
 特におすすめだよ♡　なんちゃって♡",Đặc biệt khuyến nghị cho những người yếu trước con gái như anh trai đấy♡ Giỡn chút thôi hi hi♡
 CommonEvents,404,ショップ初回,買い物,UI_Shop,,\N[1],"（夜のテクニック……もしかしたら
-早漏の治療に使えるかもしれない）",(Kỹ thuật phòng trung... Biết đâu lại dùng được cho việc trị liệu xuất tinh sớm)
+早漏の治療に使えるかもしれない）",(Kỹ thuật giường chiếu... Biết đâu lại dùng được cho việc trị liệu xuất tinh sớm)
 CommonEvents,404,ショップ初回,買い物,UI_Shop,,\N[1],あー……、ちょっと見せてもらってもいいですか？,À... Cho tôi xem thử một chút được không?
 CommonEvents,404,ショップ初回,買い物,UI_Shop,サキュバス,\C[5]サキュバス,"え？
 本当に欲しいの？",Hả? Anh muốn mua thật sao?
@@ -2111,7 +2111,7 @@ Hôm nay lại muốn mua đồ dâm mát nữa sao?♡"
 CommonEvents,409,メインストーリー3-2,メインストーリー,Story_Main,,\N[1],誤解を生む言い方はやめてください。,Đừng có dùng cách nói gây hiểu lầm như thế.
 CommonEvents,409,メインストーリー3-2,メインストーリー,Story_Main,サキュバス,\C[5]サキュバス,"え～？　別に事実でしょ？
 最近熱心に集めてるよねぇ、エロテクの本。","Ơ~? Thì là sự thật mà đúng không?
-Dạo này anh tích cực sưu tầm sách kỹ thuật phòng trung lắm nha."
+Dạo này anh tích cực sưu tầm sách kỹ thuật giường chiếu lắm nha."
 CommonEvents,409,メインストーリー3-2,メインストーリー,Story_Main,サキュバス,\C[5]サキュバス,"何？　もしかして彼女？
 おちんちんはよわよわな癖に生意気～♡","Sao đó? Chẳng lẽ có bạn gái rồi sao?
 Con cu thì yếu hìu mà xấc xược thế~♡"
@@ -3027,7 +3027,7 @@ CommonEvents,423,メインストーリー10-2,メインストーリー,Story_Mai
 おすすめの商品を見せてください、店員さん。","Được rồi, nói chuyện xong mà đi về ngay thì bất lịch sự quá, cho tôi xem sản phẩm khuyến nghị đi, cô nhân viên."
 CommonEvents,423,メインストーリー10-2,メインストーリー,Story_Main,サキュバス,\C[5]サキュバス,"ちゃんと買い物するんだ……。
 そーですねぇ、お客さんにおすすめなのは……。","Ủa cô mua thật sao... Để xem nào, sản phẩm gợi ý cho vị khách này là..."
-CommonEvents,423,メインストーリー10-2,メインストーリー,Story_Main,サキュバス,\C[5]サキュバス,こちらの、インキュバスが執筆した夜のテクニックのハウツー本！,Chính là cuốn sách hướng dẫn kỹ thuật phòng trung do Incubus biên soạn đây!
+CommonEvents,423,メインストーリー10-2,メインストーリー,Story_Main,サキュバス,\C[5]サキュバス,こちらの、インキュバスが執筆した夜のテクニックのハウツー本！,Chính là cuốn sách hướng dẫn kỹ thuật giường chiếu do Incubus biên soạn đây!
 CommonEvents,423,メインストーリー10-2,メインストーリー,Story_Main,セラ,\C[4]セラ,"ふむ……魔物の書いた本など不吉ですが、
 確かに治療に役立てられる可能性がありますね……。","Hừm... Sách do quái vật viết nghe xui xẻo thật, nhưng đúng là có khả năng áp dụng vào trị liệu..."
 CommonEvents,423,メインストーリー10-2,メインストーリー,Story_Main,セラ,\C[4]セラ,"しかしなぜインキュバス？
