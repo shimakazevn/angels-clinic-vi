@@ -2417,8 +2417,8 @@
                                 "showChoice",
                                 "選択肢の表示",
                                 {
-                                    "messageText": "Bạn có muốn quay lại màn hình chọn Aftercare không?",
-                                    "choices": "[\"{\\\"label\\\":\\\"Quay lại\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"Hủy bỏ\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
+                                    "messageText": "アフターケアの選択画面に戻りますか？",
+                                    "choices": "[\"{\\\"label\\\":\\\"戻る\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"キャンセル\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
                                     "cancelType": "true",
@@ -2437,14 +2437,14 @@
                             "code": 657,
                             "indent": 2,
                             "parameters": [
-                                "質問メッセージ = Bạn có muốn quay lại màn hình chọn Aftercare không?"
+                                "質問メッセージ = アフターケアの選択画面に戻りますか？"
                             ]
                         },
                         {
                             "code": 657,
                             "indent": 2,
                             "parameters": [
-                                "選択肢リスト = [\"{\\\"label\\\":\\\"Quay lại\\\",\\\"switchId\\\":\\\"\\\",\\\"re…"
+                                "選択肢リスト = [\"{\\\"label\\\":\\\"戻る\\\",\\\"switchId\\\":\\\"\\\",\\\"re…"
                             ]
                         },
                         {

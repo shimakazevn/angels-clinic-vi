@@ -5006,7 +5006,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera R「Tán tỉnh cả hai người cùng lúc sao……」"
+                                    "text": "セラR「二人同時に口説くとは……」"
                                 }
                             ]
                         },
@@ -5014,7 +5014,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera R「Tán tỉnh cả hai người cùng lúc sao……」"
+                                "テキスト = セラR「二人同時に口説くとは……」"
                             ]
                         },
                         {
@@ -5168,7 +5168,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera L「Đồ sát gái」"
+                                    "text": "セラL「女たらしです」"
                                 }
                             ]
                         },
@@ -5176,7 +5176,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera L「Đồ sát gái」"
+                                "テキスト = セラL「女たらしです」"
                             ]
                         },
                         {
@@ -5245,7 +5245,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Số lượt còn lại đã bị giảm 1!"
+                                    "text": "残りターンが-1された！"
                                 }
                             ]
                         },
@@ -5253,7 +5253,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Số lượt còn lại đã bị giảm 1!"
+                                "テキスト = 残りターンが-1された！"
                             ]
                         },
                         {
@@ -5675,7 +5675,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bắn tinh mất rồi!"
+                                    "text": "\\N[1]は射精してしまった！"
                                 }
                             ]
                         },
@@ -5683,7 +5683,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1]は射精してしまった！"
                             ]
                         },
                         {
@@ -7111,7 +7111,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã trụ vững qua buổi trị liệu!"
+                                    "text": "治療に耐えきった！"
                                 }
                             ]
                         },
@@ -7119,7 +7119,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Đã trụ vững qua buổi trị liệu!"
+                                "テキスト = 治療に耐えきった！"
                             ]
                         },
                         {
@@ -7130,7 +7130,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera R「Cố gắng lắm. Ngoan nào」"
+                                    "text": "セラR「頑張りましたね。よしよし」"
                                 }
                             ]
                         },
@@ -7138,7 +7138,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera R「Cố gắng lắm. Ngoan nào」"
+                                "テキスト = セラR「頑張りましたね。よしよし」"
                             ]
                         },
                         {
@@ -7149,7 +7149,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera L「Vậy em cũng, ngoan nào」"
+                                    "text": "セラL「じゃあ私も、よしよし」"
                                 }
                             ]
                         },
@@ -7157,7 +7157,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera L「Vậy em cũng, ngoan nào」"
+                                "テキスト = セラL「じゃあ私も、よしよし」"
                             ]
                         },
                         {
@@ -8543,7 +8543,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bắn tinh mất rồi!"
+                                    "text": "\\N[1]は射精してしまった！"
                                 }
                             ]
                         },
@@ -8551,7 +8551,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1]は射精してしまった！"
                             ]
                         },
                         {
@@ -9970,7 +9970,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã trụ vững qua buổi trị liệu!"
+                                    "text": "治療に耐えきった！"
                                 }
                             ]
                         },
@@ -9978,7 +9978,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Đã trụ vững qua buổi trị liệu!"
+                                "テキスト = 治療に耐えきった！"
                             ]
                         },
                         {
@@ -9989,7 +9989,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera R「Cố gắng lắm. Ngoan nào」"
+                                    "text": "セラR「頑張りましたね。よしよし」"
                                 }
                             ]
                         },
@@ -9997,7 +9997,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera R「Cố gắng lắm. Ngoan nào」"
+                                "テキスト = セラR「頑張りましたね。よしよし」"
                             ]
                         },
                         {
@@ -10008,7 +10008,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera L「Vậy em cũng, ngoan nào」"
+                                    "text": "セラL「じゃあ私も、よしよし」"
                                 }
                             ]
                         },
@@ -10016,7 +10016,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera L「Vậy em cũng, ngoan nào」"
+                                "テキスト = セラL「じゃあ私も、よしよし」"
                             ]
                         },
                         {
