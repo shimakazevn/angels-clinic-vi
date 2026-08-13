@@ -1,0 +1,8 @@
+# Ignore compiled binaries and heavy android template assets
+android/output/
+android/template/app/build/
+android/template/.gradle/
+android/template/app/src/main/assets/
+*.apk
+*.zip
+temp_patch/

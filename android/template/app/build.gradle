@@ -1,0 +1,44 @@
+// app/build.gradle
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.viethoa.thiensu'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.viethoa.thiensu"
+        minSdk 26          // Android 8.0+
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            applicationIdSuffix ""
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    aaptOptions {
+        noCompress "ogg", "m4a", "mp3", "wav", "png", "json", "js"
+    }
+
+    packagingOptions {
+        doNotStrip "**/*.so"
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.8.0'
+}
