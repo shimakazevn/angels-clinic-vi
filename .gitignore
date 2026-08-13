@@ -1,8 +1,28 @@
+# Game gốc (nguồn, không commit — quá lớn 900MB+)
+天使の早漏治療クリニック/
+
+# Thư mục rác / cũ
+DELETE/
+
+# Bản build test game (sinh lại được)
+Tenshi_no_Hayarou_Clinic_VN/
+天使の早漏治療クリニック - TEST/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS
+Thumbs.db
+desktop.ini
+
 # Ignore compiled binaries and heavy android template assets
-android/output/
-android/template/app/build/
-android/template/.gradle/
-android/template/app/src/main/assets/
 *.apk
 *.zip
 temp_patch/
+patch-release/android/output/
+patch-release/android/template/app/build/
+patch-release/android/template/.gradle/
+patch-release/android/template/app/src/main/assets/
+patch-release/**/.git/
+tools/archive/corrupted_data_vn_2026-08-12/

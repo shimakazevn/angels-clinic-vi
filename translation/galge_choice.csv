@@ -1,0 +1,28 @@
+﻿original_jp,vietnamese
+敗北Hイベントをスキップしますか？,Bạn có muốn bỏ qua sự kiện H khi thua cuộc không?
+はい,Có
+いいえ,Không
+質問メッセージ = 敗北Hイベントをスキップしますか？,質問メッセージ = Bạn có muốn bỏ qua sự kiện H khi thua cuộc không?
+"選択肢リスト = [""{\""label\"":\""はい\"",\""switchId\"":\""\"",\""re…","選択肢リスト = [""{\""label\"":\""Có\"",\""switchId\"":\""\"",\""re…"
+"OPをスキップしますか？
+
+※スキップした場合、あらすじの後
+　戦闘チュートリアルを開始します。","Bạn có muốn bỏ qua phần Mở đầu không?
+
+※ Nếu bỏ qua, sau phần Tóm tắt cốt truyện
+　sẽ bắt đầu phần Hướng dẫn chiến đấu."
+OPを見る（初回推奨）,Xem phần Mở đầu (nên xem lần đầu)
+スキップする,Bỏ qua
+質問メッセージ = OPをスキップしますか？  ※スキップした場合…,"質問メッセージ = Bạn có muốn bỏ qua phần Mở đầu không?  ※Nếu bỏ qua, sau phần Tóm tắt sẽ bắt đầu Hướng dẫn chiến đấu.…"
+"選択肢リスト = [""{\""label\"":\""OPを見る（初回推奨）\"",\""swit…","選択肢リスト = [""{\""label\"":\""Xem phần Mở đầu (nên xem lần đầu)\"",\""swit…"
+シーンを全開放しますか？,"Bạn có muốn mở khóa toàn bộ phân cảnh không?
+"
+質問メッセージ = シーンを全開放しますか？,質問メッセージ = Bạn có muốn mở khóa toàn bộ phân cảnh không? 
+本当に全開放しますか？,"Bạn có chắc muốn mở khóa toàn bộ phân cảnh không?
+"
+質問メッセージ = 本当に全開放しますか？,質問メッセージ = Bạn có chắc muốn mở khóa toàn bộ phân cảnh không? 
+アフターケアの選択画面に戻りますか？,Bạn có muốn quay lại màn hình chọn Aftercare không?
+戻る,Quay lại
+キャンセル,Hủy bỏ
+質問メッセージ = アフターケアの選択画面に戻りますか？,質問メッセージ = Bạn có muốn quay lại màn hình chọn Aftercare không?
+"選択肢リスト = [""{\""label\"":\""戻る\"",\""switchId\"":\""\"",\""re…","選択肢リスト = [""{\""label\"":\""Quay lại\"",\""switchId\"":\""\"",\""re…"

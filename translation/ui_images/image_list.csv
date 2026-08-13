@@ -1,0 +1,60 @@
+﻿original_path,export_name,category,note,status
+img\titles1\タイトル画面.png,Title_タイトル画面.png,Title,Màn hình tiêu đề game — cần thay tên game,pending
+img\titles2\Command_0.png,Command_0.png,TitleCommand,Nút Khám Lần Đầu trên bìa hồ sơ,pending
+img\titles2\Command_1.png,Command_1.png,TitleCommand,Nút Tái Khám trên bìa hồ sơ,pending
+img\titles2\Command_2.png,Command_2.png,TitleCommand,Nút Tùy Chọn trên bìa hồ sơ,pending
+img\spines\UI 戦闘.png,UI 戦闘.png,Spine_UI,Spine Texture Atlas giao diện chiến đấu (Còn / Lượt),pending
+img\pictures\システム\PC_ホーム画面1.png,PC_ホーム画面1.png,PC_UI,Màn hình chính PC — tab 1,pending
+img\pictures\システム\PC_ホーム画面2.png,PC_ホーム画面2.png,PC_UI,Màn hình chính PC — tab 2,pending
+img\pictures\システム\PC_ホーム画面3.png,PC_ホーム画面3.png,PC_UI,Màn hình chính PC — tab 3,pending
+img\pictures\システム\PC_ホーム画面4.png,PC_ホーム画面4.png,PC_UI,Màn hình chính PC — tab 4,pending
+img\pictures\システム\PC_UI 回想1.png,PC_UI 回想1.png,PC_UI,UI hồi ký — trang 1,pending
+img\pictures\システム\PC_UI 回想2.png,PC_UI 回想2.png,PC_UI,UI hồi ký — trang 2,pending
+img\pictures\システム\PC_UI 戦闘.png,PC_UI 戦闘.png,PC_UI,UI chiến đấu,pending
+img\pictures\システム\PC_UI 戦闘2.png,PC_UI 戦闘2.png,PC_UI,UI chiến đấu — trang 2,pending
+img\pictures\システム\PC_UI 編成.png,PC_UI 編成.png,PC_UI,UI biên chế đội hình,pending
+img\pictures\システム\PC_アフターケア.png,PC_アフターケア.png,PC_UI,UI Aftercare (chăm sóc sau),pending
+img\pictures\システム\PC_アフターケアリスト.png,PC_アフターケアリスト.png,PC_UI,UI danh sách Aftercare,pending
+img\pictures\システム\PC_クリック誘導スチル7.png,PC_クリック誘導スチル7.png,PC_UI,Hướng dẫn click — still 7,pending
+img\pictures\システム\PC_買い物.png,PC_買い物.png,PC_UI,UI mua sắm / shop,pending
+img\pictures\システム\チュートリアル1.png,Tutorial_チュートリアル1.png,Tutorial,Hình hướng dẫn trang 1,pending
+img\pictures\システム\チュートリアル2.png,Tutorial_チュートリアル2.png,Tutorial,Hình hướng dẫn trang 2,pending
+img\pictures\システム\チュートリアル3.png,Tutorial_チュートリアル3.png,Tutorial,Hình hướng dẫn trang 3,pending
+img\pictures\システム\チュートリアル4.png,Tutorial_チュートリアル4.png,Tutorial,Hình hướng dẫn trang 4,pending
+img\pictures\システム\チュートリアル5.png,Tutorial_チュートリアル5.png,Tutorial,Hình hướng dẫn trang 5,pending
+img\pictures\システム\チュートリアル6.png,Tutorial_チュートリアル6.png,Tutorial,Hình hướng dẫn trang 6,pending
+img\pictures\システム\チュートリアル7.png,Tutorial_チュートリアル7.png,Tutorial,Hình hướng dẫn trang 7,pending
+img\pictures\システム\チュートリアル8.png,Tutorial_チュートリアル8.png,Tutorial,Hình hướng dẫn trang 8,pending
+img\pictures\システム\チュートリアル9.png,Tutorial_チュートリアル9.png,Tutorial,Hình hướng dẫn trang 9,pending
+img\pictures\システム\チュートリアル10.png,Tutorial_チュートリアル10.png,Tutorial,Hình hướng dẫn trang 10,pending
+img\pictures\システム\チュートリアル11.png,Tutorial_チュートリアル11.png,Tutorial,Hình hướng dẫn trang 11,pending
+img\pictures\システム\チュートリアル12.png,Tutorial_チュートリアル12.png,Tutorial,Hình hướng dẫn trang 12,pending
+img\pictures\システム\チュートリアル13.png,Tutorial_チュートリアル13.png,Tutorial,Hình hướng dẫn trang 13,pending
+img\pictures\システム\チュートリアル14.png,Tutorial_チュートリアル14.png,Tutorial,Hình hướng dẫn trang 14,pending
+img\pictures\システム\チュートリアル15.png,Tutorial_チュートリアル15.png,Tutorial,Hình hướng dẫn trang 15,pending
+img\pictures\システム\チュートリアル16.png,Tutorial_チュートリアル16.png,Tutorial,Hình hướng dẫn trang 16,pending
+img\pictures\システム\チュートリアル17.png,Tutorial_チュートリアル17.png,Tutorial,Hình hướng dẫn trang 17,pending
+img\pictures\システム\チュートリアル18.png,Tutorial_チュートリアル18.png,Tutorial,Hình hướng dẫn trang 18,pending
+img\pictures\システム\チュートリアル19.png,Tutorial_チュートリアル19.png,Tutorial,Hình hướng dẫn trang 19,pending
+img\pictures\システム\チュートリアル20.png,Tutorial_チュートリアル20.png,Tutorial,Hình hướng dẫn trang 20,pending
+img\pictures\システム\チュートリアル21.png,Tutorial_チュートリアル21.png,Tutorial,Hình hướng dẫn trang 21,pending
+img\pictures\システム\チュートリアル22.png,Tutorial_チュートリアル22.png,Tutorial,Hình hướng dẫn trang 22,pending
+img\pictures\システム\チュートリアル23.png,Tutorial_チュートリアル23.png,Tutorial,Hình hướng dẫn trang 23,pending
+img\pictures\システム\チュートリアル24.png,Tutorial_チュートリアル24.png,Tutorial,Hình hướng dẫn trang 24,pending
+img\pictures\システム\チュートリアル25.png,Tutorial_チュートリアル25.png,Tutorial,Hình hướng dẫn trang 25,pending
+img\pictures\システム\チュートリアル26.png,Tutorial_チュートリアル26.png,Tutorial,Hình hướng dẫn trang 26,pending
+img\pictures\システム\チュートリアル27.png,Tutorial_チュートリアル27.png,Tutorial,Hình hướng dẫn trang 27,pending
+img\pictures\システム\チュートリアル28.png,Tutorial_チュートリアル28.png,Tutorial,Hình hướng dẫn trang 28,pending
+img\pictures\システム\チュートリアル29.png,Tutorial_チュートリアル29.png,Tutorial,Hình hướng dẫn trang 29,pending
+img\pictures\システム\チュートリアル30.png,Tutorial_チュートリアル30.png,Tutorial,Hình hướng dẫn trang 30,pending
+img\pictures\システム\チュートリアル31.png,Tutorial_チュートリアル31.png,Tutorial,Hình hướng dẫn trang 31,pending
+img\pictures\システム\チュートリアル23_2.png,Tutorial_チュートリアル23_2.png,Tutorial,Hình hướng dẫn trang 23 (biến thể 2),pending
+img\pictures\システム\チュートリアル24_2.png,Tutorial_チュートリアル24_2.png,Tutorial,Hình hướng dẫn trang 24 (biến thể 2),pending
+img\pictures\システム\ホイール操作可.png,HUD_ホイール操作可.png,HUD,Chỉ dẫn thao tác cuộn chuột (cả 2 chiều),pending
+img\pictures\システム\ホイール操作可_上のみ.png,HUD_ホイール操作可_上のみ.png,HUD,Chỉ dẫn thao tác cuộn chuột (chỉ lên),pending
+img\pictures\システム\射精ゲージ1.png,HUD_射精ゲージ1.png,HUD,Thanh gauge — loại 1,pending
+img\pictures\システム\射精ゲージ2.png,HUD_射精ゲージ2.png,HUD,Thanh gauge — loại 2,pending
+img\pictures\システム\射精ゲージ_スリップダメージ.png,HUD_射精ゲージ_スリップダメージ.png,HUD,Thanh gauge — slip damage,pending
+img\pictures\システム\照れゲージ1.png,HUD_照れゲージ1.png,HUD,Thanh gauge xấu hổ — loại 1,pending
+img\pictures\システム\照れゲージ2.png,HUD_照れゲージ2.png,HUD,Thanh gauge xấu hổ — loại 2,pending
+img\pictures\システム\スリップダメージ表記.png,HUD_スリップダメージ表記.png,HUD,Hiển thị slip damage,pending
