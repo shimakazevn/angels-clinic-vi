@@ -28,7 +28,6 @@ public class MainActivity extends Activity {
 
     private static final String TAG = "ThienSuGame";
     private WebView mWebView;
-    private long mBackPressedTime = 0;
 
     private void hideSystemUI() {
         try {
@@ -72,7 +71,6 @@ public class MainActivity extends Activity {
         mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         setContentView(mWebView);
 
-        // Call hideSystemUI after view is attached
         mWebView.post(new Runnable() {
             @Override
             public void run() {
@@ -177,21 +175,30 @@ public class MainActivity extends Activity {
         }
     }
 
+    /**
+     * Nút Back Android: Đóng vai trò nút Hủy / Quay lại (Escape / Cancel) trong game,
+     * giúp người chơi thoát các menu, bảng lưu game, danh sách tùy chọn...
+     * Muốn thoát ứng dụng, người chơi mở đa nhiệm (Recents / Task switcher) để đóng app.
+     */
     @Override
     public void onBackPressed() {
-        if (mWebView != null && mWebView.canGoBack()) {
-            mWebView.goBack();
-        } else {
-            if (mBackPressedTime + 2000 > System.currentTimeMillis()) {
-                super.onBackPressed();
-            } else {
-                android.widget.Toast.makeText(
-                    this,
-                    "Nhan Back mot lan nua de thoat",
-                    android.widget.Toast.LENGTH_SHORT
-                ).show();
-                mBackPressedTime = System.currentTimeMillis();
-            }
+        if (mWebView != null) {
+            mWebView.evaluateJavascript(
+                "(function() {" +
+                "    if (window.TouchInput && typeof TouchInput._onCancel === 'function') {" +
+                "        TouchInput._newState.cancelled = true;" +
+                "    }" +
+                "    if (window.Input && typeof Input.virtualClick === 'function') {" +
+                "        Input.virtualClick('cancel');" +
+                "        Input.virtualClick('escape');" +
+                "    }" +
+                "    const evtDown = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27, which: 27, code: 'Escape', bubbles: true });" +
+                "    const evtUp = new KeyboardEvent('keyup', { key: 'Escape', keyCode: 27, which: 27, code: 'Escape', bubbles: true });" +
+                "    document.dispatchEvent(evtDown);" +
+                "    setTimeout(function() { document.dispatchEvent(evtUp); }, 50);" +
+                "})();",
+                null
+            );
         }
     }
 
