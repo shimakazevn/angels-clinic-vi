@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import sys, io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 """
 build_apk.py -- Build Android APK tu game RPG Maker MZ da patch Viet hoa
 
@@ -21,12 +18,16 @@ Output:
 
 import os
 import sys
+import io
 import shutil
 import subprocess
 import platform
 import argparse
-import json
+import re
 from pathlib import Path
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # ---- Cau hinh duong dan ----
 SCRIPT_DIR   = Path(__file__).resolve().parent
@@ -51,7 +52,7 @@ GAME_INCLUDES = [
     "package.json",
 ]
 
-# Cac thu muc/file KHONG copy (lam APK to them nhung khong can thiet)
+# Cac thu muc/file KHONG copy
 GAME_EXCLUDES = {
     # NW.js runtime -- khong can tren Android
     "Game.exe",
@@ -100,13 +101,11 @@ def check_android_sdk() -> Path | None:
     """Tim Android SDK trong cac vi tri pho bien."""
     candidates = []
 
-    # Bien moi truong
     if os.environ.get("ANDROID_HOME"):
         candidates.append(Path(os.environ["ANDROID_HOME"]))
     if os.environ.get("ANDROID_SDK_ROOT"):
         candidates.append(Path(os.environ["ANDROID_SDK_ROOT"]))
 
-    # Vi tri mac dinh
     home = Path.home()
     if IS_WINDOWS:
         candidates += [
@@ -117,7 +116,7 @@ def check_android_sdk() -> Path | None:
     else:
         candidates += [
             home / "Android" / "Sdk",
-            home / "Library" / "Android" / "sdk",  # Mac
+            home / "Library" / "Android" / "sdk",
             Path("/opt/android-sdk"),
         ]
 
@@ -156,12 +155,10 @@ def validate_game(game_dir: Path) -> bool:
             err(f"Khong tim thay: {r.name} -- day khong phai game RPG Maker MZ")
             return False
 
-    # Kiem tra da patch Viet hoa chua
     ok("Game dir valid: RPG Maker MZ project structure verified.")
     return True
 
 def get_game_size(game_dir: Path) -> int:
-    """Tinh tong dung luong cac file se copy."""
     total = 0
     for item in GAME_INCLUDES:
         path = game_dir / item
@@ -176,10 +173,8 @@ def get_game_size(game_dir: Path) -> int:
 # ========== Copy game files ==========
 
 def copy_game_to_assets(game_dir: Path):
-    """Copy game files vao thu muc assets cua Android project."""
     header("BUOC 3: Copy game files vao APK")
 
-    # Xoa assets cu
     if ASSETS_DIR.exists():
         info("Dang xoa assets cu...")
         shutil.rmtree(ASSETS_DIR)
@@ -207,7 +202,6 @@ def copy_game_to_assets(game_dir: Path):
             for f in src.rglob("*"):
                 if not f.is_file():
                     continue
-                # Kiem tra exclude
                 if f.name in GAME_EXCLUDES:
                     continue
                 rel = f.relative_to(src)
@@ -226,111 +220,134 @@ def copy_game_to_assets(game_dir: Path):
 # ========== Android WebView Compatibility Patch ==========
 
 def patch_for_android():
-    """Patch cac file JS de tuong thich voi Android WebView.
-
-    Van de goc re:
-    - RPG Maker MZ dung Utils.isNwjs() de detect moi truong NW.js:
-        return typeof require === "function" && typeof process === "object";
-    - Tren Android WebView, 'process' duoc inject boi vorbisdecoder.js (WASM)
-      nen Utils.isNwjs() tra ve TRUE nhung thuc ra khong co NW.js.
-    - Hau qua: StorageManager.isLocalMode() = true -> game goi require('fs')
-      khong ton tai trong WebView -> crash ngay khi khoi dong -> man hinh den.
-
-    Fix: Dung 'typeof nw === "object"' de detect NW.js chinh xac.
-    """
+    """Patch cac file JS de tuong thich 100% voi Android WebView va fix triet de loi man hinh den."""
     header("BUOC 3.5: Patch JS cho Android WebView")
 
-    # --- Patch 1: rmmz_core.js - Utils.isNwjs() ---
+    # --- Patch 1: rmmz_core.js ---
     core_js = ASSETS_DIR / "js" / "rmmz_core.js"
-    if not core_js.exists():
-        warn("  Khong tim thay rmmz_core.js -- bo qua patch")
-        return
-
-    OLD_NWJS = 'return typeof require === "function" && typeof process === "object";'
-    NEW_NWJS = 'return typeof nw === "object"; // Android fix: avoid false positive from vorbisdecoder.js'
-
-    content = core_js.read_text(encoding="utf-8")
-    if OLD_NWJS in content:
-        content = content.replace(OLD_NWJS, NEW_NWJS, 1)
-        ok("  rmmz_core.js: da patch Utils.isNwjs() -> typeof nw === 'object'")
-    elif NEW_NWJS in content:
-        ok("  rmmz_core.js: da duoc patch Utils.isNwjs truoc do, bo qua")
-    else:
-        warn("  rmmz_core.js: KHONG tim thay doan Utils.isNwjs can patch -- kiem tra thu cong!")
-
-    OLD_PIXI = '} catch (e) {\n        this._app = null;\n    }'
-    NEW_PIXI = '} catch (e) {\n        console.error("PIXI App Creation Failed:", e);\n        this._app = null;\n    }'
-    if OLD_PIXI in content and NEW_PIXI not in content:
-        content = content.replace(OLD_PIXI, NEW_PIXI, 1)
-        ok("  rmmz_core.js: da patch _createPixiApp de log loi")
+    if core_js.exists():
+        content = core_js.read_text(encoding="utf-8")
         
-    # --- Patch 5: rmmz_core.js - WebGL Workarounds for Android WebView ---
-    OLD_SETUP = 'Graphics._setupPixi = function() {\n    PIXI.utils.skipHello();'
-    NEW_SETUP = 'Graphics._setupPixi = function() {\n    PIXI.utils.skipHello();\n    PIXI.settings.SPRITE_MAX_TEXTURES = 1;\n    PIXI.settings.PRECISION_FRAGMENT = PIXI.PRECISION.MEDIUM;'
-    if OLD_SETUP in content and 'PIXI.settings.SPRITE_MAX_TEXTURES = 1;' not in content:
-        content = content.replace(OLD_SETUP, NEW_SETUP, 1)
-        ok("  rmmz_core.js: da patch WebGL SPRITE_MAX_TEXTURES=1 de sua loi den man hinh")
-    # removed content2 manipulation here
-        
-    # --- Patch 3: main.js - isPathRandomized() ---
-    OLD_APP = 'this._app = new PIXI.Application({\n            view: this._canvas,\n            autoStart: false\n        });'
-    NEW_APP = 'this._app = new PIXI.Application({\n            view: this._canvas,\n            autoStart: false,\n            transparent: true,\n            backgroundAlpha: 0,\n            preserveDrawingBuffer: true,\n            forceCanvas: true\n        });'
-    if OLD_APP in content:
-        content = content.replace(OLD_APP, NEW_APP, 1)
-        ok("  rmmz_core.js: da patch PIXI.Application them forceCanvas=true de fix mumu")
-    # For idempotence if OLD_APP already replaced:
-    elif 'preserveDrawingBuffer: true' in content and 'forceCanvas: true' not in content:
-        content = content.replace('preserveDrawingBuffer: true', 'preserveDrawingBuffer: true,\n            forceCanvas: true')
-        ok("  rmmz_core.js: da patch PIXI.Application them forceCanvas=true")
-        
-    core_js.write_text(content, encoding="utf-8")
+        # 1.1 Fix Utils.isNwjs
+        OLD_NWJS = 'return typeof require === "function" && typeof process === "object";'
+        NEW_NWJS = 'return typeof nw === "object"; // Android fix: avoid false positive from vorbisdecoder.js'
+        if OLD_NWJS in content:
+            content = content.replace(OLD_NWJS, NEW_NWJS, 1)
+            ok("  rmmz_core.js: da patch Utils.isNwjs() -> typeof nw === 'object'")
 
+        # 1.2 Robust WebGL context creation for PIXI
+        NEW_CREATE_PIXI = (
+            "Graphics._createPixiApp = function() {\n"
+            "    try {\n"
+            "        this._setupPixi();\n"
+            "        this._app = new PIXI.Application({\n"
+            "            view: this._canvas,\n"
+            "            autoStart: false,\n"
+            "            powerPreference: 'default',\n"
+            "            preserveDrawingBuffer: true\n"
+            "        });\n"
+            "        this._app.ticker.remove(this._app.render, this._app);\n"
+            "        this._app.ticker.add(this._onTick, this);\n"
+            "    } catch (e) {\n"
+            "        console.error('PIXI App Creation Failed:', e);\n"
+            "        this._app = null;\n"
+            "    }\n"
+            "};"
+        )
+        content = re.sub(r'Graphics\._createPixiApp\s*=\s*function\(\)\s*\{[\s\S]*?\n\};', NEW_CREATE_PIXI, content)
+        ok("  rmmz_core.js: da patch _createPixiApp voi WebGL chuan")
+
+        # 1.3 Fix Effekseer Context creation to NEVER null out this._app
+        NEW_EFFEKSEER = (
+            "Graphics._createEffekseerContext = function() {\n"
+            "    this._effekseer = null;\n"
+            "    if (this._app && this._app.renderer && this._app.renderer.gl && window.effekseer && typeof effekseer.createContext === 'function') {\n"
+            "        try {\n"
+            "            const ctx = effekseer.createContext();\n"
+            "            if (ctx) {\n"
+            "                ctx.init(this._app.renderer.gl);\n"
+            "                ctx.setRestorationOfStatesFlag(false);\n"
+            "                this._effekseer = ctx;\n"
+            "            }\n"
+            "        } catch (e) {\n"
+            "            console.warn('Effekseer WebGL init skipped on this device:', e);\n"
+            "            this._effekseer = null;\n"
+            "        }\n"
+            "    }\n"
+            "};"
+        )
+        content = re.sub(r'Graphics\._createEffekseerContext\s*=\s*function\(\)\s*\{[\s\S]*?\n\};', NEW_EFFEKSEER, content)
+        ok("  rmmz_core.js: da patch _createEffekseerContext de tranh null _app")
+
+        # 1.4 Clean PIXI setup
+        NEW_SETUP = (
+            "Graphics._setupPixi = function() {\n"
+            "    PIXI.utils.skipHello();\n"
+            "    PIXI.settings.GC_MAX_IDLE = 600;\n"
+            "};"
+        )
+        content = re.sub(r'Graphics\._setupPixi\s*=\s*function\(\)\s*\{[\s\S]*?\n\};', NEW_SETUP, content)
+
+        core_js.write_text(content, encoding="utf-8")
+
+    # --- Patch 2: main.js ---
     main_js = ASSETS_DIR / "js" / "main.js"
-    if not main_js.exists():
-        warn("  Khong tim thay main.js -- bo qua patch")
-        return
+    if main_js.exists():
+        main_content = main_js.read_text(encoding="utf-8")
 
-    OLD_PROCESS = 'typeof process === "object" &&'
-    NEW_PROCESS = 'typeof process === "object" && process.mainModule &&'
+        # 2.1 Ensure pixi.js is used (NOT pixi-legacy)
+        main_content = main_content.replace('"js/libs/pixi-legacy.js"', '"js/libs/pixi.js"')
 
-    main_content = main_js.read_text(encoding="utf-8")
-    if OLD_PROCESS in main_content and NEW_PROCESS not in main_content:
-        main_content = main_content.replace(OLD_PROCESS, NEW_PROCESS, 1)
-        ok("  main.js: da patch isPathRandomized() de tranh crash TypeError")
-    elif NEW_PROCESS in main_content:
-        ok("  main.js: isPathRandomized() da duoc patch truoc do, bo qua")
-        
-    if '"js/libs/pixi.js"' in main_content:
-        main_content = main_content.replace('"js/libs/pixi.js"', '"js/libs/pixi-legacy.js"')
-        ok("  main.js: da patch de su dung pixi-legacy.js (Canvas fallback)")
-    else:
-        warn("  main.js: KHONG tim thay doan isPathRandomized can patch -- kiem tra thu cong!")
+        # 2.2 Fix isPathRandomized
+        OLD_PROCESS = 'typeof process === "object" &&'
+        NEW_PROCESS = 'typeof process === "object" && process.mainModule &&'
+        if OLD_PROCESS in main_content and NEW_PROCESS not in main_content:
+            main_content = main_content.replace(OLD_PROCESS, NEW_PROCESS, 1)
 
-    # --- Patch 4: main.js - onWindowError() ---
-    OLD_ONERROR = 'function onWindowError(event) {\n    if (event.filename) {\n        PluginManager.setup($plugins);\n        SceneManager.catchException(event.error);\n    }\n}'
-    NEW_ONERROR = 'function onWindowError(event) {\n    console.error("Window Error:", event.error);\n    if (Graphics && Graphics.printError) {\n        Graphics.printError("Error", event.error ? event.error.message : event.message);\n    }\n}'
-    if OLD_ONERROR in main_content and NEW_ONERROR not in main_content:
-        main_content = main_content.replace(OLD_ONERROR, NEW_ONERROR, 1)
-        ok("  main.js: da patch onWindowError() de show loi tren man hinh")
-        
-    # Inject a debug interval to print canvas size
-    DEBUG_LOG = '''
-setInterval(function() {
-    if (window.Graphics && Graphics._canvas) {
-        console.log("DEBUG: window.innerWidth=" + window.innerWidth + " window.innerHeight=" + window.innerHeight + " canvas.width=" + Graphics._canvas.width + " canvas.style.width=" + Graphics._canvas.style.width + " scale=" + Graphics._realScale);
-    }
-}, 3000);
-'''
-    if "DEBUG: window.innerWidth" not in main_content:
-        main_content = main_content + DEBUG_LOG
-        ok("  main.js: da them debug log interval")
-        
-    main_js.write_text(main_content, encoding="utf-8")
+        # 2.3 Fix initEffekseerRuntime with safety timeout so game NEVER gets stuck on black screen
+        NEW_EFFEKSEER_RUNTIME = (
+            "    initEffekseerRuntime() {\n"
+            "        let booted = false;\n"
+            "        const bootGame = () => {\n"
+            "            if (!booted) {\n"
+            "                booted = true;\n"
+            "                this.eraseLoadingSpinner();\n"
+            "                SceneManager.run(Scene_Boot);\n"
+            "            }\n"
+            "        };\n"
+            "\n"
+            "        const timer = setTimeout(() => {\n"
+            "            console.warn('[Main] Effekseer wasm load timed out, starting game directly...');\n"
+            "            bootGame();\n"
+            "        }, 1000);\n"
+            "\n"
+            "        try {\n"
+            "            effekseer.initRuntime(\n"
+            "                effekseerWasmUrl,\n"
+            "                () => {\n"
+            "                    clearTimeout(timer);\n"
+            "                    bootGame();\n"
+            "                },\n"
+            "                () => {\n"
+            "                    clearTimeout(timer);\n"
+            "                    console.warn('[Main] Effekseer wasm failed to load, starting game without 3D effekseer...');\n"
+            "                    bootGame();\n"
+            "                }\n"
+            "            );\n"
+            "        } catch (e) {\n"
+            "            clearTimeout(timer);\n"
+            "            bootGame();\n"
+            "        }\n"
+            "    }"
+        )
+        main_content = re.sub(r'initEffekseerRuntime\(\)\s*\{[\s\S]*?\n    \}', NEW_EFFEKSEER_RUNTIME, main_content)
+        ok("  main.js: da patch initEffekseerRuntime voi safety timeout de luon vao duoc game")
+
+        main_js.write_text(main_content, encoding="utf-8")
 
 # ========== Build APK ==========
 
 def build_apk(sdk_dir: Path):
-    """Chay Gradle de build APK."""
     header("BUOC 4: Build APK (co the mat 5-15 phut lan dau)")
 
     env = os.environ.copy()
@@ -345,7 +362,7 @@ def build_apk(sdk_dir: Path):
             [str(gradlew_path), "assembleRelease", "--no-daemon"],
             cwd=str(TEMPLATE_DIR),
             env=env,
-            capture_output=False,  # Hien thi output truc tiep
+            capture_output=False,
             text=True,
         )
         if result.returncode != 0:
@@ -359,13 +376,11 @@ def build_apk(sdk_dir: Path):
         return False
 
 def collect_apk():
-    """Tim APK da build va copy vao output/."""
     apk_locations = list((TEMPLATE_DIR / "app" / "build" / "outputs" / "apk").rglob("*.apk"))
     if not apk_locations:
         err("Khong tim thay APK output!")
         return None
 
-    # Uu tien release, sau do debug
     apk_src = None
     for apk in apk_locations:
         if "release" in str(apk):

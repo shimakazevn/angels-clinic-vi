@@ -1,6 +1,7 @@
 package com.viethoa.thiensu;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.webkit.WebViewAssetLoader;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends Activity {
 
@@ -42,7 +46,7 @@ public class MainActivity extends Activity {
             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
 
-        // Enable WebView remote debugging via chrome://inspect (debug only)
+        // Enable remote debugging
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
@@ -57,31 +61,25 @@ public class MainActivity extends Activity {
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        // Viewport / layout settings (important for PIXI.js canvas sizing)
+        // Viewport / layout settings
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
 
         settings.setAllowFileAccessFromFileURLs(true);
         settings.setAllowUniversalAccessFromFileURLs(true);
         settings.setAllowFileAccess(true);
+        settings.setAllowContentAccess(true);
 
         settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
 
-        // Hardware acceleration is required for WebGL compositing.
-        mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
-        // WebChromeClient is REQUIRED for WebGL to work in Android WebView.
-        // Without it the GL surface is never created and PIXI.js renders nothing
-        // (audio still works because Web Audio API is independent of WebGL).
+        // Forward console logs to Logcat
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm) {
-                // Forward all JS console output to Android logcat for debugging
                 String level = cm.messageLevel().name();
-                String msg = cm.message() + " -- From line " + cm.lineNumber()
-                        + " of " + cm.sourceId();
+                String msg = cm.message() + " -- From line " + cm.lineNumber() + " of " + cm.sourceId();
                 switch (cm.messageLevel()) {
                     case ERROR:
                         Log.e(TAG, "[JS] " + msg);
@@ -97,7 +95,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Asset loader bypasses CORS & file:// restrictions on Android 11+
         final WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
                 .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
                 .build();
@@ -105,6 +102,20 @@ public class MainActivity extends Activity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                Uri url = request.getUrl();
+                String path = url.getPath();
+                if (path != null) {
+                    // Fix MIME types for wasm and other assets on Android WebView
+                    if (path.endsWith(".wasm")) {
+                        try {
+                            String assetPath = path.startsWith("/assets/") ? path.substring(8) : (path.startsWith("/") ? path.substring(1) : path);
+                            InputStream is = getAssets().open(assetPath);
+                            return new WebResourceResponse("application/wasm", "UTF-8", is);
+                        } catch (IOException e) {
+                            Log.e(TAG, "Failed to load wasm asset: " + path, e);
+                        }
+                    }
+                }
                 return assetLoader.shouldInterceptRequest(request.getUrl());
             }
 
