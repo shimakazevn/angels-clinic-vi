@@ -298,6 +298,15 @@ def patch_for_android():
             mgr_js.write_text(mcontent, encoding="utf-8")
             ok("  rmmz_managers.js: da patch isGameActive -> true")
 
+        # Patch index.html viewport for fullscreen
+        idx_html = ASSETS_DIR / "index.html"
+        if idx_html.exists():
+            icontent = idx_html.read_text(encoding="utf-8")
+            if 'viewport-fit=cover' not in icontent:
+                icontent = re.sub(r'<meta\s+name="viewport"[^>]*>', '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">', icontent)
+                idx_html.write_text(icontent, encoding="utf-8")
+                ok("  index.html: da cap nhat viewport-fit=cover cho fullscreen")
+
     # --- Patch 2: main.js ---
     main_js = ASSETS_DIR / "js" / "main.js"
     if main_js.exists():
