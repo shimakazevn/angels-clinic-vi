@@ -28,3 +28,7 @@ __pycache__/
 temp_patch/
 Thumbs.db
 desktop.ini
+
+ios/output/
+ios/ThienSuClinic-shell.ipa
+ios/*.ipa
