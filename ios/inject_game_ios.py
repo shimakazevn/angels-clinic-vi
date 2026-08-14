@@ -46,18 +46,16 @@ def find_shell_ipa():
     return None
 
 def generate_and_inject_icons(app_dir: Path, game_dir: Path):
-    """Tạo và nhúng trực tiếp icon vào Payload/*.app để các tool sign đều nhận diện"""
+    """Tạo và nhúng trực tiếp icon tràn viền (Full-bleed) vào Payload/*.app"""
     src_icon_path = game_dir / "icon" / "icon.png"
     if not src_icon_path.exists():
         src_icon_path = REPO_ROOT.parent / "天使の早漏治療クリニック" / "Game" / "icon" / "icon.png"
 
     if src_icon_path.exists():
         try:
-            src_img = Image.open(src_icon_path).convert("RGBA")
-            master_1024 = Image.new("RGBA", (1024, 1024), (25, 28, 36, 255))
-            icon_scaled = src_img.resize((860, 860), Image.Resampling.LANCZOS)
-            master_1024.paste(icon_scaled, (82, 82), icon_scaled)
-            master_1024_rgb = master_1024.convert("RGB")
+            # Scale trực tiếp tràn viền 100% không để viền đen
+            src_img = Image.open(src_icon_path).convert("RGB")
+            master_1024 = src_img.resize((1024, 1024), Image.Resampling.LANCZOS)
 
             icon_map = {
                 "AppIcon60x60@2x.png": 120,
@@ -73,10 +71,10 @@ def generate_and_inject_icons(app_dir: Path, game_dir: Path):
 
             for name, sz in icon_map.items():
                 target_f = app_dir / name
-                img_res = master_1024_rgb.resize((sz, sz), Image.Resampling.LANCZOS)
+                img_res = master_1024.resize((sz, sz), Image.Resampling.LANCZOS)
                 img_res.save(target_f, format="PNG")
 
-            print("  [OK] Đã tạo và nhúng bộ Icon iOS chuẩn (60x60, 76x76, 1024x1024)")
+            print("  [OK] Đã tạo và nhúng bộ Icon tràn viền iOS (không viền đen)")
         except Exception as e:
             print(f"  [!] Cảnh báo tạo icon: {e}")
 
