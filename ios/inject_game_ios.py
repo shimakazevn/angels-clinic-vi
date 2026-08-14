@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Công cụ tự động tiêm (inject) dữ liệu Game RPG Maker MZ Việt Hóa vào file iOS .IPA Shell
-Được thiết kế để tạo file .IPA hoàn chỉnh cho iPhone / iPad.
+Tự động tiêm đầy đủ Icons, Plist và Game Assets.
 """
 
 import os
@@ -12,9 +12,10 @@ import re
 import shutil
 import zipfile
 import argparse
+import plistlib
 from pathlib import Path
+from PIL import Image
 
-# Đảm bảo in UTF-8 trên Windows console
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
@@ -25,11 +26,10 @@ OUTPUT_DIR = BASE_DIR / "output"
 
 def print_banner():
     print("=" * 60)
-    print("    CONG CU TIEM DU LIEU GAME VAO FILE IOS .IPA SHELL")
+    print("    CONG CU TIEM DU LIEU GAME VA ICONS VAO FILE IOS .IPA")
     print("=" * 60)
 
 def find_shell_ipa():
-    # 1. Check in ios/ folder or root
     candidates = [
         BASE_DIR / "ThienSuClinic-shell.ipa",
         BASE_DIR / "ThienSuClinic.ipa",
@@ -40,30 +40,88 @@ def find_shell_ipa():
         if c.exists() and c.is_file():
             return c
     
-    # 2. Search anywhere in repo
     for p in REPO_ROOT.rglob("*.ipa"):
         if "shell" in p.name.lower():
             return p
     return None
 
+def generate_and_inject_icons(app_dir: Path, game_dir: Path):
+    """Tạo và nhúng trực tiếp icon vào Payload/*.app để các tool sign đều nhận diện"""
+    src_icon_path = game_dir / "icon" / "icon.png"
+    if not src_icon_path.exists():
+        src_icon_path = REPO_ROOT.parent / "天使の早漏治療クリニック" / "Game" / "icon" / "icon.png"
+
+    if src_icon_path.exists():
+        try:
+            src_img = Image.open(src_icon_path).convert("RGBA")
+            master_1024 = Image.new("RGBA", (1024, 1024), (25, 28, 36, 255))
+            icon_scaled = src_img.resize((860, 860), Image.Resampling.LANCZOS)
+            master_1024.paste(icon_scaled, (82, 82), icon_scaled)
+            master_1024_rgb = master_1024.convert("RGB")
+
+            icon_map = {
+                "AppIcon60x60@2x.png": 120,
+                "AppIcon60x60@3x.png": 180,
+                "AppIcon76x76@2x~ipad.png": 152,
+                "AppIcon76x76~ipad.png": 76,
+                "AppIcon83.5x83.5@2x~ipad.png": 167,
+                "AppIcon.png": 120,
+                "icon.png": 120,
+                "iTunesArtwork": 512,
+                "iTunesArtwork@2x": 1024
+            }
+
+            for name, sz in icon_map.items():
+                target_f = app_dir / name
+                img_res = master_1024_rgb.resize((sz, sz), Image.Resampling.LANCZOS)
+                img_res.save(target_f, format="PNG")
+
+            print("  [OK] Đã tạo và nhúng bộ Icon iOS chuẩn (60x60, 76x76, 1024x1024)")
+        except Exception as e:
+            print(f"  [!] Cảnh báo tạo icon: {e}")
+
+    # Patch Info.plist để khai báo CFBundleIcons rõ ràng
+    plist_path = app_dir / "Info.plist"
+    if plist_path.exists():
+        try:
+            with open(plist_path, 'rb') as fp:
+                pl = plistlib.load(fp)
+            
+            icon_files = ["AppIcon60x60", "AppIcon76x76", "AppIcon", "icon"]
+            pl["CFBundleIcons"] = {
+                "CFBundlePrimaryIcon": {
+                    "CFBundleIconFiles": icon_files,
+                    "CFBundleIconName": "AppIcon"
+                }
+            }
+            pl["CFBundleIcons~ipad"] = {
+                "CFBundlePrimaryIcon": {
+                    "CFBundleIconFiles": icon_files,
+                    "CFBundleIconName": "AppIcon"
+                }
+            }
+            pl["CFBundleIconFiles"] = icon_files
+
+            with open(plist_path, 'wb') as fp:
+                plistlib.dump(pl, fp)
+            print("  [OK] Đã cập nhật Info.plist với CFBundleIcons")
+        except Exception as e:
+            print(f"  [!] Cảnh báo patch Info.plist: {e}")
+
 def patch_web_assets_for_ios(temp_www: Path):
     """Patch các file JavaScript để tối ưu cho iOS WebKit WKWebView"""
     js_dir = temp_www / "js"
     
-    # Patch rmmz_core.js
     core_file = js_dir / "rmmz_core.js"
     if core_file.exists():
         content = core_file.read_text(encoding="utf-8")
-        # Fix Nwjs check
         content = re.sub(r'Utils\.isNwjs\s*=\s*function\(\)\s*\{[^}]*\}',
                          'Utils.isNwjs = function() { return typeof nw === "object"; }',
                          content)
-        # Fix WebGL auto fallback
         content = content.replace("preferQueryMode: false", "preferQueryMode: false, powerPreference: 'high-performance'")
         core_file.write_text(content, encoding="utf-8")
         print("  [OK] Patch rmmz_core.js cho iOS")
 
-    # Patch rmmz_managers.js: Giữ audio và game active khi mất focus
     mgr_file = js_dir / "rmmz_managers.js"
     if mgr_file.exists():
         content = mgr_file.read_text(encoding="utf-8")
@@ -73,7 +131,6 @@ def patch_web_assets_for_ios(temp_www: Path):
         mgr_file.write_text(content, encoding="utf-8")
         print("  [OK] Patch rmmz_managers.js (luôn active)")
 
-    # Patch index.html cho tràn viền tai thỏ / dynamic island
     index_file = temp_www / "index.html"
     if index_file.exists():
         content = index_file.read_text(encoding="utf-8")
@@ -92,7 +149,6 @@ def patch_web_assets_for_ios(temp_www: Path):
 def inject_game(shell_ipa: Path, game_dir: Path, output_ipa: Path):
     if not shell_ipa.exists():
         print(f"[-] LOI: Khong tim thay file IPA shell tai: {shell_ipa}")
-        print("    Vui long tai file 'ThienSuClinic-shell.ipa' tu GitHub Actions ve dat vao thu muc 'ios/'.")
         return False
 
     if not (game_dir / "data" / "System.json").exists():
@@ -110,12 +166,10 @@ def inject_game(shell_ipa: Path, game_dir: Path, output_ipa: Path):
     temp_dir.mkdir(parents=True, exist_ok=True)
 
     try:
-        # 1. Giai nen IPA shell
         print("\nBUOC 1: Giai nen file IPA shell...")
         with zipfile.ZipFile(shell_ipa, 'r') as zip_ref:
             zip_ref.extractall(temp_dir)
 
-        # Tim thu muc Payload/*.app
         payload_dir = temp_dir / "Payload"
         if not payload_dir.exists():
             print("[-] LOI: Khong tim thay thu muc Payload trong file IPA!")
@@ -132,7 +186,6 @@ def inject_game(shell_ipa: Path, game_dir: Path, output_ipa: Path):
             shutil.rmtree(target_www, ignore_errors=True)
         target_www.mkdir(parents=True, exist_ok=True)
 
-        # 2. Copy tai nguyen Game vao www/
         print("\nBUOC 2: Sao chep du lieu game (~700 MB)...")
         subdirs = ["audio", "css", "data", "effects", "fonts", "img", "js"]
         for sub in subdirs:
@@ -143,18 +196,16 @@ def inject_game(shell_ipa: Path, game_dir: Path, output_ipa: Path):
                 file_count = sum(1 for _ in dst_sub.rglob("*") if _.is_file())
                 print(f"  [OK] {sub}/ ({file_count} files)")
 
-        # Copy single files
         for fn in ["index.html", "package.json"]:
             src_f = game_dir / fn
             if src_f.exists():
                 shutil.copy2(src_f, target_www / fn)
                 print(f"  [OK] {fn}")
 
-        # 3. Patch JS cho iOS
-        print("\nBUOC 3: Patch ma nguon cho iOS WebKit...")
+        print("\nBUOC 3: Patch ma nguon cho iOS WebKit & Nhúng Icon...")
         patch_web_assets_for_ios(target_www)
+        generate_and_inject_icons(app_dir, game_dir)
 
-        # 4. Dong goi lai thanh IPA
         print(f"\nBUOC 4: Dong goi file IPA hoan chinh...")
         if output_ipa.exists():
             try:
@@ -171,14 +222,10 @@ def inject_game(shell_ipa: Path, game_dir: Path, output_ipa: Path):
 
         final_size_mb = output_ipa.stat().st_size / (1024 * 1024)
         print("\n" + "=" * 60)
-        print("    TIEM DU LIEU GAME VAO FILE IOS .IPA THANH CONG!")
+        print("    TIEM DU LIEU GAME VA ICONS VAO FILE IOS .IPA THANH CONG!")
         print(f"    File IPA: {output_ipa}")
         print(f"    Dung luong: {final_size_mb:.1f} MB")
         print("=" * 60)
-        print("\nHuong dan cai dat len iPhone / iPad:")
-        print("1. Cai dat qua AltStore / Sideloadly / Scarlet / TrollStore / LiveContainer.")
-        print("2. Chon file: " + str(output_ipa))
-        print("3. Sign va cai dat truc tiep vao may.\n")
         return True
 
     finally:
@@ -193,34 +240,19 @@ def main():
     parser.add_argument("--output", type=str, default=None, help="Duong dan file IPA dau ra")
     args = parser.parse_args()
 
-    # 1. Xac dinh shell IPA
     if args.ipa:
         shell_ipa = Path(args.ipa).resolve()
     else:
         shell_ipa = find_shell_ipa()
         if not shell_ipa:
             print("[-] Chua tim thay file 'ThienSuClinic-shell.ipa' trong thu muc 'ios/'.")
-            print("    Vui long copy file IPA shell tai ve tu GitHub Actions vao day:")
-            print(f"    {BASE_DIR}")
             return
 
-    # 2. Xac dinh thu muc game
     if args.game_dir:
         game_dir = Path(args.game_dir).resolve()
     else:
         game_dir = DEFAULT_GAME_DIR
-        if not game_dir.exists():
-            # Thu tim cac thu muc game ben canh
-            candidates = [
-                REPO_ROOT.parent / "天使の早漏治療クリニック" / "Game",
-                REPO_ROOT.parent / "Game"
-            ]
-            for c in candidates:
-                if (c / "data" / "System.json").exists():
-                    game_dir = c
-                    break
 
-    # 3. Xac dinh file output
     if args.output:
         output_ipa = Path(args.output).resolve()
     else:
