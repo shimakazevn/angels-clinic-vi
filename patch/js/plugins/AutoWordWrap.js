@@ -3,12 +3,12 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc Tự động ngắt dòng chuẩn xác cho Hội thoại game (Window_Message), Nhật ký hội thoại (Window_TextLog) và Bảng thông báo (LogMessage).
+ * @plugindesc Tự động ngắt dòng tự nhiên, chuẩn xác cho Hội thoại game (Window_Message), Nhật ký hội thoại (Window_TextLog) và Bảng thông báo (LogMessage).
  * @author Localizer & Antigravity
  *
  * @help AutoWordWrap.js
- * 1. Tự động xuống dòng chuẩn xác cho tiếng Việt và tiếng Anh.
- * 2. Hỗ trợ tự động ngắt dòng trong khung thoại Window_Message (mở rộng lên 880px hoặc 720px khi có Face).
+ * 1. Tự động xuống dòng tự nhiên, liền mạch theo từ ngữ (greedy word-wrap) cho tiếng Việt và tiếng Anh.
+ * 2. Hỗ trợ tự động ngắt dòng trong khung thoại Window_Message (tối đa 900px, 740px khi có Face).
  * 3. Hỗ trợ tự động ngắt dòng trong bảng Lịch sử hội thoại Window_TextLog (Backlog), tính toán chiều cao cuộn chính xác.
  * 4. Hỗ trợ tự động ngắt dòng trong bảng thông báo hành động LogMessage.
  */
@@ -56,26 +56,8 @@
                 const testLine = testWords.join(' ');
 
                 if (measure(testLine) > maxW && curWords.length > 0) {
-                    // Tìm dấu câu thích hợp để ngắt tự nhiên nếu dòng đã đạt trên 50% maxW
-                    let splitIdx = -1;
-                    for (let idx = curWords.length - 1; idx >= 0; idx--) {
-                        const cand = curWords[idx].replace(/\\C\[\d+\]|\\N\[\d+\]|\\V\[\d+\]|\\c\[\d+\]|\\I\[\d+\]/gi, '');
-                        const partial = curWords.slice(0, idx + 1).join(' ');
-                        if (measure(partial) >= maxW * 0.50) {
-                            if (/[,;—.\!?…:」』）\)]$/.test(cand)) {
-                                splitIdx = idx;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (splitIdx !== -1) {
-                        finalLines.push(curWords.slice(0, splitIdx + 1).join(' '));
-                        curWords = curWords.slice(splitIdx + 1).concat([word]);
-                    } else {
-                        finalLines.push(curWords.join(' '));
-                        curWords = [word];
-                    }
+                    finalLines.push(curWords.join(' '));
+                    curWords = [word];
                 } else {
                     curWords.push(word);
                 }
@@ -98,8 +80,8 @@
             const rawText = $gameMessage.allText();
             const faceExists = $gameMessage.faceName() !== '';
             
-            // Khung thoại tùy biến: mở rộng maxW lên 880px (hoặc 720px khi có Face) để khớp với thanh gạch ngang viền phải
-            const maxW = faceExists ? 720 : 880;
+            // Khung thoại mở rộng tự nhiên (900px, 740px khi có Face)
+            const maxW = faceExists ? 740 : 900;
 
             const wrappedText = Utils.autoWrapText(rawText, maxW, this);
             $gameMessage._texts = [wrappedText];
