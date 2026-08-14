@@ -77,12 +77,52 @@ if exist "%EXTRACTED_DIR%\data" xcopy "%EXTRACTED_DIR%\data" "%GAME_DIR%data" /E
 if exist "%EXTRACTED_DIR%\js" xcopy "%EXTRACTED_DIR%\js" "%GAME_DIR%js" /E /I /Y /Q >nul 2>&1
 if exist "%EXTRACTED_DIR%\img" xcopy "%EXTRACTED_DIR%\img" "%GAME_DIR%img" /E /I /Y /Q >nul 2>&1
 
-REM --- 4. Tu dong sua ten file Audio bi loi font / mojibake khi giai nen ---
+REM --- 4. Tu dong tuong thich ten file Audio (Ban goc Nhat / Ban Kimochi EN Romaji / Mojibake) ---
 if exist "%GAME_DIR%audio" (
-    echo [+] Dang kiem tra va tu dong fix ten file Audio bi loi font...
+    echo [+] Dang tu dong kiem tra va dong bo ten file Audio (Tieng Nhat / Romaji Kimochi / Mojibake)...
     powershell -ExecutionPolicy Bypass -NoProfile -Command ^
-        "$bgmMap = @{ 'K[fEVeB_2.ogg' = 'ガーデン・シティ_2.ogg'; 'h}eBbNEVeB.ogg' = 'ドラマティック・シティ.ogg'; 'ACJtFB.ogg' = '今日は、気ままなカフェ巡り。.ogg'; 'DSA.ogg' = '優しい心、温かい日.ogg'; 's.ogg' = '奈落への巡行.ogg'; 'j.ogg' = '月曜日の庭.ogg'; 'gh.ogg' = '波に揺られる.ogg'; 'TBsR.ogg' = '狼達の行軍.ogg'; 'n.ogg' = '秘境の地.ogg'; 'E(Dreaming_world).ogg' = '夢見る世界(Dreaming_world).ogg'; ']C(Quiet_suggestiveness).ogg' = '静かな余韻(Quiet_suggestiveness).ogg'; 'Lazy_Midnight([).ogg' = 'Lazy_Midnight(深夜にまったり).ogg'; 'Midnight_Isolation_W.ogg' = 'Midnight_Isolation_編集済み.ogg' };" ^
-        "Get-ChildItem -Path '%GAME_DIR%audio' -Recurse -Filter *.ogg | ForEach-Object { $name = $_.Name; foreach ($k in $bgmMap.Keys) { if ($name -like ('*' + $k)) { $target = Join-Path $_.DirectoryName $bgmMap[$k]; if (-not (Test-Path -LiteralPath $target)) { Copy-Item -LiteralPath $_.FullName -Destination $target -Force } } } }" >nul 2>&1
+        "$map = @{ " ^
+        "  'ガーデン・シティ_2.ogg' = @('gaaden_shitei_2.ogg', 'K[fEVeB_2.ogg', 'garden_city_2.ogg'); " ^
+        "  'ドラマティック・シティ.ogg' = @('doramateikku_shitei.ogg', 'h}eBbNEVeB.ogg', 'dramatic_city.ogg'); " ^
+        "  '今日は、気ままなカフェ巡り。.ogg' = @('konnichiha_kimamanakafemeguri.ogg', 'ACJtFB.ogg'); " ^
+        "  '優しい心、温かい日.ogg' = @('yasashiikokoro_atatakainichi.ogg', 'DSA.ogg'); " ^
+        "  '夏が呼んでいる.ogg' = @('natsugayondeiru.ogg', 'ĂĂł.ogg'); " ^
+        "  '夢見る世界(Dreaming_world).ogg' = @('yumemirusekai_dreaming_world.ogg', 'E(Dreaming_world).ogg'); " ^
+        "  '奈落への巡行.ogg' = @('narakuhenojunkou.ogg', 's.ogg'); " ^
+        "  '月曜日の庭.ogg' = @('getsuyoubinoniwa.ogg', 'j.ogg'); " ^
+        "  '波に揺られる.ogg' = @('naminiyurareru.ogg', 'gh.ogg'); " ^
+        "  '狼達の行軍.ogg' = @('ookamitoorunokougun.ogg', 'TBsR.ogg'); " ^
+        "  '秘境の地.ogg' = @('hikyounochi.ogg', 'n.ogg'); " ^
+        "  '霧の中へ.ogg' = @('kirinonakahe.ogg'); " ^
+        "  '静かな余韻(Quiet_suggestiveness).ogg' = @('shizukanayoin_quiet_suggestiveness.ogg', ']C(Quiet_suggestiveness).ogg'); " ^
+        "  'Lazy_Midnight(深夜にまったり).ogg' = @('lazy_midnight_shinyanimattari.ogg', 'Lazy_Midnight([).ogg'); " ^
+        "  'Midnight_Isolation_編集済み.ogg' = @('midnight_isolation_henshuusumi.ogg', 'Midnight_Isolation_W.ogg'); " ^
+        "  'ぬるぐちゃ001.ogg' = @('nurugucha001.ogg', '001.ogg'); " ^
+        "  'ぬるぐちゃ003.ogg' = @('nurugucha003.ogg', '003.ogg'); " ^
+        "  'パイズリ.ogg' = @('paizuri.ogg', 'pCY.ogg'); " ^
+        "  'パイズリ2.ogg' = @('paizuri2.ogg', 'pCY2.ogg'); " ^
+        "  'パイズリカウベル入り.ogg' = @('paizurikauberuiri.ogg', 'pCYJEx.ogg'); " ^
+        "  'パイズリカウベル入り2.ogg' = @('paizurikauberuiri2.ogg', 'pCYJEx2.ogg'); " ^
+        "  'ピストン ウェット.ogg' = @('pisuton_wetto.ogg', 'pisuton wetto.ogg', 'sXg EFbg.ogg'); " ^
+        "  'フェラＳＥ（中）長.ogg' = @('feraSE_chuu_chou.ogg', 'feraSE_chuu.ogg', 'tFrdij.ogg'); " ^
+        "  'フェラＳＥ（強）長.ogg' = @('feraSE_kyou_chou.ogg', 'feraSE_kyou.ogg', 'tFrdij.ogg'); " ^
+        "  '手コキ３（低速～中速）.ogg' = @('tekoki3_teisoku_chuusoku.ogg', 'tekoki3.ogg', 'RLRi`j.ogg'); " ^
+        "  '手コキ５（中速）.ogg' = @('tekoki5_chuusoku.ogg', 'tekoki5.ogg', 'RLTij.ogg'); " ^
+        "  '手コキ６（中速～高速）.ogg' = @('tekoki6_chuusoku_kousoku.ogg', 'tekoki6.ogg', 'RLUi`j.ogg'); " ^
+        "  '1.ハードピストン（低速）.ogg' = @('1.haadopisuton_teisoku.ogg', '1.haadopisuton.ogg', '1.n[hsXgij.ogg'); " ^
+        "  '2.ハードピストン（低速～中速）08倍速.ogg' = @('2.haadopisuton_teisoku_chuusoku_08baisoku.ogg', '2.haadopisuton.ogg', '2.n[hsXgi`j08{.ogg'); " ^
+        "  '3.ハードピストン（中速）.ogg' = @('3.haadopisuton_chuusoku.ogg', '3.haadopisuton.ogg', '3.n[hsXgij.ogg') " ^
+        "}; " ^
+        "$files = Get-ChildItem -Path '%GAME_DIR%audio' -Recurse -Filter *.ogg; " ^
+        "foreach ($jp in $map.Keys) { " ^
+        "  $aliases = $map[$jp]; " ^
+        "  foreach ($f in $files) { " ^
+        "    if ($aliases -contains $f.Name -or $f.Name.ToLower() -eq $jp.ToLower()) { " ^
+        "      $target = Join-Path $f.DirectoryName $jp; " ^
+        "      if (-not (Test-Path -LiteralPath $target)) { Copy-Item -LiteralPath $f.FullName -Destination $target -Force } " ^
+        "    } " ^
+        "  } " ^
+        "}" >nul 2>&1
 )
 
 REM Truong hop game unpack dong goi lai data.dts
