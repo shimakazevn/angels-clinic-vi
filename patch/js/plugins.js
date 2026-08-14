@@ -442,7 +442,7 @@ var $plugins =
         }
     },
     {
-        "name": "MOG_TitleCommands_AlphaHit.js",
+        "name": "MOG_TitleCommands_AlphaHit",
         "status": true,
         "description": "Loại bỏ vùng trong suốt khỏi khu vực nhấp chuột menu Tiêu đề MOG_TitleCommands",
         "parameters": {
@@ -461,5 +461,6 @@ var $plugins =
         "description": "Tự động xuống dòng hội thoại tiếng Việt",
         "parameters": {}
     },
-{"name":"FixAudioEncoding","status":true,"description":"Fixes audio encoding errors","parameters":{}}
+{"name":"FixAudioEncoding","status":true,"description":"Fixes audio encoding errors","parameters":{}},
+{"name":"FixAndroidGraphics","status":true,"description":"Fixes Android Graphics init error","parameters":{}}
 ];
