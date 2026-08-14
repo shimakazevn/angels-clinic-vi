@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Công cụ tự động tiêm (inject) dữ liệu Game RPG Maker MZ Việt Hóa vào file iOS .IPA Shell
-Tự động tiêm đầy đủ Icons, Plist, Game Assets, và hệ thống Audio ASCII Aliases cho iOS WebKit.
+Tự động tiêm đầy đủ Icons, Plist, Game Assets, Audio ASCII Aliases, và VorbisDecoder WebAssembly / Non-fatal Audio Guards cho iOS WebKit.
 """
 
 import os
@@ -138,10 +138,10 @@ def setup_ios_audio_aliases_and_mapping(temp_www: Path):
                 audio_map[f"{folder}/{stem}"] = safe_name
                 audio_map[stem] = safe_name
 
-    # Sinh plugin FixIOSAudioMapping.js
+    # Sinh plugin FixIOSAudioMapping.js kèm WebAudio Vorbis Safety
     plugin_js = f"""//=============================================================================
 // FixIOSAudioMapping.js
-// Maps all Japanese/Unicode audio filenames to safe ASCII aliases for iOS WebKit.
+// Maps all Japanese/Unicode audio filenames to safe ASCII aliases & protects WebAudio for iOS WebKit.
 //=============================================================================
 (() => {{
     const AUDIO_MAP = {json.dumps(audio_map, ensure_ascii=False, indent=2)};
@@ -162,6 +162,19 @@ def setup_ios_audio_aliases_and_mapping(temp_www: Path):
         buffer.autoPlay = true;
         return buffer;
     }};
+
+    // Chặn lỗi AudioManager.checkErrors làm dừng màn hình trên iOS
+    AudioManager.checkErrors = function() {{
+        const buffers = [this._bgmBuffer, this._bgsBuffer, this._meBuffer];
+        buffers.push(...this._staticBuffers);
+        for (const buffer of buffers) {{
+            if (buffer && buffer.isError()) {{
+                console.warn("[AudioManager] Non-fatal audio load error suppressed:", buffer.url);
+                buffer._isError = false;
+                buffer._isLoaded = true;
+            }}
+        }}
+    }};
 }})();
 """
     
@@ -175,7 +188,7 @@ def setup_ios_audio_aliases_and_mapping(temp_www: Path):
         if "FixIOSAudioMapping" not in content:
             idx = content.rfind("]")
             if idx != -1:
-                entry = ',\n{"name":"FixIOSAudioMapping","status":true,"description":"Fixes iOS non-ASCII audio loading","parameters":{}}\n'
+                entry = ',\n{"name":"FixIOSAudioMapping","status":true,"description":"Fixes iOS non-ASCII audio loading & safety","parameters":{}}\n'
                 new_content = content[:idx].rstrip() + entry + content[idx:]
                 plugins_js_path.write_text(new_content, encoding="utf-8")
 
@@ -185,16 +198,52 @@ def patch_web_assets_for_ios(temp_www: Path):
     """Patch các file JavaScript để tối ưu cho iOS WebKit WKWebView"""
     js_dir = temp_www / "js"
     
+    # 1. Patch rmmz_core.js (VorbisDecoder & WebAudio Safety)
     core_file = js_dir / "rmmz_core.js"
     if core_file.exists():
         content = core_file.read_text(encoding="utf-8")
+        # Fix Nwjs
         content = re.sub(r'Utils\.isNwjs\s*=\s*function\(\)\s*\{[^}]*\}',
                          'Utils.isNwjs = function() { return typeof nw === "object"; }',
                          content)
+        
+        # Ép buộc dùng VorbisDecoder cho OGG trên iOS WebKit
+        vorbis_patch = "WebAudio.prototype._shouldUseDecoder = function() {\n    return typeof VorbisDecoder === 'function';\n};"
+        content = re.sub(r'WebAudio\.prototype\._shouldUseDecoder\s*=\s*function\(\)\s*\{[\s\S]*?^\s*\};',
+                         vorbis_patch, content, flags=re.MULTILINE)
+
+        # Tránh crash khi decodeAudioData lỗi
+        decode_patch = """WebAudio.prototype._decodeAudioData = function(arrayBuffer) {
+    if (this._shouldUseDecoder()) {
+        if (this._decoder) {
+            this._decoder.send(arrayBuffer, this._isLoaded);
+        }
+    } else {
+        WebAudio._context
+            .decodeAudioData(arrayBuffer.slice())
+            .then(buffer => this._onDecode(buffer))
+            .catch(err => {
+                if (typeof VorbisDecoder === "function") {
+                    this._destroyDecoder();
+                    this._createDecoder();
+                    if (this._decoder) {
+                        this._decoder.send(arrayBuffer, this._isLoaded);
+                        return;
+                    }
+                }
+                console.warn("Audio decode failed, skipping gracefully:", this._url, err);
+                this._onLoad();
+            });
+    }
+};"""
+        content = re.sub(r'WebAudio\.prototype\._decodeAudioData\s*=\s*function\(arrayBuffer\)\s*\{[\s\S]*?^\s*\};',
+                         decode_patch, content, flags=re.MULTILINE)
+
         content = content.replace("preferQueryMode: false", "preferQueryMode: false, powerPreference: 'high-performance'")
         core_file.write_text(content, encoding="utf-8")
-        print("  [OK] Patch rmmz_core.js cho iOS")
+        print("  [OK] Patch rmmz_core.js (VorbisDecoder & WebAudio Safety)")
 
+    # 2. Patch rmmz_managers.js
     mgr_file = js_dir / "rmmz_managers.js"
     if mgr_file.exists():
         content = mgr_file.read_text(encoding="utf-8")
@@ -207,6 +256,7 @@ def patch_web_assets_for_ios(temp_www: Path):
         mgr_file.write_text(content, encoding="utf-8")
         print("  [OK] Patch rmmz_managers.js (luôn active)")
 
+    # 3. Patch index.html
     index_file = temp_www / "index.html"
     if index_file.exists():
         content = index_file.read_text(encoding="utf-8")
