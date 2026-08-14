@@ -5000,7 +5000,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Bị cưng nói những lời như thế,"
+                                    "text": "Sera「Bị anh nói những lời như thế,"
                                 }
                             ]
                         },
@@ -5008,7 +5008,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Bị cưng nói những lời như thế,"
+                                "テキスト = Sera「Bị anh nói những lời như thế,"
                             ]
                         },
                         {
@@ -5747,7 +5747,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
                             ]
                         },
                         {
@@ -7403,7 +7403,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
+                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
                             ]
                         },
                         {

@@ -461,31 +461,41 @@
   };
 
   LogMessageContainer.prototype._appendText = function(text) {
-    const textSprite = new Sprite();
-    textSprite.y = this._yPos;
+    if (!text) return;
 
     const indent = Number(param.indent || 0);
-
-    // アイコン分を「常に」足したいならtrue。不要なら false にする
     const addIconIndentAlways = false;
     const iconIndent = addIconIndentAlways ? (Number(param.iconSize || 0) + 4) : 0;
 
     const ow = currentOutlineWidth();
     const drawX = indent + iconIndent + Math.ceil(ow / 2);
-    const w = Math.max(0, this._width - drawX);
+    const maxW = Math.max(100, this._width - drawX - 10);
 
-    const lineY = param.lineHeight / 2 - param.fontSize / 2 - 8;
+    // Auto-wrap text if long
+    const wrapped = (typeof Utils !== "undefined" && typeof Utils.autoWrapText === "function")
+        ? Utils.autoWrapText(text, maxW, this._hiddenWindow)
+        : text;
 
-    // フォントサイズと縁取りは Window_Hidden 側で反映
-    this._hiddenWindow.drawTextEx(text, drawX, lineY, w);
+    const lines = wrapped.split("\n");
 
-    textSprite.bitmap = this._hiddenWindow.contents;
+    for (let i = 0; i < lines.length; i++) {
+        const lineStr = lines[i];
+        if (!lineStr.trim() && lines.length > 1) continue;
 
-    this._hiddenWindow.contents = null;
-    this._hiddenWindow.createContents();
+        const textSprite = new Sprite();
+        textSprite.y = this._yPos;
 
-    this.addChild(textSprite);
-    this._yPos += param.lineHeight;
+        const lineY = param.lineHeight / 2 - param.fontSize / 2 - 8;
+
+        this._hiddenWindow.drawTextEx(lineStr, drawX, lineY, maxW);
+        textSprite.bitmap = this._hiddenWindow.contents;
+
+        this._hiddenWindow.contents = null;
+        this._hiddenWindow.createContents();
+
+        this.addChild(textSprite);
+        this._yPos += param.lineHeight;
+    }
   };
 
   LogMessageContainer.prototype.show = function(text) {

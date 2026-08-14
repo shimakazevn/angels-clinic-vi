@@ -1,11 +1,14 @@
 package com.viethoa.thiensu;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
@@ -19,40 +22,61 @@ import androidx.webkit.WebViewAssetLoader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
 
 public class MainActivity extends Activity {
 
     private static final String TAG = "ThienSuGame";
     private WebView mWebView;
-    private long mBackPressedTime = 0;
+
+    private void hideSystemUI() {
+        try {
+            Window window = getWindow();
+            if (window != null) {
+                View decorView = window.getDecorView();
+                if (decorView != null) {
+                    decorView.setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    );
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "hideSystemUI warning: " + e.getMessage());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Fullscreen Sticky Immersive Mode
+        try {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        } catch (Exception ignored) {}
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        getWindow().getDecorView().setSystemUiVisibility(
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_FULLSCREEN
-            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        );
-
-        // Enable remote debugging
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
-        }
-
         mWebView = new WebView(this);
+        mWebView.setBackgroundColor(Color.BLACK);
+        mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         setContentView(mWebView);
+
+        mWebView.post(new Runnable() {
+            @Override
+            public void run() {
+                hideSystemUI();
+            }
+        });
 
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -61,9 +85,9 @@ public class MainActivity extends Activity {
         settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        // Viewport / layout settings
+        // Fullscreen viewport settings
         settings.setUseWideViewPort(true);
-        settings.setLoadWithOverviewMode(true);
+        settings.setLoadWithOverviewMode(false);
 
         settings.setAllowFileAccessFromFileURLs(true);
         settings.setAllowUniversalAccessFromFileURLs(true);
@@ -74,11 +98,13 @@ public class MainActivity extends Activity {
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
 
-        // Forward console logs to Logcat
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm) {
-                String level = cm.messageLevel().name();
                 String msg = cm.message() + " -- From line " + cm.lineNumber() + " of " + cm.sourceId();
                 switch (cm.messageLevel()) {
                     case ERROR:
@@ -105,16 +131,28 @@ public class MainActivity extends Activity {
                 Uri url = request.getUrl();
                 String path = url.getPath();
                 if (path != null) {
-                    // Fix MIME types for wasm and other assets on Android WebView
-                    if (path.endsWith(".wasm")) {
-                        try {
-                            String assetPath = path.startsWith("/assets/") ? path.substring(8) : (path.startsWith("/") ? path.substring(1) : path);
-                            InputStream is = getAssets().open(assetPath);
-                            return new WebResourceResponse("application/wasm", "UTF-8", is);
-                        } catch (IOException e) {
-                            Log.e(TAG, "Failed to load wasm asset: " + path, e);
+                    try {
+                        String rawPath = URLDecoder.decode(path, "UTF-8");
+                        String assetPath = rawPath.startsWith("/assets/") ? rawPath.substring(8) : (rawPath.startsWith("/") ? rawPath.substring(1) : rawPath);
+                        
+                        String mimeType = null;
+                        if (rawPath.endsWith(".wasm")) mimeType = "application/wasm";
+                        else if (rawPath.endsWith(".png")) mimeType = "image/png";
+                        else if (rawPath.endsWith(".jpg") || rawPath.endsWith(".jpeg")) mimeType = "image/jpeg";
+                        else if (rawPath.endsWith(".ogg")) mimeType = "audio/ogg";
+                        else if (rawPath.endsWith(".m4a")) mimeType = "audio/mp4";
+                        else if (rawPath.endsWith(".json")) mimeType = "application/json";
+                        else if (rawPath.endsWith(".js")) mimeType = "application/javascript";
+                        else if (rawPath.endsWith(".css")) mimeType = "text/css";
+                        else if (rawPath.endsWith(".html")) mimeType = "text/html";
+
+                        if (mimeType != null) {
+                            try {
+                                InputStream is = getAssets().open(assetPath);
+                                return new WebResourceResponse(mimeType, "UTF-8", is);
+                            } catch (IOException ignored) {}
                         }
-                    }
+                    } catch (Exception ignored) {}
                 }
                 return assetLoader.shouldInterceptRequest(request.getUrl());
             }
@@ -126,31 +164,48 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Load game safely over virtual https domain
         mWebView.loadUrl("https://appassets.androidplatform.net/assets/index.html");
     }
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
+    /**
+     * Nút Back Android: Đóng vai trò nút Hủy / Quay lại (Escape / Cancel) trong game,
+     * giúp người chơi thoát các menu, bảng lưu game, danh sách tùy chọn...
+     * Muốn thoát ứng dụng, người chơi mở đa nhiệm (Recents / Task switcher) để đóng app.
+     */
+    @Override
     public void onBackPressed() {
-        if (mWebView != null && mWebView.canGoBack()) {
-            mWebView.goBack();
-        } else {
-            if (mBackPressedTime + 2000 > System.currentTimeMillis()) {
-                super.onBackPressed();
-            } else {
-                android.widget.Toast.makeText(
-                    this,
-                    "Nhan Back mot lan nua de thoat",
-                    android.widget.Toast.LENGTH_SHORT
-                ).show();
-                mBackPressedTime = System.currentTimeMillis();
-            }
+        if (mWebView != null) {
+            mWebView.evaluateJavascript(
+                "(function() {" +
+                "    if (window.TouchInput && typeof TouchInput._onCancel === 'function') {" +
+                "        TouchInput._newState.cancelled = true;" +
+                "    }" +
+                "    if (window.Input && typeof Input.virtualClick === 'function') {" +
+                "        Input.virtualClick('cancel');" +
+                "        Input.virtualClick('escape');" +
+                "    }" +
+                "    const evtDown = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27, which: 27, code: 'Escape', bubbles: true });" +
+                "    const evtUp = new KeyboardEvent('keyup', { key: 'Escape', keyCode: 27, which: 27, code: 'Escape', bubbles: true });" +
+                "    document.dispatchEvent(evtDown);" +
+                "    setTimeout(function() { document.dispatchEvent(evtUp); }, 50);" +
+                "})();",
+                null
+            );
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        hideSystemUI();
         if (mWebView != null) {
             mWebView.onResume();
             mWebView.resumeTimers();

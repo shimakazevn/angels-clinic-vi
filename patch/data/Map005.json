@@ -5643,7 +5643,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Thôi thì, khen cưng một chút vậy」"
+                                    "text": "Sera「Thôi thì, khen anh một chút vậy」"
                                 }
                             ]
                         },
@@ -5651,7 +5651,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Thôi thì, khen cưng một chút vậy」"
+                                "テキスト = Sera「Thôi thì, khen anh một chút vậy」"
                             ]
                         },
                         {
@@ -7313,7 +7313,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Thôi thì, khen cưng một chút vậy」"
+                                    "text": "Sera「Thôi thì, khen anh một chút vậy」"
                                 }
                             ]
                         },
@@ -7321,7 +7321,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera「Thôi thì, khen cưng một chút vậy」"
+                                "テキスト = Sera「Thôi thì, khen anh một chút vậy」"
                             ]
                         },
                         {
