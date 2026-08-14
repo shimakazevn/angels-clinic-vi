@@ -8,7 +8,7 @@
  *
  * @help AutoWordWrap.js
  * 1. Tự động xuống dòng tự nhiên, liền mạch theo từ ngữ (greedy word-wrap) cho tiếng Việt và tiếng Anh.
- * 2. Hỗ trợ tự động ngắt dòng trong khung thoại Window_Message (tối đa 900px, 740px khi có Face).
+ * 2. Hỗ trợ tự động ngắt dòng trong khung thoại Window_Message (tối đa 825px, 680px khi có Face để khớp chuẩn với thanh gạch ngang).
  * 3. Hỗ trợ tự động ngắt dòng trong bảng Lịch sử hội thoại Window_TextLog (Backlog), tính toán chiều cao cuộn chính xác.
  * 4. Hỗ trợ tự động ngắt dòng trong bảng thông báo hành động LogMessage.
  */
@@ -80,8 +80,8 @@
             const rawText = $gameMessage.allText();
             const faceExists = $gameMessage.faceName() !== '';
             
-            // Khung thoại mở rộng tự nhiên (900px, 740px khi có Face)
-            const maxW = faceExists ? 740 : 900;
+            // Khung thoại tùy biến: 825px (680px khi có Face) nằm gọn bên trong thanh gạch ngang
+            const maxW = faceExists ? 680 : 825;
 
             const wrappedText = Utils.autoWrapText(rawText, maxW, this);
             $gameMessage._texts = [wrappedText];
