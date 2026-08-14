@@ -53,7 +53,6 @@ def generate_and_inject_icons(app_dir: Path, game_dir: Path):
 
     if src_icon_path.exists():
         try:
-            # Scale trực tiếp tràn viền 100% không để viền đen
             src_img = Image.open(src_icon_path).convert("RGB")
             master_1024 = src_img.resize((1024, 1024), Image.Resampling.LANCZOS)
 
@@ -123,9 +122,13 @@ def patch_web_assets_for_ios(temp_www: Path):
     mgr_file = js_dir / "rmmz_managers.js"
     if mgr_file.exists():
         content = mgr_file.read_text(encoding="utf-8")
-        content = re.sub(r'SceneManager\.isGameActive\s*=\s*function\(\)\s*\{[^}]*\}',
-                         'SceneManager.isGameActive = function() { return true; }',
-                         content)
+        # Thay thế toàn bộ hàm SceneManager.isGameActive một cách chuẩn xác không để sót catch thừa
+        content = re.sub(
+            r'SceneManager\.isGameActive\s*=\s*function\(\)\s*\{[\s\S]*?^\s*\};',
+            'SceneManager.isGameActive = function() {\n    return true;\n};',
+            content,
+            flags=re.MULTILINE
+        )
         mgr_file.write_text(content, encoding="utf-8")
         print("  [OK] Patch rmmz_managers.js (luôn active)")
 
