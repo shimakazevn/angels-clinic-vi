@@ -3,12 +3,12 @@
 //=============================================================================
 /*:
  * @target MZ
- * @plugindesc Comprehensive Mobile Optimization: 60 FPS Cap, Low Battery & Thermals, Fullscreen Scaling, WebGL & Effekseer Safety for Android.
+ * @plugindesc High Refresh Rate (60-165 FPS), Fullscreen 100% Scaling, WebGL & Effekseer Safety for Android.
  * @author Antigravity
  * @help
- * 1. Caps max FPS at 60 FPS to prevent 90Hz/120Hz/144Hz screens from overheating & battery drain.
- * 2. Optimized 1x native WebGL rendering with Hardware-Accelerated CSS scaling for smooth 60 FPS on any chip.
- * 3. Automatic texture & VRAM garbage collection to prevent out-of-memory crashes on 2GB-4GB RAM phones.
+ * 1. High Refresh Rate: Unlocks smooth 60 FPS up to 165 FPS (supports 60Hz, 90Hz, 120Hz, 144Hz, 165Hz gaming screens, min 60 FPS).
+ * 2. Optimized 1x native WebGL rendering with Hardware-Accelerated CSS scaling.
+ * 3. Automatic texture & VRAM garbage collection to prevent memory leaks.
  * 4. Fullscreen responsive scaling for all aspect ratios (16:9, 18:9, 19.5:9, 20:9, tablets).
  * 5. Fixes Android WebView document.hasFocus() freeze.
  * 6. Multi-tier WebGL fallback and Effekseer safety guard.
@@ -29,21 +29,21 @@
         }
     };
 
-    // 2. Optimized PIXI Settings for Mobile (Power Saving, No Overheating, 60 FPS)
+    // 2. High-Performance PIXI Settings (Min 60 FPS, Max 165 FPS)
     Graphics._setupPixi = function() {
         PIXI.utils.skipHello();
         
-        // Auto garbage collection for textures every 300 frames (~5s) to save VRAM
-        PIXI.settings.GC_MAX_IDLE = 300;
+        // Auto garbage collection for textures every 600 frames to save VRAM
+        PIXI.settings.GC_MAX_IDLE = 600;
         PIXI.settings.GC_MODE = PIXI.GC_MODES.AUTO;
         
-        // Linear scale mode for crisp interpolation
+        // Linear scale mode for crisp rendering
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.LINEAR;
         
-        // Cap shared ticker to 60 FPS (prevents 120Hz/144Hz high refresh rate overheat)
+        // High Refresh Rate: Min 60 FPS, Max 165 FPS
         if (PIXI.Ticker && PIXI.Ticker.shared) {
-            PIXI.Ticker.shared.maxFPS = 60;
-            PIXI.Ticker.shared.minFPS = 30;
+            PIXI.Ticker.shared.minFPS = 60;
+            PIXI.Ticker.shared.maxFPS = 165;
         }
     };
 
@@ -52,15 +52,15 @@
         this._setupPixi();
         let app = null;
 
-        // Tier 1: Optimal Mobile WebGL (1x resolution, preserveDrawingBuffer for WebView compositing)
+        // Tier 1: Standard High-Performance WebGL
         try {
             app = new PIXI.Application({
                 view: this._canvas,
                 autoStart: false,
                 width: this._width || 1280,
                 height: this._height || 720,
-                resolution: 1, // Keep 1x native buffer: massive battery saver & silky smooth
-                powerPreference: "default", // Balanced power profile
+                resolution: 1,
+                powerPreference: "high-performance",
                 antialias: false,
                 preserveDrawingBuffer: true
             });
@@ -103,7 +103,8 @@
             this._app.ticker.remove(this._app.render, this._app);
             this._app.ticker.add(this._onTick, this);
             if (this._app.ticker) {
-                this._app.ticker.maxFPS = 60;
+                this._app.ticker.minFPS = 60;
+                this._app.ticker.maxFPS = 165;
             }
         } else {
             this._app = null;
