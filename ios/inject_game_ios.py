@@ -2,14 +2,16 @@
 # -*- coding: utf-8 -*-
 """
 Công cụ tự động tiêm (inject) dữ liệu Game RPG Maker MZ Việt Hóa vào file iOS .IPA Shell
-Tự động tiêm đầy đủ Icons, Plist và Game Assets, đồng thời patch triệt để URL encoding cho iOS WebKit.
+Tự động tiêm đầy đủ Icons, Plist, Game Assets, và hệ thống Audio ASCII Aliases cho iOS WebKit.
 """
 
 import os
 import sys
 import io
 import re
+import json
 import shutil
+import hashlib
 import zipfile
 import argparse
 import plistlib
@@ -105,65 +107,106 @@ def generate_and_inject_icons(app_dir: Path, game_dir: Path):
         except Exception as e:
             print(f"  [!] Cảnh báo patch Info.plist: {e}")
 
+def setup_ios_audio_aliases_and_mapping(temp_www: Path):
+    """Tạo bản sao ASCII an toàn cho toàn bộ file Audio có ký tự tiếng Nhật và sinh plugin map"""
+    audio_dir = temp_www / "audio"
+    if not audio_dir.exists():
+        return
+    
+    audio_map = {}
+    copied = 0
+
+    for folder in ["bgm", "bgs", "me", "se"]:
+        f_dir = audio_dir / folder
+        if not f_dir.exists():
+            continue
+        
+        idx = 0
+        for p in sorted(f_dir.glob("*.ogg")):
+            stem = p.stem
+            try:
+                stem.encode("ascii")
+            except UnicodeEncodeError:
+                idx += 1
+                h = hashlib.md5(stem.encode("utf-8")).hexdigest()[:6]
+                safe_name = f"{folder}_{idx:03d}_{h}"
+                
+                safe_file = f_dir / f"{safe_name}.ogg"
+                shutil.copy2(p, safe_file)
+                copied += 1
+                
+                audio_map[f"{folder}/{stem}"] = safe_name
+                audio_map[stem] = safe_name
+
+    # Sinh plugin FixIOSAudioMapping.js
+    plugin_js = f"""//=============================================================================
+// FixIOSAudioMapping.js
+// Maps all Japanese/Unicode audio filenames to safe ASCII aliases for iOS WebKit.
+//=============================================================================
+(() => {{
+    const AUDIO_MAP = {json.dumps(audio_map, ensure_ascii=False, indent=2)};
+
+    const _AudioManager_createBuffer = AudioManager.createBuffer;
+    AudioManager.createBuffer = function(folder, name) {{
+        const cleanFolder = folder.replace(/\\/$/, "");
+        const key = cleanFolder + "/" + name;
+        let targetName = name;
+        if (AUDIO_MAP[key]) {{
+            targetName = AUDIO_MAP[key];
+        }} else if (AUDIO_MAP[name]) {{
+            targetName = AUDIO_MAP[name];
+        }}
+        const ext = this.audioFileExt();
+        const url = this._path + folder + Utils.encodeURI(targetName) + ext;
+        const buffer = new WebAudio(url);
+        buffer.autoPlay = true;
+        return buffer;
+    }};
+}})();
+"""
+    
+    plugin_file = temp_www / "js" / "plugins" / "FixIOSAudioMapping.js"
+    plugin_file.write_text(plugin_js, encoding="utf-8")
+    
+    # Đăng ký vào plugins.js
+    plugins_js_path = temp_www / "js" / "plugins.js"
+    if plugins_js_path.exists():
+        content = plugins_js_path.read_text(encoding="utf-8")
+        if "FixIOSAudioMapping" not in content:
+            idx = content.rfind("]")
+            if idx != -1:
+                entry = ',\n{"name":"FixIOSAudioMapping","status":true,"description":"Fixes iOS non-ASCII audio loading","parameters":{}}\n'
+                new_content = content[:idx].rstrip() + entry + content[idx:]
+                plugins_js_path.write_text(new_content, encoding="utf-8")
+
+    print(f"  [OK] Đã tạo {copied} file alias ASCII cho Audio và kích hoạt FixIOSAudioMapping.js")
+
 def patch_web_assets_for_ios(temp_www: Path):
     """Patch các file JavaScript để tối ưu cho iOS WebKit WKWebView"""
     js_dir = temp_www / "js"
     
-    # 1. Patch rmmz_core.js
     core_file = js_dir / "rmmz_core.js"
     if core_file.exists():
         content = core_file.read_text(encoding="utf-8")
-        # Fix Nwjs check
         content = re.sub(r'Utils\.isNwjs\s*=\s*function\(\)\s*\{[^}]*\}',
                          'Utils.isNwjs = function() { return typeof nw === "object"; }',
                          content)
-        # Fix Utils.encodeURI: Không mã hóa URL đối với tài nguyên cục bộ trên iOS để tránh lỗi Failed to load audio/img
-        content = re.sub(r'Utils\.encodeURI\s*=\s*function\(str\)\s*\{[\s\S]*?^\s*\};',
-                         'Utils.encodeURI = function(str) { return str; };',
-                         content, flags=re.MULTILINE)
-        
-        # Fix WebAudio._realUrl: Tự động decodeURI nếu URL bị mã hóa percent encoding
-        real_url_patch = """WebAudio.prototype._realUrl = function() {
-    try {
-        return decodeURI(this._url);
-    } catch (e) {
-        return this._url;
-    }
-};"""
-        content = re.sub(r'WebAudio\.prototype\._realUrl\s*=\s*function\(\)\s*\{[\s\S]*?^\s*\};',
-                         real_url_patch, content, flags=re.MULTILINE)
-
-        # Fix WebGL auto fallback
         content = content.replace("preferQueryMode: false", "preferQueryMode: false, powerPreference: 'high-performance'")
         core_file.write_text(content, encoding="utf-8")
-        print("  [OK] Patch rmmz_core.js (URL decoding & WebGL cho iOS)")
+        print("  [OK] Patch rmmz_core.js cho iOS")
 
-    # 2. Patch rmmz_managers.js
     mgr_file = js_dir / "rmmz_managers.js"
     if mgr_file.exists():
         content = mgr_file.read_text(encoding="utf-8")
-        # Luôn active game
         content = re.sub(
             r'SceneManager\.isGameActive\s*=\s*function\(\)\s*\{[\s\S]*?^\s*\};',
             'SceneManager.isGameActive = function() {\n    return true;\n};',
             content,
             flags=re.MULTILINE
         )
-        # Fix AudioManager.createBuffer không encode URL ký tự tiếng Nhật/Việt
-        audio_buf_patch = """AudioManager.createBuffer = function(folder, name) {
-    const ext = this.audioFileExt();
-    const url = this._path + folder + name + ext;
-    const buffer = new WebAudio(url);
-    buffer.autoPlay = true;
-    return buffer;
-};"""
-        content = re.sub(r'AudioManager\.createBuffer\s*=\s*function\(folder,\s*name\)\s*\{[\s\S]*?^\s*\};',
-                         audio_buf_patch, content, flags=re.MULTILINE)
-
         mgr_file.write_text(content, encoding="utf-8")
-        print("  [OK] Patch rmmz_managers.js (AudioManager & luôn active)")
+        print("  [OK] Patch rmmz_managers.js (luôn active)")
 
-    # 3. Patch index.html cho tràn viền tai thỏ / dynamic island
     index_file = temp_www / "index.html"
     if index_file.exists():
         content = index_file.read_text(encoding="utf-8")
@@ -235,8 +278,9 @@ def inject_game(shell_ipa: Path, game_dir: Path, output_ipa: Path):
                 shutil.copy2(src_f, target_www / fn)
                 print(f"  [OK] {fn}")
 
-        print("\nBUOC 3: Patch ma nguon cho iOS WebKit & Nhúng Icon...")
+        print("\nBUOC 3: Patch ma nguon cho iOS WebKit, Audio Aliases & Nhúng Icon...")
         patch_web_assets_for_ios(target_www)
+        setup_ios_audio_aliases_and_mapping(target_www)
         generate_and_inject_icons(app_dir, game_dir)
 
         print(f"\nBUOC 4: Dong goi file IPA hoan chinh...")
