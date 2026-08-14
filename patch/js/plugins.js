@@ -460,5 +460,6 @@ var $plugins =
         "status": true,
         "description": "Tự động xuống dòng hội thoại tiếng Việt",
         "parameters": {}
-    }
+    },
+{"name":"FixAudioEncoding","status":true,"description":"Fixes audio encoding errors","parameters":{}}
 ];

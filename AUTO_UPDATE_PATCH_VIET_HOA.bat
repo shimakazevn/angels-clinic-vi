@@ -77,6 +77,14 @@ if exist "%EXTRACTED_DIR%\data" xcopy "%EXTRACTED_DIR%\data" "%GAME_DIR%data" /E
 if exist "%EXTRACTED_DIR%\js" xcopy "%EXTRACTED_DIR%\js" "%GAME_DIR%js" /E /I /Y /Q >nul 2>&1
 if exist "%EXTRACTED_DIR%\img" xcopy "%EXTRACTED_DIR%\img" "%GAME_DIR%img" /E /I /Y /Q >nul 2>&1
 
+REM --- 4. Tu dong sua ten file Audio bi loi font / mojibake khi giai nen ---
+if exist "%GAME_DIR%audio" (
+    echo [+] Dang kiem tra va tu dong fix ten file Audio bi loi font...
+    powershell -ExecutionPolicy Bypass -NoProfile -Command ^
+        "$bgmMap = @{ 'K[fEVeB_2.ogg' = 'ガーデン・シティ_2.ogg'; 'h}eBbNEVeB.ogg' = 'ドラマティック・シティ.ogg'; 'ACJtFB.ogg' = '今日は、気ままなカフェ巡り。.ogg'; 'DSA.ogg' = '優しい心、温かい日.ogg'; 's.ogg' = '奈落への巡行.ogg'; 'j.ogg' = '月曜日の庭.ogg'; 'gh.ogg' = '波に揺られる.ogg'; 'TBsR.ogg' = '狼達の行軍.ogg'; 'n.ogg' = '秘境の地.ogg'; 'E(Dreaming_world).ogg' = '夢見る世界(Dreaming_world).ogg'; ']C(Quiet_suggestiveness).ogg' = '静かな余韻(Quiet_suggestiveness).ogg'; 'Lazy_Midnight([).ogg' = 'Lazy_Midnight(深夜にまったり).ogg'; 'Midnight_Isolation_W.ogg' = 'Midnight_Isolation_編集済み.ogg' };" ^
+        "Get-ChildItem -Path '%GAME_DIR%audio' -Recurse -Filter *.ogg | ForEach-Object { $name = $_.Name; foreach ($k in $bgmMap.Keys) { if ($name -like ('*' + $k)) { $target = Join-Path $_.DirectoryName $bgmMap[$k]; if (-not (Test-Path -LiteralPath $target)) { Copy-Item -LiteralPath $_.FullName -Destination $target -Force } } } }" >nul 2>&1
+)
+
 REM Truong hop game unpack dong goi lai data.dts
 if exist "%GAME_DIR%data.dts" if exist "%GAME_DIR%SRPG_Unpacker.exe" (
     echo [+] Dang dong goi lai data.dts...
