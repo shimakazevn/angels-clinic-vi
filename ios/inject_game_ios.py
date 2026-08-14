@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Công cụ tự động tiêm (inject) dữ liệu Game RPG Maker MZ Việt Hóa vào file iOS .IPA Shell
-Tự động tiêm đầy đủ Icons, Plist và Game Assets.
+Tự động tiêm đầy đủ Icons, Plist và Game Assets, đồng thời patch triệt để URL encoding cho iOS WebKit.
 """
 
 import os
@@ -109,29 +109,61 @@ def patch_web_assets_for_ios(temp_www: Path):
     """Patch các file JavaScript để tối ưu cho iOS WebKit WKWebView"""
     js_dir = temp_www / "js"
     
+    # 1. Patch rmmz_core.js
     core_file = js_dir / "rmmz_core.js"
     if core_file.exists():
         content = core_file.read_text(encoding="utf-8")
+        # Fix Nwjs check
         content = re.sub(r'Utils\.isNwjs\s*=\s*function\(\)\s*\{[^}]*\}',
                          'Utils.isNwjs = function() { return typeof nw === "object"; }',
                          content)
+        # Fix Utils.encodeURI: Không mã hóa URL đối với tài nguyên cục bộ trên iOS để tránh lỗi Failed to load audio/img
+        content = re.sub(r'Utils\.encodeURI\s*=\s*function\(str\)\s*\{[\s\S]*?^\s*\};',
+                         'Utils.encodeURI = function(str) { return str; };',
+                         content, flags=re.MULTILINE)
+        
+        # Fix WebAudio._realUrl: Tự động decodeURI nếu URL bị mã hóa percent encoding
+        real_url_patch = """WebAudio.prototype._realUrl = function() {
+    try {
+        return decodeURI(this._url);
+    } catch (e) {
+        return this._url;
+    }
+};"""
+        content = re.sub(r'WebAudio\.prototype\._realUrl\s*=\s*function\(\)\s*\{[\s\S]*?^\s*\};',
+                         real_url_patch, content, flags=re.MULTILINE)
+
+        # Fix WebGL auto fallback
         content = content.replace("preferQueryMode: false", "preferQueryMode: false, powerPreference: 'high-performance'")
         core_file.write_text(content, encoding="utf-8")
-        print("  [OK] Patch rmmz_core.js cho iOS")
+        print("  [OK] Patch rmmz_core.js (URL decoding & WebGL cho iOS)")
 
+    # 2. Patch rmmz_managers.js
     mgr_file = js_dir / "rmmz_managers.js"
     if mgr_file.exists():
         content = mgr_file.read_text(encoding="utf-8")
-        # Thay thế toàn bộ hàm SceneManager.isGameActive một cách chuẩn xác không để sót catch thừa
+        # Luôn active game
         content = re.sub(
             r'SceneManager\.isGameActive\s*=\s*function\(\)\s*\{[\s\S]*?^\s*\};',
             'SceneManager.isGameActive = function() {\n    return true;\n};',
             content,
             flags=re.MULTILINE
         )
-        mgr_file.write_text(content, encoding="utf-8")
-        print("  [OK] Patch rmmz_managers.js (luôn active)")
+        # Fix AudioManager.createBuffer không encode URL ký tự tiếng Nhật/Việt
+        audio_buf_patch = """AudioManager.createBuffer = function(folder, name) {
+    const ext = this.audioFileExt();
+    const url = this._path + folder + name + ext;
+    const buffer = new WebAudio(url);
+    buffer.autoPlay = true;
+    return buffer;
+};"""
+        content = re.sub(r'AudioManager\.createBuffer\s*=\s*function\(folder,\s*name\)\s*\{[\s\S]*?^\s*\};',
+                         audio_buf_patch, content, flags=re.MULTILINE)
 
+        mgr_file.write_text(content, encoding="utf-8")
+        print("  [OK] Patch rmmz_managers.js (AudioManager & luôn active)")
+
+    # 3. Patch index.html cho tràn viền tai thỏ / dynamic island
     index_file = temp_www / "index.html"
     if index_file.exists():
         content = index_file.read_text(encoding="utf-8")
