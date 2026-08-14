@@ -290,6 +290,14 @@ def patch_for_android():
 
         core_js.write_text(content, encoding="utf-8")
 
+        # Patch rmmz_managers.js isGameActive
+        mgr_js = ASSETS_DIR / "js" / "rmmz_managers.js"
+        if mgr_js.exists():
+            mcontent = mgr_js.read_text(encoding="utf-8")
+            mcontent = mcontent.replace("return window.top.document.hasFocus();", "return true; // Android fix")
+            mgr_js.write_text(mcontent, encoding="utf-8")
+            ok("  rmmz_managers.js: da patch isGameActive -> true")
+
     # --- Patch 2: main.js ---
     main_js = ASSETS_DIR / "js" / "main.js"
     if main_js.exists():

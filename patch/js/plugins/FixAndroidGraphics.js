@@ -126,4 +126,9 @@
             return null;
         };
     }
+
+    // 6. Fix Android WebView document.hasFocus() freeze / permanent black screen
+    SceneManager.isGameActive = function() {
+        return true;
+    };
 })();
