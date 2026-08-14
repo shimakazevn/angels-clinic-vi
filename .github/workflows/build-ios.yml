@@ -1,0 +1,45 @@
+name: Build iOS Shell (.IPA)
+
+on:
+  push:
+    branches:
+      - ios-build
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    name: Build iOS Native Shell (.ipa)
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Display Xcode Version
+        run: |
+          xcodebuild -version
+
+      - name: Build Xcode Project (Unsigned Shell)
+        run: |
+          xcodebuild -project ios/template/ThienSuClinic.xcodeproj \
+                     -scheme ThienSuClinic \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -derivedDataPath build/DerivedData \
+                     CODE_SIGN_IDENTITY="" \
+                     CODE_SIGNING_REQUIRED=NO \
+                     CODE_SIGNING_ALLOWED=NO
+
+      - name: Package Payload into .IPA
+        run: |
+          mkdir -p Payload
+          cp -R build/DerivedData/Build/Products/Release-iphoneos/ThienSuClinic.app Payload/
+          zip -r -9 ThienSuClinic-shell.ipa Payload
+          ls -lh ThienSuClinic-shell.ipa
+
+      - name: Upload Shell IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ThienSuClinic-shell-ipa
+          path: ThienSuClinic-shell.ipa
+          retention-days: 30
