@@ -32,3 +32,5 @@ desktop.ini
 ios/output/
 ios/ThienSuClinic-shell.ipa
 ios/*.ipa
+
+release_dist/
