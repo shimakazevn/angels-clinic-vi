@@ -1,34 +1,10 @@
-# Game gốc PRISTINE (quá lớn, không commit)
-天使の早漏治療クリニック/
-
-# Game thử nghiệm (sinh lại được)
-天使の早漏治療クリニック - TEST/
-Tenshi_no_Hayarou_Clinic_VN/
-DELETE/
-
-# Archives & Temporary Scratch
-tools/archive/
-scratch/
-
-# Ignore android build outputs & generated assets
-android/output/
-android/template/app/build/
-android/template/.gradle/
-android/template/app/src/main/assets/
-patch-release/android/output/
-patch-release/android/template/app/build/
-patch-release/android/template/.gradle/
-patch-release/android/template/app/src/main/assets/
-
-# Python cache, archives, OS
-__pycache__/
-*.pyc
+# Output and temporary directories
+output/
+release_dist/
 *.apk
+*.ipa
 *.zip
-temp_patch/
+*.tmp
+*.bak
+.DS_Store
 Thumbs.db
-desktop.ini
-
-ios/output/
-ios/ThienSuClinic-shell.ipa
-ios/*.ipa
