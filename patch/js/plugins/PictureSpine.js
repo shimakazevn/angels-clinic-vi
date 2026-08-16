@@ -875,17 +875,42 @@
                     list.forEach((animation, index) => {
                         let name = this._animationNames.find(animationName => {
                             return animationName.match(`(?:^|/)${animation.name}$`);
-                        }) || animation.name;
-                        let _loop = index < list.length - 1 ? false : loop;
-                        if (index == 0 && track.interrupt) {
-                            entry = state.setAnimation(id, name, _loop);
-                        } else {
-                            entry = state.addAnimation(id, name, _loop, 0);
+                        });
+                        // Fallback for _残りX (e.g. _残り6 -> fallback to _残り5, _残り4, ...)
+                        if (!name && /_残り\d+$/.test(animation.name)) {
+                            for (let r = 5; r >= 1; r--) {
+                                let fallbackCandidate = animation.name.replace(/_残り\d+$/, `_残り${r}`);
+                                name = this._animationNames.find(animationName => {
+                                    return animationName.match(`(?:^|/)${fallbackCandidate}$`);
+                                });
+                                if (name) break;
+                            }
                         }
-                        entry.timeScale  = animation.timeScale;
-                        entry.alpha      = animation.alpha;
-                        entry.plainAlpha = animation.alpha;
-                        spine.setPlayData(entry);
+                        if (!name && state && state.data && state.data.skeletonData) {
+                            if (state.data.skeletonData.findAnimation(animation.name)) {
+                                name = animation.name;
+                            }
+                        }
+                        if (!name) {
+                            console.warn("[PictureSpine] Animation not found in skeleton, safely skipped:", animation.name);
+                            return;
+                        }
+                        let _loop = index < list.length - 1 ? false : loop;
+                        try {
+                            if (index == 0 && track.interrupt) {
+                                entry = state.setAnimation(id, name, _loop);
+                            } else {
+                                entry = state.addAnimation(id, name, _loop, 0);
+                            }
+                            if (entry) {
+                                entry.timeScale  = animation.timeScale;
+                                entry.alpha      = animation.alpha;
+                                entry.plainAlpha = animation.alpha;
+                                spine.setPlayData(entry);
+                            }
+                        } catch (e) {
+                            console.warn("[PictureSpine] setAnimation error safely caught:", e);
+                        }
                     });
                 }
             }
@@ -917,7 +942,12 @@
                             break;
                         case 'play':
                         case 'repeat':
-                            data.trackTime %= this._data.spineData.animations.find(animation => animation.name == data.name).duration;
+                            let _foundAnim = this._data.spineData.animations.find(animation => animation.name == data.name);
+                            if (!_foundAnim) {
+                                console.warn("[PictureSpine] restoreAnimation: animation not found:", data.name);
+                                break;
+                            }
+                            data.trackTime %= _foundAnim.duration;
                             this._data.stateData.defaultMix = data.mixDuration;
                             entry = this._data.state.setAnimation(id, data.name, data.loop);
                             entry.alpha      = data.alpha;

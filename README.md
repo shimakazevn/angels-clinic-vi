@@ -17,6 +17,7 @@ Bản patch Tiếng Việt hoàn chỉnh dành cho tựa game **天使の早漏�
 
 ### 🛠️ Sửa lỗi hệ thống & Tương thích đa nền tảng
 - **Khắc phục triệt để lỗi treo/đơ game trên Android & iOS** tại **Main Story 17** (`CE 437`).
+- **Khắc phục lỗi crash trong chiến đấu (`Animation not found: 能力変化_主人公3_残り6`)**: Nâng cấp plugin `PictureSpine.js` và thư viện `pixi-spine.js` tự động fallback số lượt hiệu ứng còn lại (`_残り5`) và chặn hoàn toàn các ngoại lệ thiếu animation Spine làm dừng game.
 - **Sửa lỗi hiển thị thông báo hệ thống**: Điều chỉnh đúng thông báo điều khiển con lăn chuột (`\C[2]con lăn chuột\C[0]`) tại các H-scene 13, 14, 18 (`CE 514`, `CE 515`, `CE 519`).
 - **Tối ưu hóa pipeline đóng gói**: Hỗ trợ xuất đồng thời bộ cài đặt PC (Full Game ZIP), Android (APK) và iOS (IPA).
 
