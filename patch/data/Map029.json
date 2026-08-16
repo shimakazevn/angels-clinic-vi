@@ -5994,13 +5994,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "kết thúc tại đây sao."
-                            ]
-                        },
-                        {
                             "code": 111,
                             "indent": 5,
                             "parameters": [
@@ -6201,7 +6194,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Đây là cơ hội để được cả hai bọn em vắt cạn đấy?"
+                                "Cơ hội tốt để được cả hai bọn em vắt kiệt đấy nhé?"
                             ]
                         },
                         {
@@ -6405,14 +6398,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Nếu bây giờ anh đầu hàng,"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "hai bọn em sẽ cho anh màn bắn tinh tuyệt đỉnh nhất đấy."
+                                "Nếu bây giờ đầu hàng, hai bọn em sẽ cùng hành hạ cho anh bắn tinh sướng nhất luôn."
                             ]
                         },
                         {
@@ -6666,21 +6652,14 @@
                                 0,
                                 0,
                                 2,
-                                "\\C[4]Sera R&L"
+                                "\\C[4]Sera (Cả hai)"
                             ]
                         },
                         {
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Hì hì...♡"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 6,
-                            "parameters": [
-                                "Đồ ngốc này...♡"
+                                "Hì hì...♡ Đồ ngốc này...♡"
                             ]
                         },
                         {
@@ -7151,7 +7130,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera R「Anh cố gắng lắm rồi. Ngoan nào ngoan nào」"
+                                    "text": "Sera R「Cố gắng lắm. Ngoan nào」"
                                 }
                             ]
                         },
@@ -7170,7 +7149,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera L「Thế thì em cũng xoa đầu anh, ngoan nào ngoan nào」"
+                                    "text": "Sera L「Vậy em cũng, ngoan nào」"
                                 }
                             ]
                         },
@@ -8883,13 +8862,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "kết thúc tại đây sao."
-                            ]
-                        },
-                        {
                             "code": 111,
                             "indent": 3,
                             "parameters": [
@@ -9090,7 +9062,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Đây là cơ hội để được cả hai bọn em vắt cạn đấy?"
+                                "Cơ hội tốt để được cả hai bọn em vắt kiệt đấy nhé?"
                             ]
                         },
                         {
@@ -9294,14 +9266,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Nếu bây giờ anh đầu hàng,"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "hai bọn em sẽ cho anh màn bắn tinh tuyệt đỉnh nhất đấy."
+                                "Nếu bây giờ đầu hàng, hai bọn em sẽ cùng hành hạ cho anh bắn tinh sướng nhất luôn."
                             ]
                         },
                         {
@@ -9555,21 +9520,14 @@
                                 0,
                                 0,
                                 2,
-                                "\\C[4]Sera R&L"
+                                "\\C[4]Sera (Cả hai)"
                             ]
                         },
                         {
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Hì hì...♡"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 4,
-                            "parameters": [
-                                "Đồ ngốc này...♡"
+                                "Hì hì...♡ Đồ ngốc này...♡"
                             ]
                         },
                         {
@@ -10031,7 +9989,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera R「Anh cố gắng lắm rồi. Ngoan nào ngoan nào」"
+                                    "text": "Sera R「Cố gắng lắm. Ngoan nào」"
                                 }
                             ]
                         },
@@ -10050,7 +10008,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera L「Thế thì em cũng xoa đầu anh, ngoan nào ngoan nào」"
+                                    "text": "Sera L「Vậy em cũng, ngoan nào」"
                                 }
                             ]
                         },

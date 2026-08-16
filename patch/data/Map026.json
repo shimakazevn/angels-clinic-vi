@@ -4666,7 +4666,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Bị anh nói những lời như thế,"
+                                    "text": "Sera「Bị cưng nói những lời như thế,"
                                 }
                             ]
                         },
@@ -4674,7 +4674,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Bị anh nói những lời như thế,"
+                                "テキスト = Sera「Bị cưng nói những lời như thế,"
                             ]
                         },
                         {
@@ -5211,13 +5211,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "Vẫn chưa muốn đâu..."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 5,
                             "parameters": [
@@ -5319,14 +5312,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Nè, chịu thua đi mà?"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "Em tuyệt đối không giận đâu, anh chịu thua em nhé...?"
+                                "Này, thế được rồi đúng không? Em hứa không giận đâu, anh chịu thua em có được không...?"
                             ]
                         },
                         {
@@ -5488,14 +5474,7 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Hì hì...♡"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 6,
-                            "parameters": [
-                                "Cuối cùng anh cũng chịu thua rồi...♡"
+                                "Hì hì...♡ Cuối cùng anh cũng chịu khuất phục rồi...♡"
                             ]
                         },
                         {
@@ -5600,7 +5579,7 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Vậy thì chúng ta làm thôi nào...♡"
+                                "Thế chúng ta làm thôi nào...♡"
                             ]
                         },
                         {
@@ -5804,7 +5783,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Ư ư ư...!"
+                                    "text": "Sera「U u u~~~……!"
                                 }
                             ]
                         },
@@ -5823,7 +5802,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "   Anh chơi xấu quá à...!」"
+                                    "text": "　　　Đồ xấu bụng……！」"
                                 }
                             ]
                         },
@@ -7292,13 +7271,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "Vẫn chưa muốn đâu..."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 3,
                             "parameters": [
@@ -7400,14 +7372,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Nè, chịu thua đi mà?"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "Em tuyệt đối không giận đâu, anh chịu thua em nhé...?"
+                                "Này, thế được rồi đúng không? Em hứa không giận đâu, anh chịu thua em có được không...?"
                             ]
                         },
                         {
@@ -7569,14 +7534,7 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Hì hì...♡"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 4,
-                            "parameters": [
-                                "Cuối cùng anh cũng chịu thua rồi...♡"
+                                "Hì hì...♡ Cuối cùng anh cũng chịu khuất phục rồi...♡"
                             ]
                         },
                         {
@@ -7681,7 +7639,7 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Vậy thì chúng ta làm thôi nào...♡"
+                                "Thế chúng ta làm thôi nào...♡"
                             ]
                         },
                         {
@@ -7885,7 +7843,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Ư ư ư...!"
+                                    "text": "Sera「U u u~~~……!"
                                 }
                             ]
                         },
@@ -7904,7 +7862,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "   Anh chơi xấu quá à...!」"
+                                    "text": "　　　Đồ xấu bụng……！」"
                                 }
                             ]
                         },

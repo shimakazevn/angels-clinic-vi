@@ -5048,7 +5048,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Bị anh nói những lời như thế,"
+                                    "text": "Sera「Bị cưng nói những lời như thế,"
                                 }
                             ]
                         },
@@ -5056,7 +5056,7 @@
                             "code": 657,
                             "indent": 6,
                             "parameters": [
-                                "テキスト = Sera「Bị anh nói những lời như thế,"
+                                "テキスト = Sera「Bị cưng nói những lời như thế,"
                             ]
                         },
                         {

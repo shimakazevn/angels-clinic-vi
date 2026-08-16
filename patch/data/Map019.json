@@ -4720,7 +4720,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Bị anh nói những lời như thế,"
+                                    "text": "Sera「Bị cưng nói những lời như thế,"
                                 }
                             ]
                         },
@@ -4728,7 +4728,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Bị anh nói những lời như thế,"
+                                "テキスト = Sera「Bị cưng nói những lời như thế,"
                             ]
                         },
                         {
@@ -5443,13 +5443,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "Thực ra anh rất muốn bắn tinh ngay khi em đếm về 0 đúng không."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 5,
                             "parameters": [
@@ -5551,14 +5544,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Bây giờ vẫn còn kịp đấy."
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "Con số đó... để em đếm cho anh nhé?"
+                                "Bây giờ vẫn còn kịp đấy. Con số đó... Anh có muốn em đọc cho không?"
                             ]
                         },
                         {
@@ -5720,14 +5706,7 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Được thôi."
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 6,
-                            "parameters": [
-                                "Vậy thì anh hãy lắng tai nghe cho thật kỹ nhé."
+                                "Được thôi. Thế thì hãy vểnh tai lên nghe cho rõ nhé."
                             ]
                         },
                         {
@@ -5890,7 +5869,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「3, 2, 1...」"
+                                    "text": "Sera「3, 2, 1……」"
                                 }
                             ]
                         },
@@ -5909,7 +5888,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Bị dùng vòng ngón tay tập trung sục mạnh vào rãnh quy đầu!"
+                                    "text": "Bị vòng tay kích thích trọng tâm vào quy đầu!"
                                 }
                             ]
                         },
@@ -6013,7 +5992,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Số 0♡ Bắn tinh đi nào♡」"
+                                    "text": "Sera「Zero♡ Xuất tinh đi♡」"
                                 }
                             ]
                         },
@@ -6201,7 +6180,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -6209,7 +6188,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {
@@ -7834,13 +7813,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "Thực ra anh rất muốn bắn tinh ngay khi em đếm về 0 đúng không."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 3,
                             "parameters": [
@@ -7942,14 +7914,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Bây giờ vẫn còn kịp đấy."
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "Con số đó... để em đếm cho anh nhé?"
+                                "Bây giờ vẫn còn kịp đấy. Con số đó... Anh có muốn em đọc cho không?"
                             ]
                         },
                         {
@@ -8111,14 +8076,7 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Được thôi."
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 4,
-                            "parameters": [
-                                "Vậy thì anh hãy lắng tai nghe cho thật kỹ nhé."
+                                "Được thôi. Thế thì hãy vểnh tai lên nghe cho rõ nhé."
                             ]
                         },
                         {
@@ -8281,7 +8239,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「3, 2, 1...」"
+                                    "text": "Sera「3, 2, 1……」"
                                 }
                             ]
                         },
@@ -8300,7 +8258,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Bị dùng vòng ngón tay tập trung sục mạnh vào rãnh quy đầu!"
+                                    "text": "Bị vòng tay kích thích trọng tâm vào quy đầu!"
                                 }
                             ]
                         },
@@ -8404,7 +8362,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Số 0♡ Bắn tinh đi nào♡」"
+                                    "text": "Sera「Zero♡ Xuất tinh đi♡」"
                                 }
                             ]
                         },
@@ -8592,7 +8550,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -8600,7 +8558,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {

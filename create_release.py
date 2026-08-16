@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-create_release.py - Cong cu tu dong dong goi va upload Release len GitHub cho tat ca cac nen tang:
-  1. Cap nhat Game Title voi phien ban va Git Commit SHA
-  2. Dong bo hoa du lieu sang PC, Android va iOS
-  3. Tao file ZIP Full Game PC (Giai nen la choi ngay tren Windows)
-  4. Bien dich Android APK (Cai dat truc tiep tren Android)
-  5. Bien dich iOS IPA (Cai dat qua TrollStore / Sideloadly / Scarlet tren iOS)
-  6. Upload tat ca len GitHub Release qua GitHub CLI (`gh release create`)
+create_release.py — Đóng gói release đa nền tảng (PC ZIP / Android APK / iOS IPA).
+
+Quy trình:
+  1. Lấy Git commit SHA hiện tại
+  2. Cập nhật Game Title trong System.json + package.json
+  3. Sync data/*.json → patch/, Android assets
+  4. Đóng gói Full Game PC → release_dist/ThienSuClinic-PC-<version>.zip
+  5. Biên dịch Android APK  → release_dist/ThienSuClinic-Android-<version>.apk
+  6. Biên dịch iOS IPA       → release_dist/ThienSuClinic-iOS-<version>.ipa
+
+Để upload lên GitHub, dùng: python upload_github_release.py --version <version>
+
+Cách dùng:
+    python create_release.py --version v1.2.0
+    python create_release.py --version v1.2.0 --skip-android --skip-ios
+    python create_release.py --version v1.2.0 --dry-run
 """
 
 import os
+import re
 import sys
 import io
 import json
@@ -18,285 +28,503 @@ import shutil
 import zipfile
 import subprocess
 import argparse
+import time
+import datetime
 from pathlib import Path
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
-BASE_DIR = Path(__file__).resolve().parent
-REPO_ROOT = BASE_DIR
-GAME_TEST_DIR = REPO_ROOT.parent / "天使の早漏治療クリニック - TEST" / "Game"
-PATCH_DIR = REPO_ROOT / "patch"
-ANDROID_DIR = REPO_ROOT / "android"
-IOS_DIR = REPO_ROOT / "ios"
-RELEASE_OUT = REPO_ROOT / "release_dist"
+# ─── Paths ───────────────────────────────────────────────────────────────────
+BASE_DIR      = Path(__file__).resolve().parent
+REPO_ROOT     = BASE_DIR                                          # patch-release is the git repo
+GAME_TEST_DIR = BASE_DIR.parent / "天使の早漏治療クリニック - TEST" / "Game"
+PATCH_DIR     = BASE_DIR / "patch"
+ANDROID_DIR   = BASE_DIR / "android"
+IOS_DIR       = BASE_DIR / "ios"
+RELEASE_OUT   = BASE_DIR / "release_dist"
+F_DRIVE       = Path("F:\\")                                     # Local quick-copy drive
 
-def run_cmd(cmd, cwd=None):
-    print(f"[EXEC] {' '.join(cmd) if isinstance(cmd, list) else cmd}")
-    res = subprocess.run(cmd, cwd=cwd, shell=isinstance(cmd, str), capture_output=True, text=True, encoding='utf-8', errors='replace')
+# ─── Logger ──────────────────────────────────────────────────────────────────
+_ANSI_RE = re.compile(r"\x1b\[[0-9;]*m")
+
+def _strip_ansi(text: str) -> str:
+    return _ANSI_RE.sub("", text)
+
+
+class Logger:
+    """
+    Structured logger: in ra console (màu ANSI) VÀ ghi song song vào file log.
+    File log tự động tạo tại: release_dist/logs/release_<timestamp>.log
+    """
+
+    RESET  = "\033[0m"
+    BOLD   = "\033[1m"
+    GREEN  = "\033[92m"
+    YELLOW = "\033[93m"
+    RED    = "\033[91m"
+    CYAN   = "\033[96m"
+    GREY   = "\033[90m"
+
+    def __init__(self, dry_run: bool = False, log_dir: Path | None = None):
+        self.dry_run  = dry_run
+        self.warnings = 0
+        self.errors   = 0
+        self._t_start = time.time()
+
+        # ── File log setup ──────────────────────────────────────────
+        ts_file = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_dir = log_dir or (RELEASE_OUT / "logs")
+        log_dir.mkdir(parents=True, exist_ok=True)
+        self.log_path = log_dir / f"release_{ts_file}.log"
+        self._log_fh  = open(self.log_path, "w", encoding="utf-8", errors="replace")
+        self._log_fh.write(
+            f"=== create_release.py log — {datetime.datetime.now().isoformat()} ===\n"
+            f"dry_run={dry_run}\n\n"
+        )
+        self._log_fh.flush()
+        # Print log path to console so user knows where it is
+        print(f"{self.GREY}📄 Log file: {self.log_path}{self.RESET}")
+
+    # ── Internal write ────────────────────────────────────────────────
+    # Map unicode symbols → ASCII for log file readability
+    _SYMBOL_MAP = str.maketrans({
+        "✓": "[OK]",  "✗": "[ERR]", "⚠": "[WARN]",
+        "▶": "[>]",   "·": "[-]",    "—": "--",
+        "→": "->",    "═": "=",     "║": "|",
+        "╔": "+",     "╗": "+",     "╚": "+",
+        "╝": "+",     "─": "-",     "–": "-",
+        "📄": "",     "🌸": "",
+    })
+
+    def _write(self, line: str):
+        """Write ASCII-safe plain text line to log file."""
+        plain = _strip_ansi(line).translate(self._SYMBOL_MAP)
+        self._log_fh.write(plain + "\n")
+        self._log_fh.flush()
+
+    def _emit(self, line: str, *, err: bool = False):
+        """Print to console and mirror to log file."""
+        if err:
+            print(line, file=sys.stderr)
+        else:
+            print(line)
+        self._write(line)
+
+    # ── Helpers ───────────────────────────────────────────────────────
+    def _ts(self) -> str:
+        return datetime.datetime.now().strftime("%H:%M:%S")
+
+    def _elapsed(self) -> str:
+        s = int(time.time() - self._t_start)
+        return f"{s // 60:02d}m{s % 60:02d}s"
+
+    # ── Public API ────────────────────────────────────────────────────
+    def header(self, title: str):
+        bar = "═" * 58
+        self._emit(f"")
+        self._emit(f"{self.BOLD}{self.CYAN}╔{bar}╗")
+        self._emit(f"║  {title:<56}║")
+        self._emit(f"╚{bar}╝{self.RESET}")
+
+    def step(self, msg: str):
+        prefix = "[DRY-RUN] " if self.dry_run else ""
+        self._emit(f"{self.BOLD}{self.CYAN}[{self._ts()}]{self.RESET} {self.BOLD}▶{self.RESET} {prefix}{msg}")
+
+    def ok(self, msg: str):
+        self._emit(f"{self.BOLD}{self.GREEN}[{self._ts()}]  ✓{self.RESET}  {msg}")
+
+    def info(self, msg: str):
+        self._emit(f"{self.GREY}[{self._ts()}]  ·  {msg}{self.RESET}")
+
+    def warn(self, msg: str):
+        self.warnings += 1
+        self._emit(f"{self.YELLOW}[{self._ts()}]  ⚠  WARN: {msg}{self.RESET}", err=True)
+
+    def error(self, msg: str):
+        self.errors += 1
+        self._emit(f"{self.RED}{self.BOLD}[{self._ts()}]  ✗  ERROR: {msg}{self.RESET}", err=True)
+
+    def cmd(self, parts):
+        display = " ".join(parts) if isinstance(parts, list) else parts
+        self._emit(f"{self.GREY}[{self._ts()}]     $ {display}{self.RESET}")
+
+    def summary(self, version: str, assets: list):
+        elapsed = self._elapsed()
+        bar = "─" * 58
+        self._emit(f"")
+        self._emit(f"{self.BOLD}{self.CYAN}{bar}{self.RESET}")
+        self._emit(f"{self.BOLD}  BUILD SUMMARY  —  {version}  —  {elapsed}{self.RESET}")
+        self._emit(f"{self.CYAN}{bar}{self.RESET}")
+        for label, path in assets:
+            if path and Path(path).exists():
+                size_mb = Path(path).stat().st_size / (1024 * 1024)
+                self._emit(f"  {self.GREEN}✓{self.RESET}  {label:<20} {Path(path).name}  ({size_mb:.1f} MB)")
+            else:
+                self._emit(f"  {self.YELLOW}–{self.RESET}  {label:<20} (skipped / not built)")
+        self._emit(f"{self.CYAN}{bar}{self.RESET}")
+        status_label = "OK" if self.errors == 0 else "FAILED"
+        status_color = self.GREEN if self.errors == 0 else self.RED
+        self._emit(
+            f"  Warnings: {self.warnings}  |  Errors: {self.errors}  "
+            f"|  Status: {status_color}{self.BOLD}{status_label}{self.RESET}"
+        )
+        self._emit(f"{self.CYAN}{bar}{self.RESET}")
+        self._emit(f"")
+
+    def close(self):
+        """Flush và đóng file log. Gọi sau khi tất cả output đã xong."""
+        if not self._log_fh.closed:
+            elapsed = self._elapsed()
+            self._log_fh.write(f"\n=== END — elapsed {elapsed} ===\n")
+            self._log_fh.close()
+            print(f"{self.GREY}📄 Full log saved: {self.log_path}{self.RESET}")
+
+
+log: "Logger | None" = None  # initialized in main()
+
+
+# ─── Helpers ─────────────────────────────────────────────────────────────────
+def run(cmd: list, *, cwd=None, capture=True, timeout=300) -> tuple[bool, str, str]:
+    """Run a subprocess command, return (success, stdout, stderr).
+    timeout: giây tối đa chờ lệnh hoàn thành (mặc định 5 phút).
+    """
+    log.cmd(cmd)
+    if log.dry_run:
+        return True, "(dry-run)", ""
+    try:
+        res = subprocess.run(
+            cmd, cwd=cwd,
+            capture_output=capture,
+            text=True, encoding="utf-8", errors="replace",
+            timeout=timeout
+        )
+    except subprocess.TimeoutExpired:
+        log.error(f"Command timed out after {timeout}s: {' '.join(cmd[:4])}")
+        return False, "", "TimeoutExpired"
     if res.returncode != 0:
-        print(f"[ERR] Command failed with returncode {res.returncode}:")
-        print(res.stderr)
-        return False, res.stdout, res.stderr
-    return True, res.stdout, res.stderr
+        log.error(f"Command exited {res.returncode}: {' '.join(cmd[:3])}…")
+        if res.stderr.strip():
+            for line in res.stderr.strip().splitlines()[-10:]:
+                print(f"         {line}", file=sys.stderr)
+        return False, res.stdout or "", res.stderr or ""
+    if res.stdout.strip():
+        for line in res.stdout.strip().splitlines()[-5:]:
+            log.info(line)
+    return True, res.stdout or "", res.stderr or ""
 
-def get_git_commit():
-    ok, out, _ = run_cmd(["git", "rev-parse", "--short", "HEAD"], cwd=REPO_ROOT)
-    if ok and out.strip():
-        return out.strip()
-    return "dev"
 
-def update_game_title(version, commit_sha):
-    title_suffix = f"[{version}-{commit_sha}]"
-    base_title = "Phòng Khám Thiên Sứ: Chuyên Trị Xuất Tinh Sớm"
-    full_title = f"{base_title} {title_suffix}"
-    
-    print(f"\n[+] Cap nhat Game Title thanh: '{full_title}'")
-    
-    # 1. Update TEST game System.json
+def git_commit_sha() -> str:
+    ok, out, _ = run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO_ROOT)
+    return out.strip() if ok and out.strip() else "dev"
+
+
+def git_current_branch() -> str:
+    ok, out, _ = run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=REPO_ROOT)
+    return out.strip() if ok and out.strip() else "main"
+
+
+def file_size_mb(path: Path) -> str:
+    if path and path.exists():
+        return f"{path.stat().st_size / (1024 * 1024):.2f} MB"
+    return "N/A"
+
+
+# ─── Step 1: Update Game Title ───────────────────────────────────────────────
+def update_game_title(version: str, commit_sha: str) -> str:
+    log.header("STEP 1 — UPDATE GAME TITLE & SYNC DATA")
+
+    base_title  = "Phòng Khám Thiên Sứ: Chuyên Trị Xuất Tinh Sớm"
+    full_title  = f"{base_title} [{version}-{commit_sha}]"
+    log.step(f"Game Title → '{full_title}'")
+
+    # System.json (TEST game)
     sys_file = GAME_TEST_DIR / "data" / "System.json"
     if sys_file.exists():
-        data = json.loads(sys_file.read_text(encoding="utf-8"))
-        data["gameTitle"] = full_title
-        sys_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("  [OK] Updated TEST Game System.json")
-        
-    # 2. Update TEST game package.json
+        if not log.dry_run:
+            data = json.loads(sys_file.read_text(encoding="utf-8"))
+            data["gameTitle"] = full_title
+            sys_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        log.ok(f"System.json updated: {sys_file}")
+    else:
+        log.warn(f"System.json not found: {sys_file}")
+
+    # package.json (TEST game)
     pkg_file = GAME_TEST_DIR / "package.json"
     if pkg_file.exists():
-        pkg = json.loads(pkg_file.read_text(encoding="utf-8"))
-        if "window" not in pkg:
-            pkg["window"] = {}
-        pkg["window"]["title"] = full_title
-        pkg["version"] = version.lstrip("v")
-        pkg_file.write_text(json.dumps(pkg, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("  [OK] Updated TEST Game package.json")
-        
-    # 3. Sync to patch/ directory
-    patch_sys = PATCH_DIR / "data" / "System.json"
-    if sys_file.exists():
-        patch_sys.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(sys_file, patch_sys)
-        print("  [OK] Synced to patch/data/System.json")
-        
-    patch_pkg = PATCH_DIR / "package.json"
+        if not log.dry_run:
+            pkg = json.loads(pkg_file.read_text(encoding="utf-8"))
+            pkg.setdefault("window", {})["title"] = full_title
+            pkg["version"] = version.lstrip("v")
+            pkg_file.write_text(json.dumps(pkg, ensure_ascii=False, indent=2), encoding="utf-8")
+        log.ok(f"package.json updated: {pkg_file}")
+    else:
+        log.warn(f"package.json not found: {pkg_file}")
+
+    # Sync → patch/data/
+    patch_data = PATCH_DIR / "data"
+    patch_data.mkdir(parents=True, exist_ok=True)
+    test_data  = GAME_TEST_DIR / "data"
+    json_files = sorted(test_data.glob("*.json"))
+    log.step(f"Sync {len(json_files)} JSON files → patch/data/")
+    if not log.dry_run:
+        for jf in json_files:
+            shutil.copy2(jf, patch_data / jf.name)
+    log.ok(f"Synced {len(json_files)} files → {patch_data}")
+
+    # Sync → patch/package.json
     if pkg_file.exists():
-        shutil.copy2(pkg_file, patch_pkg)
-        print("  [OK] Synced to patch/package.json")
+        if not log.dry_run:
+            shutil.copy2(pkg_file, PATCH_DIR / "package.json")
+        log.ok(f"Synced package.json → {PATCH_DIR / 'package.json'}")
 
-    # 4. Sync all latest data/*.json to patch/
-    for json_f in (GAME_TEST_DIR / "data").glob("*.json"):
-        shutil.copy2(json_f, PATCH_DIR / "data" / json_f.name)
-    print("  [OK] Synced all data/*.json to patch/data/")
-
-    # 5. Sync to Android assets
-    android_assets = ANDROID_DIR / "template" / "app" / "src" / "main" / "assets"
+    # Sync → Android assets (only files that already exist there)
+    android_assets = ANDROID_DIR / "template" / "app" / "src" / "main" / "assets" / "data"
     if android_assets.exists():
-        for json_f in (GAME_TEST_DIR / "data").glob("*.json"):
-            dst = android_assets / "data" / json_f.name
-            if dst.exists():
-                shutil.copy2(json_f, dst)
-        print("  [OK] Synced data/*.json to Android assets")
+        synced = 0
+        if not log.dry_run:
+            for jf in json_files:
+                dst = android_assets / jf.name
+                if dst.exists():
+                    shutil.copy2(jf, dst)
+                    synced += 1
+        log.ok(f"Synced {synced} files → Android assets ({android_assets})")
+    else:
+        log.info(f"Android assets dir not found, skipping: {android_assets}")
 
     return full_title
 
-def build_pc_game_zip(version):
-    print("\n" + "="*50)
-    print("    DONG GOI FULL GAME PC (STANDALONE)")
-    print("="*50)
-    
+
+# ─── Step 2: Git commit ───────────────────────────────────────────────────────
+def git_commit_version(version: str, commit_sha: str):
+    log.header("STEP 2 — GIT COMMIT VERSION BUMP")
+    branch = git_current_branch()
+    log.step(f"Committing version bump on branch '{branch}'")
+    run(["git", "add", "."], cwd=REPO_ROOT)
+    run(["git", "commit", "--allow-empty", "-m",
+         f"chore(release): bump version to {version} [{commit_sha}]"], cwd=REPO_ROOT)
+    new_sha = git_commit_sha()
+    log.ok(f"Committed. New SHA: {new_sha}")
+    return new_sha
+
+
+# ─── Step 3: PC ZIP ──────────────────────────────────────────────────────────
+def build_pc_zip(version: str) -> Path | None:
+    log.header("STEP 3 — PACKAGE PC FULL GAME ZIP")
+
     zip_name = f"ThienSuClinic-PC-{version}.zip"
     zip_path = RELEASE_OUT / zip_name
     RELEASE_OUT.mkdir(parents=True, exist_ok=True)
-    
+
     if zip_path.exists():
-        zip_path.unlink()
-        
-    root_folder_name = f"ThienSuClinic-PC-{version}"
-    
-    print(f"[+] Dang nen thu muc game: {GAME_TEST_DIR} -> {zip_name}...")
-    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
-        for root, dirs, files in os.walk(GAME_TEST_DIR):
-            for f in files:
-                full_p = Path(root) / f
-                rel_p = full_p.relative_to(GAME_TEST_DIR)
-                
-                # Exclude developer temporary save states (file*.rmmzsave)
-                if rel_p.parts and rel_p.parts[0] == "save" and f.startswith("file") and f.endswith(".rmmzsave"):
-                    continue
-                # Exclude unnecessary temporary logs/backups
-                if f.endswith(".tmp") or f.endswith(".bak"):
-                    continue
-                    
-                arc_p = Path(root_folder_name) / rel_p
+        log.info(f"Removing existing ZIP: {zip_path.name}")
+        if not log.dry_run:
+            zip_path.unlink()
+
+    root_folder = f"ThienSuClinic-PC-{version}"
+    EXCLUDE_DIRS  = {"save"}
+    EXCLUDE_EXTS  = {".tmp", ".bak", ".rmmzsave"}
+    EXCLUDE_FILES = {"thumbs.db", ".ds_store"}
+
+    log.step(f"Scanning game dir: {GAME_TEST_DIR}")
+    all_files = []
+    for root, dirs, files in os.walk(GAME_TEST_DIR):
+        root_path = Path(root)
+        rel_root  = root_path.relative_to(GAME_TEST_DIR)
+
+        # Prune excluded dirs in-place
+        dirs[:] = [d for d in dirs if d.lower() not in EXCLUDE_DIRS]
+
+        for fname in files:
+            # Skip unwanted files
+            if fname.lower() in EXCLUDE_FILES:
+                continue
+            if Path(fname).suffix.lower() in EXCLUDE_EXTS:
+                continue
+            # Skip developer save states only inside save/
+            if rel_root.parts and rel_root.parts[0] == "save" and fname.startswith("file"):
+                continue
+            full_p = root_path / fname
+            rel_p  = full_p.relative_to(GAME_TEST_DIR)
+            all_files.append((full_p, Path(root_folder) / rel_p))
+
+    log.info(f"Total files to pack: {len(all_files)}")
+
+    if not log.dry_run:
+        t0 = time.time()
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
+            for idx, (full_p, arc_p) in enumerate(all_files, 1):
                 zf.write(full_p, arc_p)
-                
-    print(f"[OK] Da tao file Full Game PC ZIP: {zip_path} ({zip_path.stat().st_size / (1024*1024):.2f} MB)")
-    
-    # Also copy to F: for quick local access
-    f_drive = Path(r"F:\ThienSuClinic-PC.zip")
-    if f_drive.parent.exists():
-        shutil.copy2(zip_path, f_drive)
-        print(f"  [+] Da cap nhat sang {f_drive}")
-        
+                if idx % 500 == 0 or idx == len(all_files):
+                    pct = idx * 100 // len(all_files)
+                    log.info(f"  Packing… {idx}/{len(all_files)} ({pct}%)")
+        elapsed = time.time() - t0
+        log.ok(f"ZIP created: {zip_path}  [{file_size_mb(zip_path)}]  ({elapsed:.1f}s)")
+    else:
+        log.ok(f"[DRY-RUN] Would create: {zip_path}")
+
+    # Quick-copy to F: drive if available
+    f_dst = F_DRIVE / "ThienSuClinic-PC.zip"
+    if F_DRIVE.exists() and not log.dry_run:
+        shutil.copy2(zip_path, f_dst)
+        log.ok(f"Copied to F: drive → {f_dst}")
+
     return zip_path
 
-def build_android_apk(version):
-    print("\n" + "="*50)
-    print("    BIEN DICH ANDROID APK")
-    print("="*50)
-    
-    cmd = [
-        sys.executable,
-        str(ANDROID_DIR / "build_apk.py"),
-        "--game-dir", str(GAME_TEST_DIR)
-    ]
-    ok, out, err = run_cmd(cmd, cwd=ANDROID_DIR)
+
+# ─── Step 4: Android APK ─────────────────────────────────────────────────────
+def build_android_apk(version: str) -> Path | None:
+    log.header("STEP 4 — BUILD ANDROID APK")
+
+    build_script = ANDROID_DIR / "build_apk.py"
+    if not build_script.exists():
+        log.warn(f"build_apk.py not found: {build_script}  — skipping Android build")
+        return None
+
+    log.step(f"Running: {build_script.name}")
+    ok, out, err = run(
+        [sys.executable, str(build_script), "--game-dir", str(GAME_TEST_DIR)],
+        cwd=ANDROID_DIR
+    )
     if not ok:
-        print("[ERR] Build Android APK that bai!")
-        print(err)
+        log.error("Android APK build failed.")
         return None
-        
+
     src_apk = ANDROID_DIR / "output" / "viet-hoa-thiensu.apk"
-    if not src_apk.exists():
-        print("[ERR] Khong tim thay file APK sau khi build!")
+    if not src_apk.exists() and not log.dry_run:
+        log.error(f"APK not found after build: {src_apk}")
         return None
-        
+
     dst_apk = RELEASE_OUT / f"ThienSuClinic-Android-{version}.apk"
-    shutil.copy2(src_apk, dst_apk)
-    print(f"[OK] Android APK da duoc tao: {dst_apk} ({dst_apk.stat().st_size / (1024*1024):.2f} MB)")
-    
-    f_drive = Path(r"F:\ThienSuClinic-Android.apk")
-    if f_drive.parent.exists():
-        shutil.copy2(dst_apk, f_drive)
-        print(f"  [+] Da cap nhat sang {f_drive}")
-        
+    if not log.dry_run:
+        shutil.copy2(src_apk, dst_apk)
+    log.ok(f"APK ready: {dst_apk}  [{file_size_mb(dst_apk)}]")
+
+    f_dst = F_DRIVE / "ThienSuClinic-Android.apk"
+    if F_DRIVE.exists() and not log.dry_run:
+        shutil.copy2(dst_apk, f_dst)
+        log.ok(f"Copied to F: drive → {f_dst}")
+
     return dst_apk
 
-def build_ios_ipa(version):
-    print("\n" + "="*50)
-    print("    BIEN DICH IOS IPA")
-    print("="*50)
-    
-    cmd = [
-        sys.executable,
-        str(IOS_DIR / "inject_game_ios.py")
-    ]
-    ok, out, err = run_cmd(cmd, cwd=IOS_DIR)
+
+# ─── Step 5: iOS IPA ─────────────────────────────────────────────────────────
+def build_ios_ipa(version: str) -> Path | None:
+    log.header("STEP 5 — BUILD iOS IPA")
+
+    build_script = IOS_DIR / "inject_game_ios.py"
+    if not build_script.exists():
+        log.warn(f"inject_game_ios.py not found: {build_script}  — skipping iOS build")
+        return None
+
+    log.step(f"Running: {build_script.name}")
+    ok, out, err = run(
+        [sys.executable, str(build_script)],
+        cwd=IOS_DIR
+    )
     if not ok:
-        print("[ERR] Build iOS IPA that bai!")
-        print(err)
+        log.error("iOS IPA build failed.")
         return None
-        
+
     src_ipa = IOS_DIR / "output" / "ThienSuClinic-VietHoa.ipa"
-    if not src_ipa.exists():
-        print("[ERR] Khong tim thay file IPA sau khi build!")
+    if not src_ipa.exists() and not log.dry_run:
+        log.error(f"IPA not found after build: {src_ipa}")
         return None
-        
+
     dst_ipa = RELEASE_OUT / f"ThienSuClinic-iOS-{version}.ipa"
-    shutil.copy2(src_ipa, dst_ipa)
-    print(f"[OK] iOS IPA da duoc tao: {dst_ipa} ({dst_ipa.stat().st_size / (1024*1024):.2f} MB)")
-    
-    # Also copy to F: for quick local access
-    f_drive = Path(r"F:\ThienSuClinic-VietHoa.ipa")
-    if f_drive.parent.exists():
-        shutil.copy2(src_ipa, f_drive)
-        print(f"  [+] Da cap nhat sang {f_drive}")
-        
+    if not log.dry_run:
+        shutil.copy2(src_ipa, dst_ipa)
+    log.ok(f"IPA ready: {dst_ipa}  [{file_size_mb(dst_ipa)}]")
+
+    f_dst = F_DRIVE / "ThienSuClinic-VietHoa.ipa"
+    if F_DRIVE.exists() and not log.dry_run:
+        shutil.copy2(src_ipa, f_dst)
+        log.ok(f"Copied to F: drive → {f_dst}")
+
     return dst_ipa
 
-def publish_github_release(version, commit_sha, assets):
-    print("\n" + "="*50)
-    print(f"    PUBLISH GITHUB RELEASE: {version}")
-    print("="*50)
-    
-    release_notes = f"""## 🌸 Bản Dịch Việt Hóa: Thiên Sứ Trị Liệu Xuất Tinh Sớm ({version})
-**Commit ID:** `{commit_sha}`
 
-### 📌 Các tính năng & nội dung cập nhật:
-- **Việt hóa 100% cốt truyện chính, thoại nhân vật Sera, các đợt trị liệu và Aftercare**.
-- **Hiển thị phiên bản & Git Commit ID ngay trên tiêu đề game PC** (`[{version}-{commit_sha}]`) giúp dễ dàng kiểm tra phiên bản.
-- **Bản PC Full Game đóng gói sẵn**: Chỉ cần giải nén và mở `Game.exe` là chơi được ngay, không cần game gốc.
-- **Bản Android APK tích hợp sẵn**: Cài đặt và chơi mượt mà trên điện thoại/máy tính bảng Android.
-- **Khắc phục trọn vẹn âm thanh trên iOS Safari/WebKit** qua bộ giải mã WebAudio VorbisDecoder WASM chuyên dụng.
-- **Sửa toàn bộ các lỗi hiển thị, từ nối, kính ngữ và đồng bộ thoại - voice audio**.
+# ─── Git push ────────────────────────────────────────────────────────────────
+def git_push():
+    log.header("STEP 6 — GIT PUSH")
+    branch = git_current_branch()
+    log.step(f"Pushing branch '{branch}' and tags to origin")
+    run(["git", "push", "origin", branch], cwd=REPO_ROOT)
+    run(["git", "push", "--tags", "origin"], cwd=REPO_ROOT)
+    log.ok("Push complete.")
 
----
 
-### 📦 Tải về theo nền tảng:
-1. **Windows PC (Full Game)**: Tải file `ThienSuClinic-PC-{version}.zip`, giải nén và chạy `Game.exe` để chơi ngay.
-2. **Android**: Tải và cài đặt trực tiếp `ThienSuClinic-Android-{version}.apk`.
-3. **iOS (iPhone / iPad)**: Tải file `ThienSuClinic-iOS-{version}.ipa` và cài qua TrollStore, Scarlet, Sideloadly hoặc AltStore.
-"""
-    
-    notes_file = RELEASE_OUT / "RELEASE_NOTES.md"
-    notes_file.write_text(release_notes, encoding="utf-8")
-    
-    cmd = [
-        "gh", "release", "create", version,
-        "--title", f"Bản Dịch Việt Hóa {version} [{commit_sha}]",
-        "--notes-file", str(notes_file)
-    ]
-    for asset in assets:
-        if asset and Path(asset).exists():
-            cmd.append(str(asset))
-            
-    print(f"[EXEC] Dang upload len GitHub Release...")
-    ok, out, err = run_cmd(cmd, cwd=REPO_ROOT)
-    if ok:
-        print("\n" + "="*60)
-        print("  🎉 PUBLISH RELEASE LEN GITHUB THANH CONG!")
-        print("  Link:", out.strip())
-        print("="*60)
-        return True
-    else:
-        print(f"[NOTE] Thu cap nhat assets voi gh release upload:")
-        up_cmd = ["gh", "release", "upload", version, "--clobber"] + [str(a) for a in assets if a and Path(a).exists()]
-        ok2, out2, err2 = run_cmd(up_cmd, cwd=REPO_ROOT)
-        if ok2:
-            print("[OK] Da upload/cap nhat assets len GitHub Release thanh cong!")
-            return True
-        else:
-            print("[ERR] Upload that bai:", err, err2)
-            return False
-
+# ─── Main ────────────────────────────────────────────────────────────────────
 def main():
-    parser = argparse.ArgumentParser(description="Tao va publish Release da nen tang len GitHub")
-    parser.add_argument("--version", default="v1.0.0", help="Phien ban release (vi du: v1.0.0)")
-    parser.add_argument("--skip-upload", action="store_true", help="Chi dong goi tai cho ma khong upload")
+    parser = argparse.ArgumentParser(
+        description="Dong goi release da nen tang (PC / Android / iOS). "
+                    "Upload len GitHub: dung upload_github_release.py"
+    )
+    parser.add_argument("--version",       default="",    help="Phien ban release, vd: v1.2.0 (bat buoc)")
+    parser.add_argument("--skip-android",  action="store_true", help="Bo qua build Android APK")
+    parser.add_argument("--skip-ios",      action="store_true", help="Bo qua build iOS IPA")
+    parser.add_argument("--skip-git",      action="store_true", help="Bo qua git commit va push")
+    parser.add_argument("--dry-run",       action="store_true", help="Chay thu, khong thuc su ghi file")
     args = parser.parse_args()
-    
-    version = args.version
-    commit_sha = get_git_commit()
-    print(f"[+] Bat dau quy trinh Release cho phien ban: {version} (Commit: {commit_sha})")
-    
-    # 1. Update Game Title
+
+    # ── Version: hỏi nếu không truyền ──
+    version = args.version.strip()
+    if not version:
+        try:
+            version = input("Nhap phien ban release (vi du: v1.2.0): ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nHuy.")
+            sys.exit(0)
+    if not version:
+        print("[ERR] Phai nhap phien ban! Vi du: python create_release.py --version v1.2.0")
+        sys.exit(1)
+    if not version.startswith("v"):
+        version = "v" + version
+
+    global log
+    RELEASE_OUT.mkdir(parents=True, exist_ok=True)
+    log = Logger(dry_run=args.dry_run, log_dir=RELEASE_OUT / "logs")
+
+    log.header(f"CREATE RELEASE — {version}")
+    if args.dry_run:
+        log.warn("DRY-RUN mode: không có file nào được ghi/thay đổi")
+
+    commit_sha = git_commit_sha()
+    log.info(f"Version    : {version}")
+    log.info(f"Commit SHA : {commit_sha}")
+    log.info(f"Branch     : {git_current_branch()}")
+    log.info(f"Game dir   : {GAME_TEST_DIR}")
+    log.info(f"Output dir : {RELEASE_OUT}")
+
+    # ── Steps ────────────────────────────────────────────────────────────────
     update_game_title(version, commit_sha)
-    
-    # 2. Git commit version change
-    run_cmd(["git", "add", "."], cwd=REPO_ROOT)
-    run_cmd(["git", "commit", "-m", f"chore(release): bump version to {version} [{commit_sha}]"], cwd=REPO_ROOT)
-    commit_sha = get_git_commit() # Refresh commit sha after bump commit
-    
-    # 3. Package Full PC Game Zip
-    pc_zip = build_pc_game_zip(version)
-    
-    # 4. Build Android APK
-    apk_file = build_android_apk(version)
-    
-    # 5. Build iOS IPA
-    ipa_file = build_ios_ipa(version)
-    
-    # 6. Publish to GitHub Release (if not skip-upload)
-    if not args.skip_upload:
-        assets = [pc_zip, apk_file, ipa_file]
-        publish_github_release(version, commit_sha, assets)
+
+    if not args.skip_git:
+        commit_sha = git_commit_version(version, commit_sha)
+
+    pc_zip  = build_pc_zip(version)
+    apk     = None if args.skip_android else build_android_apk(version)
+    ipa     = None if args.skip_ios     else build_ios_ipa(version)
+
+    if not args.skip_git:
+        git_push()
+
+    # ── Summary ──────────────────────────────────────────────────────────────
+    log.summary(version, [
+        ("PC Full Game ZIP", pc_zip),
+        ("Android APK",      apk),
+        ("iOS IPA",          ipa),
+    ])
+
+    if log.errors > 0:
+        log.error(f"Build hoàn thành với {log.errors} lỗi. Kiểm tra output ở trên.")
+        log.close()
+        sys.exit(1)
     else:
-        print("\n[OK] Bo qua buoc upload len GitHub (theo yeu cau --skip-upload).")
-        
-    # Push git commits and tags
-    run_cmd(["git", "push", "origin", "ios-build"], cwd=REPO_ROOT)
-    run_cmd(["git", "push", "--tags", "origin"], cwd=REPO_ROOT)
+        log.ok("Build thành công! Để upload lên GitHub, chạy:")
+        log.info(f"    python upload_github_release.py --version {version}")
+        log.close()
+
 
 if __name__ == "__main__":
     main()

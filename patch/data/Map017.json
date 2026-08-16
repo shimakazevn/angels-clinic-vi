@@ -4885,7 +4885,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Bị anh nói những lời như thế,"
+                                    "text": "Sera「Bị cưng nói những lời như thế,"
                                 }
                             ]
                         },
@@ -4893,7 +4893,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Bị anh nói những lời như thế,"
+                                "テキスト = Sera「Bị cưng nói những lời như thế,"
                             ]
                         },
                         {
@@ -5556,13 +5556,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "cũng hoàn toàn được mà..."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 5,
                             "parameters": [
@@ -5664,7 +5657,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Anh vẫn chưa cất con cu đi đúng không?"
+                                "Anh chưa cất con cu vào quần ngay đúng không?"
                             ]
                         },
                         {
@@ -5833,14 +5826,7 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Nếu vậy thì lượng tinh dịch nóng bỏng từ buổi trị liệu,"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 6,
-                            "parameters": [
-                                "Hãy trao hết cho em nhé...♡"
+                                "Thế thì tinh dịch sôi trào vì trị liệu, hãy cho em đi nào...♡"
                             ]
                         },
                         {
@@ -6098,7 +6084,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã chấp nhận sự quyến rũ của Sera!"
+                                    "text": "Đã chấp nhận lời mời gọi của Sera mất rồi!"
                                 }
                             ]
                         },
@@ -6276,7 +6262,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -6284,7 +6270,7 @@
                             "code": 657,
                             "indent": 6,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {
@@ -7968,13 +7954,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "cũng hoàn toàn được mà..."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 3,
                             "parameters": [
@@ -8076,7 +8055,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Anh vẫn chưa cất con cu đi đúng không?"
+                                "Anh chưa cất con cu vào quần ngay đúng không?"
                             ]
                         },
                         {
@@ -8245,14 +8224,7 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Nếu vậy thì lượng tinh dịch nóng bỏng từ buổi trị liệu,"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 4,
-                            "parameters": [
-                                "Hãy trao hết cho em nhé...♡"
+                                "Thế thì tinh dịch sôi trào vì trị liệu, hãy cho em đi nào...♡"
                             ]
                         },
                         {
@@ -8510,7 +8482,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã chấp nhận sự quyến rũ của Sera!"
+                                    "text": "Đã chấp nhận lời mời gọi của Sera mất rồi!"
                                 }
                             ]
                         },
@@ -8688,7 +8660,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -8696,7 +8668,7 @@
                             "code": 657,
                             "indent": 4,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {

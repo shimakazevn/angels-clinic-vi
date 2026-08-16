@@ -4883,7 +4883,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Bị anh nói những lời như thế,"
+                                    "text": "Sera「Bị cưng nói những lời như thế,"
                                 }
                             ]
                         },
@@ -4891,7 +4891,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Bị anh nói những lời như thế,"
+                                "テキスト = Sera「Bị cưng nói những lời như thế,"
                             ]
                         },
                         {
@@ -5629,7 +5629,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -5637,7 +5637,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {
@@ -7292,7 +7292,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -7300,7 +7300,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {

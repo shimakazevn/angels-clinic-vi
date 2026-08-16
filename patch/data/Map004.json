@@ -5057,7 +5057,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Bị anh nói những lời như thế,"
+                                    "text": "Sera「Bị cưng nói những lời như thế,"
                                 }
                             ]
                         },
@@ -5065,7 +5065,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Bị anh nói những lời như thế,"
+                                "テキスト = Sera「Bị cưng nói những lời như thế,"
                             ]
                         },
                         {
@@ -5590,13 +5590,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 5,
-                            "parameters": [
-                                "rất mong muốn con cu của anh, tiếc thật đấy."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 5,
                             "parameters": [
@@ -5698,7 +5691,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "...Lần cuối em xin hỏi lại anh một lần nữa."
+                                "...Em xin hỏi anh lại một lần cuối cùng."
                             ]
                         },
                         {
@@ -5803,7 +5796,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Thật ra anh rất muốn làm tình ân ái nồng cháy với em đúng không?"
+                                "Thực sự anh có muốn làm tình nồng nàn mặn nồng với em không?"
                             ]
                         },
                         {
@@ -5972,14 +5965,7 @@
                             "code": 401,
                             "indent": 6,
                             "parameters": [
-                                "Hì hì. Ra vậy sao."
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 6,
-                            "parameters": [
-                                "Vậy thì chúng ta tiến hành thôi nào."
+                                "Hì hì. Thế sao. Vậy thì chúng ta hãy làm thôi nào."
                             ]
                         },
                         {
@@ -6190,7 +6176,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -6198,7 +6184,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {
@@ -7873,13 +7859,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "rất mong muốn con cu của anh, tiếc thật đấy."
-                            ]
-                        },
-                        {
                             "code": 355,
                             "indent": 3,
                             "parameters": [
@@ -7981,7 +7960,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "...Lần cuối em xin hỏi lại anh một lần nữa."
+                                "...Em xin hỏi anh lại một lần cuối cùng."
                             ]
                         },
                         {
@@ -8086,7 +8065,7 @@
                             "code": 401,
                             "indent": 3,
                             "parameters": [
-                                "Thật ra anh rất muốn làm tình ân ái nồng cháy với em đúng không?"
+                                "Thực sự anh có muốn làm tình nồng nàn mặn nồng với em không?"
                             ]
                         },
                         {
@@ -8255,14 +8234,7 @@
                             "code": 401,
                             "indent": 4,
                             "parameters": [
-                                "Hì hì. Ra vậy sao."
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 4,
-                            "parameters": [
-                                "Vậy thì chúng ta tiến hành thôi nào."
+                                "Hì hì. Thế sao. Vậy thì chúng ta hãy làm thôi nào."
                             ]
                         },
                         {
@@ -8473,7 +8445,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm đấy」"
+                                    "text": "Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                                 }
                             ]
                         },
@@ -8481,7 +8453,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera「Anh đã cố gắng hết mình rồi. Giỏi lắm ạ」"
+                                "テキスト = Sera「Cưng đã cố gắng hết mình. Ngoan quá đi」"
                             ]
                         },
                         {

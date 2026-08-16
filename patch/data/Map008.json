@@ -1481,8 +1481,8 @@
                                 "showChoice",
                                 "選択肢の表示",
                                 {
-                                    "messageText": "Bạn có muốn bỏ qua OP không?\n\n※Nếu bỏ qua, sau tóm tắt câu chuyện\n　sẽ bắt đầu hướng dẫn trận chiến.",
-                                    "choices": "[\"{\\\"label\\\": \\\"Xem OP (Khuyên dùng cho lần đầu)\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\", \"{\\\"label\\\": \\\"Bỏ qua\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\"]",
+                                    "messageText": "Bạn có muốn bỏ qua phần Mở đầu không?\n\n※ Nếu bỏ qua, sau phần Tóm tắt cốt truyện\n　sẽ bắt đầu phần Hướng dẫn chiến đấu.",
+                                    "choices": "[\"{\\\"label\\\":\\\"Xem phần Mở đầu (nên xem lần đầu)\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"Bỏ qua\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
                                     "cancelType": "false",
@@ -1529,7 +1529,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "Hủy許可 = false"
+                                "キャンセル許可 = false"
                             ]
                         },
                         {
@@ -1755,13 +1755,6 @@
                             ]
                         },
                         {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "luôn trăn trở vì chứng xuất tinh quá sớm của mình."
-                            ]
-                        },
-                        {
                             "code": 221,
                             "indent": 1,
                             "parameters": []
@@ -1830,14 +1823,7 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "Tại phòng khám chuyên trị liệu xuất tinh sớm mà anh tình cờ bước vào,"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Gặp gỡ cô y tá Thiên Sứ vô cảm, Sera."
+                                "Tình cờ bước vào một phòng khám chuyên trị xuất tinh sớm, anh đã gặp gỡ Sera — cô y tá Thiên Sứ với khuôn mặt lạnh lùng."
                             ]
                         },
                         {
@@ -1923,21 +1909,7 @@
                             "code": 401,
                             "indent": 1,
                             "parameters": [
-                                "Để chữa chứng xuất tinh sớm cho nhân vật chính,"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "Sera đã đề xuất phương pháp trị liệu \"làm chuyện 18+"
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 1,
-                            "parameters": [
-                                "với cô ấy để quen dần\"."
+                                "Để chữa trị chứng xuất tinh sớm cho nhân vật chính, Sera đã đề xuất liệu pháp trị liệu \"Tự mình làm chuyện dâm dục với anh để anh quen dần\"."
                             ]
                         },
                         {

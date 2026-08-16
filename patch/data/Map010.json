@@ -10137,7 +10137,7 @@
                                 0,
                                 0,
                                 2,
-                                "\\c[18]※Chú ý※"
+                                "\\c[18]※Lưu Ý※"
                             ]
                         },
                         {
@@ -10145,13 +10145,6 @@
                             "indent": 3,
                             "parameters": [
                                 "Bạn có thể mở khóa toàn bộ phân cảnh bất kể tiến độ chơi. Tuy nhiên, \\c[18]không thể khôi phục lại trạng thái chưa mở khóa\\c[0]."
-                            ]
-                        },
-                        {
-                            "code": 401,
-                            "indent": 3,
-                            "parameters": [
-                                "Tuy nhiên, \\c[18]không thể hoàn tác lại trạng thái chưa mở khóa\\c[0]."
                             ]
                         },
                         {
@@ -10163,7 +10156,7 @@
                                 "選択肢の表示",
                                 {
                                     "messageText": "Bạn có muốn mở khóa toàn bộ phân cảnh không?\n",
-                                    "choices": "[\"{\\\"label\\\": \\\"Có\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\", \"{\\\"label\\\": \\\"Không\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\"]",
+                                    "choices": "[\"{\\\"label\\\":\\\"Có\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"Không\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
                                     "cancelType": "true",
@@ -10210,7 +10203,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "Hủy許可 = true"
+                                "キャンセル許可 = true"
                             ]
                         },
                         {
@@ -10296,7 +10289,7 @@
                                 "選択肢の表示",
                                 {
                                     "messageText": "Bạn có chắc muốn mở khóa toàn bộ phân cảnh không?\n",
-                                    "choices": "[\"{\\\"label\\\": \\\"Có\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\", \"{\\\"label\\\": \\\"Không\\\", \\\"switchId\\\": \\\"\\\", \\\"resultNumber\\\": \\\"0\\\"}\"]",
+                                    "choices": "[\"{\\\"label\\\":\\\"Có\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\",\"{\\\"label\\\":\\\"Không\\\",\\\"switchId\\\":\\\"\\\",\\\"resultNumber\\\":\\\"0\\\"}\"]",
                                     "maxCols": "1",
                                     "variableNumber": "12",
                                     "cancelType": "true",
@@ -10343,7 +10336,7 @@
                             "code": 657,
                             "indent": 4,
                             "parameters": [
-                                "Hủy許可 = true"
+                                "キャンセル許可 = true"
                             ]
                         },
                         {
@@ -10817,7 +10810,7 @@
                             "code": 401,
                             "indent": 5,
                             "parameters": [
-                                "Đã mở khóa toàn bộ cảnh quay."
+                                "Đã mở khóa toàn bộ phân cảnh."
                             ]
                         },
                         {
