@@ -5178,7 +5178,7 @@ this.PIXI.spine = this.PIXI.spine || {};
         AnimationState.prototype.setAnimation = function (trackIndex, animationName, loop) {
             var animation = this.data.skeletonData.findAnimation(animationName);
             if (animation == null)
-                console.warn("[pixi-spine] Animation not found: " + animationName); return null;
+                throw new Error("Animation not found: " + animationName);
             return this.setAnimationWith(trackIndex, animation, loop);
         };
         /** Sets the current animation for a track, discarding any queued animations. If the formerly current track entry was never
@@ -5216,7 +5216,7 @@ this.PIXI.spine = this.PIXI.spine || {};
         AnimationState.prototype.addAnimation = function (trackIndex, animationName, loop, delay) {
             var animation = this.data.skeletonData.findAnimation(animationName);
             if (animation == null)
-                console.warn("[pixi-spine] Animation not found: " + animationName); return null;
+                throw new Error("Animation not found: " + animationName);
             return this.addAnimationWith(trackIndex, animation, loop, delay);
         };
         /** Adds an animation to be played after the current or last queued animation for a track. If the track is empty, it is
@@ -5773,10 +5773,10 @@ this.PIXI.spine = this.PIXI.spine || {};
         AnimationStateData.prototype.setMix = function (fromName, toName, duration) {
             var from = this.skeletonData.findAnimation(fromName);
             if (from == null)
-                console.warn("[pixi-spine] Animation not found: " + fromName); return;
+                throw new Error("Animation not found: " + fromName);
             var to = this.skeletonData.findAnimation(toName);
             if (to == null)
-                console.warn("[pixi-spine] Animation not found: " + toName); return;
+                throw new Error("Animation not found: " + toName);
             this.setMixWith(from, to, duration);
         };
         AnimationStateData.prototype.setMixByName = function (fromName, toName, duration) {
@@ -11862,7 +11862,7 @@ this.PIXI.spine = this.PIXI.spine || {};
         AnimationState.prototype.setAnimation = function (trackIndex, animationName, loop) {
             var animation = this.data.skeletonData.findAnimation(animationName);
             if (animation == null)
-                console.warn("[pixi-spine] Animation not found: " + animationName); return null;
+                throw new Error("Animation not found: " + animationName);
             return this.setAnimationWith(trackIndex, animation, loop);
         };
         AnimationState.prototype.setAnimationWith = function (trackIndex, animation, loop) {
@@ -11891,7 +11891,7 @@ this.PIXI.spine = this.PIXI.spine || {};
         AnimationState.prototype.addAnimation = function (trackIndex, animationName, loop, delay) {
             var animation = this.data.skeletonData.findAnimation(animationName);
             if (animation == null)
-                console.warn("[pixi-spine] Animation not found: " + animationName); return null;
+                throw new Error("Animation not found: " + animationName);
             return this.addAnimationWith(trackIndex, animation, loop, delay);
         };
         AnimationState.prototype.addAnimationWith = function (trackIndex, animation, loop, delay) {
@@ -12356,10 +12356,10 @@ this.PIXI.spine = this.PIXI.spine || {};
         AnimationStateData.prototype.setMix = function (fromName, toName, duration) {
             var from = this.skeletonData.findAnimation(fromName);
             if (from == null)
-                console.warn("[pixi-spine] Animation not found: " + fromName); return;
+                throw new Error("Animation not found: " + fromName);
             var to = this.skeletonData.findAnimation(toName);
             if (to == null)
-                console.warn("[pixi-spine] Animation not found: " + toName); return;
+                throw new Error("Animation not found: " + toName);
             this.setMixWith(from, to, duration);
         };
         AnimationStateData.prototype.setMixByName = function (fromName, toName, duration) {
@@ -18389,7 +18389,7 @@ this.PIXI.spine = this.PIXI.spine || {};
             if (loop === void 0) { loop = false; }
             var animation = this.data.skeletonData.findAnimation(animationName);
             if (!animation)
-                console.warn("[pixi-spine] Animation not found: " + animationName); return null;
+                throw new Error("Animation not found: " + animationName);
             return this.setAnimationWith(trackIndex, animation, loop);
         };
         /** Sets the current animation for a track, discarding any queued animations. If the formerly current track entry was never
@@ -18430,7 +18430,7 @@ this.PIXI.spine = this.PIXI.spine || {};
             if (delay === void 0) { delay = 0; }
             var animation = this.data.skeletonData.findAnimation(animationName);
             if (!animation)
-                console.warn("[pixi-spine] Animation not found: " + animationName); return null;
+                throw new Error("Animation not found: " + animationName);
             return this.addAnimationWith(trackIndex, animation, loop, delay);
         };
         /** Adds an animation to be played after the current or last queued animation for a track. If the track is empty, it is
@@ -19116,10 +19116,10 @@ this.PIXI.spine = this.PIXI.spine || {};
         AnimationStateData.prototype.setMix = function (fromName, toName, duration) {
             var from = this.skeletonData.findAnimation(fromName);
             if (!from)
-                console.warn("[pixi-spine] Animation not found: " + fromName); return;
+                throw new Error("Animation not found: " + fromName);
             var to = this.skeletonData.findAnimation(toName);
             if (!to)
-                console.warn("[pixi-spine] Animation not found: " + toName); return;
+                throw new Error("Animation not found: " + toName);
             this.setMixWith(from, to, duration);
         };
         /** Sets the mix duration when changing from the specified animation to the other.

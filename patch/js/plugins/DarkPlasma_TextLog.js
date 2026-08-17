@@ -582,10 +582,6 @@
    * ただし、handlerやキー操作の仕組みはSelectableのものを使いたい。
    */
   class Window_TextLog extends Window_Selectable {
-    convertEscapeCharacters(text) {
-      if (!text) return '';
-      return Window_Base.prototype.convertEscapeCharacters.call(this, text);
-    }
     initialize(rect) {
       super.initialize(rect);
       this.setupLogMessages();
