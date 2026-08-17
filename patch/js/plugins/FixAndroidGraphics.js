@@ -188,9 +188,10 @@
     Graphics.pageToCanvasX = function(x) {
         if (this._canvas) {
             const rect = this._canvas.getBoundingClientRect();
-            const clientX = x - (window.pageXOffset || window.scrollX || 0);
-            const scaleX = rect.width / (this._width || 1280);
-            return Math.round((clientX - rect.left) / scaleX);
+            if (rect.width > 0) {
+                const clientX = x - (window.pageXOffset || window.scrollX || 0);
+                return Math.round((clientX - rect.left) * ((this._width || 1280) / rect.width));
+            }
         }
         return 0;
     };
@@ -198,26 +199,18 @@
     Graphics.pageToCanvasY = function(y) {
         if (this._canvas) {
             const rect = this._canvas.getBoundingClientRect();
-            const clientY = y - (window.pageYOffset || window.scrollY || 0);
-            const scaleY = rect.height / (this._height || 720);
-            return Math.round((clientY - rect.top) / scaleY);
+            if (rect.height > 0) {
+                const clientY = y - (window.pageYOffset || window.scrollY || 0);
+                return Math.round((clientY - rect.top) * ((this._height || 720) / rect.height));
+            }
         }
         return 0;
     };
 
+    // isInsideCanvas receives ALREADY converted canvas coordinates (x: 0..width, y: 0..height)
     Graphics.isInsideCanvas = function(x, y) {
-        if (this._canvas) {
-            const rect = this._canvas.getBoundingClientRect();
-            const clientX = x - (window.pageXOffset || window.scrollX || 0);
-            const clientY = y - (window.pageYOffset || window.scrollY || 0);
-            return (
-                clientX >= rect.left &&
-                clientX <= rect.right &&
-                clientY >= rect.top &&
-                clientY <= rect.bottom
-            );
-        }
-        return false;
+        return x >= 0 && x < (this._width || 1280) && y >= 0 && y < (this._height || 720);
     };
 })();
+
 

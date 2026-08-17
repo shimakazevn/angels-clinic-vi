@@ -3,7 +3,7 @@
   "main": "index.html",
   "chromium-args": "--force-color-profile=srgb --disable-devtools",
   "window": {
-    "title": "Phòng Khám Thiên Sứ: Chuyên Trị Xuất Tinh Sớm [v2.0.0-6a2852e]",
+    "title": "Phòng Khám Thiên Sứ: Chuyên Trị Xuất Tinh Sớm [v2.0.0-7b2c6a9]",
     "width": 1280,
     "height": 720,
     "position": "center",
