@@ -47,6 +47,13 @@ Bản patch Tiếng Việt hoàn chỉnh dành cho tựa game **天使の早漏�
 - **MEMO 15**:
   - Main Story 15-1 & 15-2 (`CE 432`, `CE 433`): Căn chỉnh toàn bộ kịch bản Sera mặc trang phục Bunny Girl trong suốt dán ngực mô phỏng sòng bài và trận đánh bài Poker hài hước.
   - H-scene 17 (`CE 518`): Căn chỉnh toàn bộ kịch bản sóc cu bằng chân trong trang phục Bunny Girl, phân đoạn bóc miếng dán ti và Việt hóa lựa chọn cầu xin (`み、見せて欲しいです……！` $\rightarrow$ `X-Xin hãy cho tôi xem đi ạ……!`).
+- **MEMO 16**:
+  - Main Story 16 (`CE 435`): Sửa dòng thoại bị chèn nhầm khi đánh quái vật bảo vệ thành phố (`Sera cẩn thận nguy hiểm quá!`) và căn chỉnh phân đoạn Sera dỗi đáng yêu khi Main hỏi về ma thuật cản trở nhận thức.
+  - H-scene 18 (`CE 519`): Việt hóa hoàn toàn các lựa chọn làm nũng bé cưng (`ま、ママ……っ` $\rightarrow$ `M-Mẹ ơi……`, `ま……ママ、しーしーさせて……っ！` $\rightarrow$ `M…… Mẹ ơi, cho con tè dầm đi mà……!`).
+- **MEMO 17**:
+  - First Treatment Event (`CE 436`): Căn chỉnh lại toàn bộ **13 dòng đối thoại** (phân đoạn Sera giới thiệu bài rên rỉ giả tạo để thử thách bản lĩnh đàn ông).
+  - Main Story 17 (`CE 437`): Dịch và nạp lại toàn bộ **66 dòng kịch bản cao trào** (Main phát hiện vết sẹo Rồng & cuộc tâm sự trải lòng đầy cảm động của Sera trên sân thượng phòng khám).
+  - H-scene 19 (`CE 520`): Dịch và nạp lại toàn bộ **55 dòng** kịch bản màn Paizuri kẹp ngực làm tình giả lập cùng những tiếng rên rỉ giả vờ mê hoặc của Sera.
 - **Việt hóa 100% tất cả các Lựa chọn (Choices) trong Game**:
   - Dịch toàn bộ các nhánh lựa chọn trong chiến đấu, sự kiện, H-scene và Aftercare (`ま、ママ……っ`, `ま……ママ、しーしーさせて……っ`, `反応する/反応しない`, `楽しかったです/ソワソワしました`, `胸を揉む`, `こと細かく教える`...) sang tiếng Việt hoàn chỉnh.
 - **EX 1 & EX 3**:
