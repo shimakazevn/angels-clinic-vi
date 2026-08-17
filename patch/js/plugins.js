@@ -1,5 +1,6 @@
-var  =
+var $plugins =
 [
+
   {
     "name": "PluginCommonBase",
     "status": true,
