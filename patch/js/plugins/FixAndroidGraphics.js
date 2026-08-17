@@ -160,7 +160,7 @@
         return true;
     };
 
-    // 8. Edge-to-Edge Fullscreen Stretched Canvas Scaling on Mobile (100% Fullscreen, No Black Bars)
+    // 8. Fullscreen Stretched 100% Canvas Scaling on Android
     Utils.isLocal = function() {
         return true;
     };
@@ -172,45 +172,4 @@
     Graphics._stretchHeight = function() {
         return window.innerHeight || document.documentElement.clientHeight;
     };
-
-    Graphics._centerElement = function(element) {
-        element.style.position = "fixed";
-        element.style.top = "0px";
-        element.style.left = "0px";
-        element.style.width = "100vw";
-        element.style.height = "100vh";
-        element.style.margin = "0px";
-        element.style.padding = "0px";
-        element.style.zIndex = "1";
-    };
-
-    // Pixel-perfect touch / click coordinate conversion using getBoundingClientRect
-    Graphics.pageToCanvasX = function(x) {
-        if (this._canvas) {
-            const rect = this._canvas.getBoundingClientRect();
-            if (rect.width > 0) {
-                const clientX = x - (window.pageXOffset || window.scrollX || 0);
-                return Math.round((clientX - rect.left) * ((this._width || 1280) / rect.width));
-            }
-        }
-        return 0;
-    };
-
-    Graphics.pageToCanvasY = function(y) {
-        if (this._canvas) {
-            const rect = this._canvas.getBoundingClientRect();
-            if (rect.height > 0) {
-                const clientY = y - (window.pageYOffset || window.scrollY || 0);
-                return Math.round((clientY - rect.top) * ((this._height || 720) / rect.height));
-            }
-        }
-        return 0;
-    };
-
-    // isInsideCanvas receives ALREADY converted canvas coordinates (x: 0..width, y: 0..height)
-    Graphics.isInsideCanvas = function(x, y) {
-        return x >= 0 && x < (this._width || 1280) && y >= 0 && y < (this._height || 720);
-    };
 })();
-
-

@@ -177,9 +177,9 @@
             } else {
                 this.showAllWindow();
             }
-        } else if (this.isHidden() && (this.isTriggered() || TouchInput.isTriggered() || TouchInput.isPressed() || TouchInput.isCancelled() || param.restoreByDecision)) {
+        } else if (this.isHidden() && this.isTriggered() && param.restoreByDecision) {
             this.showAllWindow();
-            if (param.syncSwitch && param.triggerSwitch > 0) {
+            if (param.syncSwitch) {
                 $gameSwitches.setValue(param.triggerSwitch, false);
             }
             Input.update();
