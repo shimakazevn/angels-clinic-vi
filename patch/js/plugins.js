@@ -360,9 +360,9 @@ var $plugins =
     "status": true,
     "description": "Plugin tạo mục cài đặt tùy chỉnh trong Tùy chọn",
     "parameters": {
-      "NumberOptions": "[{\"Name\": \"Giảm ST Nhận Vào\", \"DefaultValue\": \"0\", \"VariableID\": \"15\", \"HiddenFlag\": \"false\", \"Script\": \"\", \"NumberMin\": \"0\", \"NumberMax\": \"100\", \"NumberStep\": \"25\", \"Unit\": \"%\", \"AddPosition\": \"\", \"PaddingTop\": \"0\"}, {\"Name\": \"Tăng ST Gây Ra\", \"DefaultValue\": \"0\", \"VariableID\": \"16\", \"HiddenFlag\": \"false\", \"Script\": \"\", \"NumberMin\": \"0\", \"NumberMax\": \"100\", \"NumberStep\": \"25\", \"Unit\": \"%\", \"AddPosition\": \"\", \"PaddingTop\": \"0\"}]",
+      "NumberOptions": "[\"{\\\"Name\\\": \\\"Giảm ST Nhận Vào\\\", \\\"DefaultValue\\\": \\\"0\\\", \\\"VariableID\\\": \\\"15\\\", \\\"HiddenFlag\\\": \\\"false\\\", \\\"Script\\\": \\\"\\\", \\\"NumberMin\\\": \\\"0\\\", \\\"NumberMax\\\": \\\"100\\\", \\\"NumberStep\\\": \\\"25\\\", \\\"Unit\\\": \\\"%\\\", \\\"AddPosition\\\": \\\"\\\", \\\"PaddingTop\\\": \\\"0\\\"}\", \"{\\\"Name\\\": \\\"Tăng ST Gây Ra\\\", \\\"DefaultValue\\\": \\\"0\\\", \\\"VariableID\\\": \\\"16\\\", \\\"HiddenFlag\\\": \\\"false\\\", \\\"Script\\\": \\\"\\\", \\\"NumberMin\\\": \\\"0\\\", \\\"NumberMax\\\": \\\"100\\\", \\\"NumberStep\\\": \\\"25\\\", \\\"Unit\\\": \\\"%\\\", \\\"AddPosition\\\": \\\"\\\", \\\"PaddingTop\\\": \\\"0\\\"}\"]",
       "StringOptions": "",
-      "SwitchOptions": "[{\"Name\": \"x2 EXP Nhận Được\", \"DefaultValue\": \"false\", \"SwitchID\": \"36\", \"OnText\": \"\", \"OffText\": \"\", \"HiddenFlag\": \"false\", \"Script\": \"\", \"AddPosition\": \"\", \"PaddingTop\": \"0\"}, {\"Name\": \"x2 Tiền Nhận Được\", \"DefaultValue\": \"false\", \"SwitchID\": \"37\", \"OnText\": \"\", \"OffText\": \"\", \"HiddenFlag\": \"false\", \"Script\": \"\", \"AddPosition\": \"\", \"PaddingTop\": \"0\"}]",
+      "SwitchOptions": "[\"{\\\"Name\\\": \\\"x2 EXP Nhận Được\\\", \\\"DefaultValue\\\": \\\"false\\\", \\\"SwitchID\\\": \\\"36\\\", \\\"OnText\\\": \\\"\\\", \\\"OffText\\\": \\\"\\\", \\\"HiddenFlag\\\": \\\"false\\\", \\\"Script\\\": \\\"\\\", \\\"AddPosition\\\": \\\"\\\", \\\"PaddingTop\\\": \\\"0\\\"}\", \"{\\\"Name\\\": \\\"x2 Tiền Nhận Được\\\", \\\"DefaultValue\\\": \\\"false\\\", \\\"SwitchID\\\": \\\"37\\\", \\\"OnText\\\": \\\"\\\", \\\"OffText\\\": \\\"\\\", \\\"HiddenFlag\\\": \\\"false\\\", \\\"Script\\\": \\\"\\\", \\\"AddPosition\\\": \\\"\\\", \\\"PaddingTop\\\": \\\"0\\\"}\"]",
       "VolumeOptions": "",
       "CustomOrder": "[\"NumberOptions\",\"StringOptions\",\"SwitchOptions\",\"VolumeOptions\"]"
     }
@@ -393,7 +393,7 @@ var $plugins =
     "status": true,
     "description": "v1.001 Tùy chỉnh giao diện menu Cài đặt Options",
     "parameters": {
-      "SeparateList": "[{\"SeparateText\": \"\\\\I[253]\\\\c[1]Tùy Chỉnh\", \"Position\": \"0\"}, {\"SeparateText\": \"\\\\I[254]\\\\c[2]Tùy Chọn Gian Lận\", \"Position\": \"5\"}]",
+      "SeparateList": "[\"{\\\"SeparateText\\\": \\\"\\\\\\\\I[253]\\\\\\\\c[1]Tùy Chỉnh\\\", \\\"Position\\\": \\\"0\\\"}\", \"{\\\"SeparateText\\\": \\\"\\\\\\\\I[254]\\\\\\\\c[2]Tùy Chọn Gian Lận\\\", \\\"Position\\\": \\\"5\\\"}\"]",
       "SeparateCenter": "true",
       "MaxVisibleCommands": "",
       "WindowWidth": "",
