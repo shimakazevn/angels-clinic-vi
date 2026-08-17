@@ -220,15 +220,6 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
-    }
-
-
-    @Override
     protected void onPause() {
         super.onPause();
         if (mWebView != null) {
