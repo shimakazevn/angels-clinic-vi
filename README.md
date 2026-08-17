@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-v1.5.0-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-v2.0.0-gold.svg?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-PC%20%7C%20Android%20%7C%20iOS-brightgreen.svg?style=flat-square)
 ![Engine](https://img.shields.io/badge/engine-RPG%20Maker%20MZ-orange.svg?style=flat-square)
 ![Status](https://img.shields.io/badge/status-Completed-success.svg?style=flat-square)
@@ -13,49 +13,26 @@ Bản patch Tiếng Việt hoàn chỉnh dành cho tựa game **天使の早漏�
 
 ---
 
-## 🚀 Nhật ký cập nhật v1.5.0 (Changelog)
+## 🚀 Nhật ký cập nhật v2.0.0 (Changelog)
+
+### 🌟 Đại tu dịch thuật & Khắc phục 100% lỗi lệch kịch bản (Full Project Audit)
+- **Hoàn thiện 100% toàn bộ kịch bản cốt truyện & H-scene**:
+  - **MEMO 18 & MEMO 22**: Sửa lỗi thoại dồn ép tâm lý (`CE 439`, `CE 446`).
+  - **MEMO 23 (Cow Girl Sữa Mẹ)**: Căn chỉnh phân đoạn bú sữa và cưng nựng trong `CE 449`.
+  - **MEMO 25 (Đại kết cục / Ending)**: Căn chỉnh toàn bộ **12 dòng đối thoại kết thúc game** (`CE 453`), lời bộc bạch xúc động của Sera về nơi chốn thuộc về cô và lời hứa mãi mãi bên cạnh Main.
+  - **H-scene 3 (`CE 504`)**: Căn chỉnh 20 dòng màn kẹp ngực tra tấn quy đầu và phần thưởng bắn tinh vào khe ngực.
+  - **H-scene 20 & 21 (`CE 521`, `CE 522`)**: Dịch và căn chỉnh toàn bộ màn làm tình cưỡi ngựa lọt khe ngoài trời tại hẻm nhỏ bãi biển, loại bỏ các chuỗi header bị chèn nhầm.
+  - **H-scene 23 (`CE 524`)**: Dịch trọn vẹn màn làm tình kem tăng độ nhạy cảm x10.
+  - **H-scene 28 (Climax Post-game `CE 529`)**: Dịch và khôi phục toàn bộ **64 dòng thoại cao trào** (màn cưỡng bức ân ái dồn dập, kích thích tam giác 3 điểm và xuất tinh nhiều lần liên tục), xóa sạch các chuỗi tag menu bị lỗi trước đó.
+  - **Hệ thống Aftercare**: Căn chỉnh toàn bộ lời thoại mở khóa và hướng dẫn chăm sóc tinh thần sau trị liệu (`CE 364`).
 
 ### 🛠️ Sửa lỗi hệ thống & Tương thích đa nền tảng
 - **Khắc phục triệt để lỗi treo/đơ game trên Android & iOS** tại **Main Story 17** (`CE 437`).
 - **Khắc phục lỗi crash trong chiến đấu (`Animation not found: 能力変化_主人公3_残り6`)**: Nâng cấp plugin `PictureSpine.js` và thư viện `pixi-spine.js` tự động fallback số lượt hiệu ứng còn lại (`_残り5`) và chặn hoàn toàn các ngoại lệ thiếu animation Spine làm dừng game.
 - **Sửa lỗi hiển thị thông báo hệ thống**: Điều chỉnh đúng thông báo điều khiển con lăn chuột (`\C[2]con lăn chuột\C[0]`) tại các H-scene 13, 14, 18 (`CE 514`, `CE 515`, `CE 519`).
-- **Tối ưu hóa pipeline đóng gói**: Hỗ trợ xuất đồng thời bộ cài đặt PC (Full Game ZIP), Android (APK) và iOS (IPA).
-
-### 📖 Sửa lỗi lệch kịch bản (Desync) & Trau chuốt dịch thuật
-- **MEMO 5 & MEMO 6**:
-  - Sửa lỗi chính tả `uốn tréo lưng` $\rightarrow$ `uốn éo thắt lưng`, `nhai nhồm nhàm` $\rightarrow$ `nhai nhồm nhoàm`.
-  - Căn chỉnh và nạp lại toàn bộ **31 dòng** kịch bản màn thủ dâm bằng đồ lót của Sera (`CE 507`).
-- **MEMO 9**:
-  - Dịch lại nửa đầu Main Story 9-2 (`CE 421`): Đoạn mời rượu nho & đùa kiểu Thiên Sứ (*Angel joke*) không còn bị trùng lặp với đoạn say xỉn.
-  - Căn chỉnh lại nửa sau H-scene 10 (`CE 511`): Nạp lại đầy đủ thoại Sera kích thích và nuốt trọn tinh dịch thay cho đoạn đếm ngược bị lệch.
-- **MEMO 10**:
-  - Căn chỉnh lại toàn bộ **19 câu đối thoại** giữa Sera, Succubus và Main tại tiệm sách 18+ (`CE 423`), sửa đúng vai nhân vật và nội dung.
-- **MEMO 11**:
-  - Sửa phân đoạn uống thuốc teo nhỏ cơ thể (Shota) trong Main Story 11-1 (`CE 424`).
-  - Dịch và nạp lại toàn bộ **33 dòng** màn kẹp ngực Shota (`CE 513`) bám sát kịch bản gốc tiếng Nhật.
-- **MEMO 12**:
-  - Sửa dòng thông báo con lăn chuột bị chèn vào giữa H-scene 14 (`CE 515`).
-  - Sửa toàn bộ lỗi chính tả `ăn ăn kiểm điểm` $\rightarrow$ `ăn năn kiểm điểm` trong các màn xuất tinh trừng phạt.
-  - Trau chuốt lời thoại của Succubus ở Main Story 12-2 (`CE 427`).
-- **MEMO 13**:
-  - Main Story 13 (`CE 429`): Căn chỉnh lại toàn bộ **46 dòng đối thoại** (đoạn cứu mạo hiểm giả kiệt sức, tin đồn Thiên Sứ Sa Ngã và câu hỏi giả định giữa Sera và Main), sửa đúng đại từ xưng hô và câu cảm ơn của Sera (`信じてくれて、ありがとうございます` $\rightarrow$ `Cảm ơn anh vì đã luôn tin tưởng em`).
-  - H-scene 15 (`CE 516`): Dịch và nạp lại toàn bộ **45 dòng** màn dẫm chân lên mặt / sỉ nhục Mazo và Việt hóa lựa chọn cầu xin xuất tinh (`射精させてください、お願いします` $\rightarrow$ `Xin hãy cho anh xuất tinh, anh xin em...!`).
-- **MEMO 14**:
-  - Main Story 14-1 (`CE 430`): Sửa đúng lời thoại giải thích trị liệu hãm phanh / ngắt nhịp của Sera, loại bỏ đoạn thoại bị chèn nhầm.
-  - Main Story 14-2 (`CE 431`): Dịch và căn chỉnh toàn bộ **78 dòng đối thoại** giữa Main, Succubus tại tiệm tạp hóa và cuộc gặp gỡ thân tình với Sera tại phố mua sắm.
-  - H-scene 16 (`CE 517`): Sửa typo `uốn tréo` $\rightarrow$ `uốn éo`, sửa phân đoạn nhử mồi lừa hãm phanh (fakeout) của Sera không còn bị trộn lẫn với màn Bunny Girl.
-- **MEMO 15**:
-  - Main Story 15-1 & 15-2 (`CE 432`, `CE 433`): Căn chỉnh toàn bộ kịch bản Sera mặc trang phục Bunny Girl trong suốt dán ngực mô phỏng sòng bài và trận đánh bài Poker hài hước.
-  - H-scene 17 (`CE 518`): Căn chỉnh toàn bộ kịch bản sóc cu bằng chân trong trang phục Bunny Girl, phân đoạn bóc miếng dán ti và Việt hóa lựa chọn cầu xin (`み、見せて欲しいです……！` $\rightarrow$ `X-Xin hãy cho tôi xem đi ạ……!`).
-- **MEMO 16**:
-  - Main Story 16 (`CE 435`): Sửa dòng thoại bị chèn nhầm khi đánh quái vật bảo vệ thành phố (`Sera cẩn thận nguy hiểm quá!`) và căn chỉnh phân đoạn Sera dỗi đáng yêu khi Main hỏi về ma thuật cản trở nhận thức.
-  - H-scene 18 (`CE 519`): Việt hóa hoàn toàn các lựa chọn làm nũng bé cưng (`ま、ママ……っ` $\rightarrow$ `M-Mẹ ơi……`, `ま……ママ、しーしーさせて……っ！` $\rightarrow$ `M…… Mẹ ơi, cho con tè dầm đi mà……!`).
-- **MEMO 17**:
-  - First Treatment Event (`CE 436`): Căn chỉnh lại toàn bộ **13 dòng đối thoại** (phân đoạn Sera giới thiệu bài rên rỉ giả tạo để thử thách bản lĩnh đàn ông).
-  - Main Story 17 (`CE 437`): Dịch và nạp lại toàn bộ **66 dòng kịch bản cao trào** (Main phát hiện vết sẹo Rồng & cuộc tâm sự trải lòng đầy cảm động của Sera trên sân thượng phòng khám).
-  - H-scene 19 (`CE 520`): Dịch và nạp lại toàn bộ **55 dòng** kịch bản màn Paizuri kẹp ngực làm tình giả lập cùng những tiếng rên rỉ giả vờ mê hoặc của Sera.
 - **Việt hóa 100% tất cả các Lựa chọn (Choices) trong Game**:
   - Dịch toàn bộ các nhánh lựa chọn trong chiến đấu, sự kiện, H-scene và Aftercare (`ま、ママ……っ`, `ま……ママ、しーしーさせて……っ`, `反応する/反応しない`, `楽しかったです/ソワソワしました`, `胸を揉む`, `こと細かく教える`...) sang tiếng Việt hoàn chỉnh.
+- **Tối ưu hóa pipeline đóng gói**: Hỗ trợ xuất đồng thời bộ cài đặt PC (Full Game ZIP), Android (APK) và iOS (IPA).
 - **EX 1 & EX 3**:
   - Căn chỉnh ngữ cảnh khổ dâm và sửa lỗi chính tả tại `CE 509`.
   - Dịch và nạp lại toàn bộ **39 dòng** màn trừng phạt sục cu từ phía sau tư thế bò 4 chân (`CE 509`).
@@ -73,13 +50,13 @@ Bản patch Tiếng Việt hoàn chỉnh dành cho tựa game **天使の早漏�
 3. Nhấp đúp chuột chạy file `.bat` để script tự động tải và cập nhật bản patch mới nhất.
 
 #### Cách 2: Cài đặt thủ công (Offline)
-1. Tải gói ZIP `ThienSuClinic-PC-v1.5.0.zip` từ mục Releases và giải nén.
+1. Tải gói ZIP `ThienSuClinic-PC-v2.0.0.zip` từ mục Releases và giải nén.
 2. Chạy trực tiếp `Game.exe` để trải nghiệm game đã tích hợp sẵn tiếng Việt.
 
 ---
 
 ### 📱 Dành cho Android
-1. Tải file `ThienSuClinic-Android-v1.5.0.apk` từ mục Releases.
+1. Tải file `ThienSuClinic-Android-v2.0.0.apk` từ mục Releases.
 2. Cài đặt trực tiếp file APK lên thiết bị Android của bạn (cho phép cài đặt từ nguồn không xác định nếu được yêu cầu).
 3. Mở game và trải nghiệm (đã tích hợp đầy đủ tính năng cảm ứng và plugin tự động ngắt dòng).
 
