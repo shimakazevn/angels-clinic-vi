@@ -160,7 +160,7 @@
         return true;
     };
 
-    // 8. Fullscreen Stretched 100% Canvas Scaling on Android
+    // 8. Edge-to-Edge Fullscreen Stretched Canvas Scaling on Mobile (100% Fullscreen, No Black Bars)
     Utils.isLocal = function() {
         return true;
     };
@@ -172,4 +172,52 @@
     Graphics._stretchHeight = function() {
         return window.innerHeight || document.documentElement.clientHeight;
     };
+
+    Graphics._centerElement = function(element) {
+        element.style.position = "fixed";
+        element.style.top = "0px";
+        element.style.left = "0px";
+        element.style.width = "100vw";
+        element.style.height = "100vh";
+        element.style.margin = "0px";
+        element.style.padding = "0px";
+        element.style.zIndex = "1";
+    };
+
+    // Pixel-perfect touch / click coordinate conversion using getBoundingClientRect
+    Graphics.pageToCanvasX = function(x) {
+        if (this._canvas) {
+            const rect = this._canvas.getBoundingClientRect();
+            const clientX = x - (window.pageXOffset || window.scrollX || 0);
+            const scaleX = rect.width / (this._width || 1280);
+            return Math.round((clientX - rect.left) / scaleX);
+        }
+        return 0;
+    };
+
+    Graphics.pageToCanvasY = function(y) {
+        if (this._canvas) {
+            const rect = this._canvas.getBoundingClientRect();
+            const clientY = y - (window.pageYOffset || window.scrollY || 0);
+            const scaleY = rect.height / (this._height || 720);
+            return Math.round((clientY - rect.top) / scaleY);
+        }
+        return 0;
+    };
+
+    Graphics.isInsideCanvas = function(x, y) {
+        if (this._canvas) {
+            const rect = this._canvas.getBoundingClientRect();
+            const clientX = x - (window.pageXOffset || window.scrollX || 0);
+            const clientY = y - (window.pageYOffset || window.scrollY || 0);
+            return (
+                clientX >= rect.left &&
+                clientX <= rect.right &&
+                clientY >= rect.top &&
+                clientY <= rect.bottom
+            );
+        }
+        return false;
+    };
 })();
+
