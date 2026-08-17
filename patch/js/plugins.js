@@ -1,6 +1,5 @@
-var $plugins =
+var  =
 [
-
   {
     "name": "PluginCommonBase",
     "status": true,
@@ -473,14 +472,5 @@ var $plugins =
     "status": true,
     "description": "Fixes Android Graphics init error",
     "parameters": {}
-  },
-  {
-    "name": "FullScreenStretch",
-    "status": true,
-    "description": "Hỗ trợ hiển thị Tràn Viền Toàn Màn Hình (Full Screen Stretch / No Black Bars) và giữ đúng tọa độ cảm ứng.",
-    "parameters": {
-      "defaultStretch": "true",
-      "optionName": "Tràn viền toàn màn hình"
-    }
   }
 ];
