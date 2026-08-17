@@ -32,5 +32,8 @@ desktop.ini
 ios/output/
 ios/ThienSuClinic-shell.ipa
 ios/*.ipa
+ios/_temp_inject/
+scratch/
 
 release_dist/
+
