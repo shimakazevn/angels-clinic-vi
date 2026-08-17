@@ -1882,7 +1882,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Từ đây sẽ là mối quan hệ giữa tiếp viên và khách hàng"
+                                    "text": "セラ「ここからはキャストとお客さんという"
                                 }
                             ]
                         },
@@ -1890,7 +1890,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = Sera「Từ đây sẽ là mối quan hệ giữa tiếp viên và khách hàng"
+                                "テキスト = セラ「ここからはキャストとお客さんという"
                             ]
                         },
                         {
@@ -1901,7 +1901,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Vì sẽ giữ mối quan hệ này nên」"
+                                    "text": "　　　関係性でいきますので」"
                                 }
                             ]
                         },
@@ -1909,7 +1909,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = 　　　Vì sẽ giữ mối quan hệ này nên」"
+                                "テキスト = 　　　関係性でいきますので」"
                             ]
                         },
                         {
@@ -1920,7 +1920,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera đã bắt đầu phớt lờ lời khen!"
+                                    "text": "セラは褒め言葉を受け流すようになった！"
                                 }
                             ]
                         },
@@ -1928,7 +1928,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = Sera đã bắt đầu phớt lờ lời khen!"
+                                "テキスト = セラは褒め言葉を受け流すようになった！"
                             ]
                         },
                         {
@@ -1939,7 +1939,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "※Không thể giải trừ"
+                                    "text": "※解除不可"
                                 }
                             ]
                         },
@@ -1947,7 +1947,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = ※Không thể giải trừ"
+                                "テキスト = ※解除不可"
                             ]
                         },
                         {
@@ -5110,7 +5110,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bắn tinh mất rồi!"
+                                    "text": "\\N[1]は射精してしまった！"
                                 }
                             ]
                         },
@@ -5118,7 +5118,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1]は射精してしまった！"
                             ]
                         },
                         {
@@ -6428,7 +6428,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã trụ vững qua buổi trị liệu!"
+                                    "text": "治療に耐えきった！"
                                 }
                             ]
                         },
@@ -6436,7 +6436,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Đã trụ vững qua buổi trị liệu!"
+                                "テキスト = 治療に耐えきった！"
                             ]
                         },
                         {
@@ -6447,7 +6447,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Nhịn được như vậy thật tuyệt vời,"
+                                    "text": "セラ「我慢できるなんて素敵ですね、"
                                 }
                             ]
                         },
@@ -6455,7 +6455,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Nhịn được như vậy thật tuyệt vời,"
+                                "テキスト = セラ「我慢できるなんて素敵ですね、"
                             ]
                         },
                         {
@@ -6466,7 +6466,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Anh trai?」"
+                                    "text": "　　　お兄さん？」"
                                 }
                             ]
                         },
@@ -6474,7 +6474,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = 　　　Anh trai?」"
+                                "テキスト = 　　　お兄さん？」"
                             ]
                         },
                         {
@@ -7825,7 +7825,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bắn tinh mất rồi!"
+                                    "text": "\\N[1]は射精してしまった！"
                                 }
                             ]
                         },
@@ -7833,7 +7833,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1]は射精してしまった！"
                             ]
                         },
                         {
@@ -9143,7 +9143,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã trụ vững qua buổi trị liệu!"
+                                    "text": "治療に耐えきった！"
                                 }
                             ]
                         },
@@ -9151,7 +9151,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Đã trụ vững qua buổi trị liệu!"
+                                "テキスト = 治療に耐えきった！"
                             ]
                         },
                         {
@@ -9162,7 +9162,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Nhịn được như vậy thật tuyệt vời,"
+                                    "text": "セラ「我慢できるなんて素敵ですね、"
                                 }
                             ]
                         },
@@ -9170,7 +9170,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera「Nhịn được như vậy thật tuyệt vời,"
+                                "テキスト = セラ「我慢できるなんて素敵ですね、"
                             ]
                         },
                         {
@@ -9181,7 +9181,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Anh trai?」"
+                                    "text": "　　　お兄さん？」"
                                 }
                             ]
                         },
@@ -9189,7 +9189,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = 　　　Anh trai?」"
+                                "テキスト = 　　　お兄さん？」"
                             ]
                         },
                         {

@@ -37,6 +37,18 @@ Bản patch Tiếng Việt hoàn chỉnh dành cho tựa game **天使の早漏�
   - Sửa dòng thông báo con lăn chuột bị chèn vào giữa H-scene 14 (`CE 515`).
   - Sửa toàn bộ lỗi chính tả `ăn ăn kiểm điểm` $\rightarrow$ `ăn năn kiểm điểm` trong các màn xuất tinh trừng phạt.
   - Trau chuốt lời thoại của Succubus ở Main Story 12-2 (`CE 427`).
+- **MEMO 13**:
+  - Main Story 13 (`CE 429`): Căn chỉnh lại toàn bộ **46 dòng đối thoại** (đoạn cứu mạo hiểm giả kiệt sức, tin đồn Thiên Sứ Sa Ngã và câu hỏi giả định giữa Sera và Main), sửa đúng đại từ xưng hô và câu cảm ơn của Sera (`信じてくれて、ありがとうございます` $\rightarrow$ `Cảm ơn anh vì đã luôn tin tưởng em`).
+  - H-scene 15 (`CE 516`): Dịch và nạp lại toàn bộ **45 dòng** màn dẫm chân lên mặt / sỉ nhục Mazo và Việt hóa lựa chọn cầu xin xuất tinh (`射精させてください、お願いします` $\rightarrow$ `Xin hãy cho anh xuất tinh, anh xin em...!`).
+- **MEMO 14**:
+  - Main Story 14-1 (`CE 430`): Sửa đúng lời thoại giải thích trị liệu hãm phanh / ngắt nhịp của Sera, loại bỏ đoạn thoại bị chèn nhầm.
+  - Main Story 14-2 (`CE 431`): Dịch và căn chỉnh toàn bộ **78 dòng đối thoại** giữa Main, Succubus tại tiệm tạp hóa và cuộc gặp gỡ thân tình với Sera tại phố mua sắm.
+  - H-scene 16 (`CE 517`): Sửa typo `uốn tréo` $\rightarrow$ `uốn éo`, sửa phân đoạn nhử mồi lừa hãm phanh (fakeout) của Sera không còn bị trộn lẫn với màn Bunny Girl.
+- **MEMO 15**:
+  - Main Story 15-1 & 15-2 (`CE 432`, `CE 433`): Căn chỉnh toàn bộ kịch bản Sera mặc trang phục Bunny Girl trong suốt dán ngực mô phỏng sòng bài và trận đánh bài Poker hài hước.
+  - H-scene 17 (`CE 518`): Căn chỉnh toàn bộ kịch bản sóc cu bằng chân trong trang phục Bunny Girl, phân đoạn bóc miếng dán ti và Việt hóa lựa chọn cầu xin (`み、見せて欲しいです……！` $\rightarrow$ `X-Xin hãy cho tôi xem đi ạ……!`).
+- **Việt hóa 100% tất cả các Lựa chọn (Choices) trong Game**:
+  - Dịch toàn bộ các nhánh lựa chọn trong chiến đấu, sự kiện, H-scene và Aftercare (`ま、ママ……っ`, `ま……ママ、しーしーさせて……っ`, `反応する/反応しない`, `楽しかったです/ソワソワしました`, `胸を揉む`, `こと細かく教える`...) sang tiếng Việt hoàn chỉnh.
 - **EX 1 & EX 3**:
   - Căn chỉnh ngữ cảnh khổ dâm và sửa lỗi chính tả tại `CE 509`.
   - Dịch và nạp lại toàn bộ **39 dòng** màn trừng phạt sục cu từ phía sau tư thế bò 4 chân (`CE 509`).

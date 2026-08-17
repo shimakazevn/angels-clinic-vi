@@ -1788,7 +1788,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Với thân hình nhỏ bé yếu ớt,"
+                                    "text": "小さくてひ弱な身体では"
                                 }
                             ]
                         },
@@ -1796,7 +1796,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = Với thân hình nhỏ bé yếu ớt,"
+                                "テキスト = 小さくてひ弱な身体では"
                             ]
                         },
                         {
@@ -1807,7 +1807,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Không thể tăng chỉ số được!"
+                                    "text": "能力を上昇させられない！"
                                 }
                             ]
                         },
@@ -1815,7 +1815,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = Không thể tăng chỉ số được!"
+                                "テキスト = 能力を上昇させられない！"
                             ]
                         },
                         {
@@ -1826,7 +1826,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "※Không thể giải trừ"
+                                    "text": "※解除不可"
                                 }
                             ]
                         },
@@ -1834,7 +1834,7 @@
                             "code": 657,
                             "indent": 0,
                             "parameters": [
-                                "テキスト = ※Không thể giải trừ"
+                                "テキスト = ※解除不可"
                             ]
                         },
                         {
@@ -4993,7 +4993,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Thật là……. Phải ra dáng người lớn"
+                                    "text": "セラ「もう……。お姉さんらしく"
                                 }
                             ]
                         },
@@ -5001,7 +5001,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Thật là……. Phải ra dáng người lớn"
+                                "テキスト = セラ「もう……。お姉さんらしく"
                             ]
                         },
                         {
@@ -5012,7 +5012,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "　　　Sẽ không còn ra vẻ thong dong được nữa đâu」"
+                                    "text": "　　　振舞えなくなっちゃうでしょ」"
                                 }
                             ]
                         },
@@ -5020,7 +5020,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = 　　　Sẽ không còn ra vẻ thong dong được nữa đâu」"
+                                "テキスト = 　　　振舞えなくなっちゃうでしょ」"
                             ]
                         },
                         {
@@ -5089,7 +5089,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Số lượt còn lại đã bị giảm 1!"
+                                    "text": "残りターンが-1された！"
                                 }
                             ]
                         },
@@ -5097,7 +5097,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Số lượt còn lại đã bị giảm 1!"
+                                "テキスト = 残りターンが-1された！"
                             ]
                         },
                         {
@@ -5442,7 +5442,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bắn tinh mất rồi!"
+                                    "text": "\\N[1]は射精してしまった！"
                                 }
                             ]
                         },
@@ -5450,7 +5450,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1]は射精してしまった！"
                             ]
                         },
                         {
@@ -5741,7 +5741,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã trụ vững qua buổi trị liệu!"
+                                    "text": "治療に耐えきった！"
                                 }
                             ]
                         },
@@ -5749,7 +5749,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Đã trụ vững qua buổi trị liệu!"
+                                "テキスト = 治療に耐えきった！"
                             ]
                         },
                         {
@@ -5760,7 +5760,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cố gắng lắm. Bé ngoan ngầu lắm đấy」"
+                                    "text": "セラ「頑張ったね。僕くん格好いいよ」"
                                 }
                             ]
                         },
@@ -5768,7 +5768,7 @@
                             "code": 657,
                             "indent": 5,
                             "parameters": [
-                                "テキスト = Sera「Cố gắng lắm. Bé ngoan ngầu lắm đấy」"
+                                "テキスト = セラ「頑張ったね。僕くん格好いいよ」"
                             ]
                         },
                         {
@@ -7126,7 +7126,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "\\N[1] đã bắn tinh mất rồi!"
+                                    "text": "\\N[1]は射精してしまった！"
                                 }
                             ]
                         },
@@ -7134,7 +7134,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = \\N[1] đã bắn tinh mất rồi!"
+                                "テキスト = \\N[1]は射精してしまった！"
                             ]
                         },
                         {
@@ -7425,7 +7425,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Đã trụ vững qua buổi trị liệu!"
+                                    "text": "治療に耐えきった！"
                                 }
                             ]
                         },
@@ -7433,7 +7433,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Đã trụ vững qua buổi trị liệu!"
+                                "テキスト = 治療に耐えきった！"
                             ]
                         },
                         {
@@ -7444,7 +7444,7 @@
                                 "add",
                                 "メッセージ追加",
                                 {
-                                    "text": "Sera「Cố gắng lắm. Bé ngoan ngầu lắm đấy」"
+                                    "text": "セラ「頑張ったね。僕くん格好いいよ」"
                                 }
                             ]
                         },
@@ -7452,7 +7452,7 @@
                             "code": 657,
                             "indent": 3,
                             "parameters": [
-                                "テキスト = Sera「Cố gắng lắm. Bé ngoan ngầu lắm đấy」"
+                                "テキスト = セラ「頑張ったね。僕くん格好いいよ」"
                             ]
                         },
                         {
