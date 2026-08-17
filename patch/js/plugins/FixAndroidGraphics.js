@@ -33,8 +33,9 @@
     Graphics._setupPixi = function() {
         PIXI.utils.skipHello();
         
-        // Manual texture GC to prevent destroying preloaded Spine skeletons/textures
-        PIXI.settings.GC_MODE = PIXI.GC_MODES.MANUAL;
+        // Auto garbage collection for textures every 600 frames to save VRAM
+        PIXI.settings.GC_MAX_IDLE = 600;
+        PIXI.settings.GC_MODE = PIXI.GC_MODES.AUTO;
         
         // Linear scale mode for crisp rendering
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.LINEAR;
@@ -171,74 +172,4 @@
     Graphics._stretchHeight = function() {
         return window.innerHeight || document.documentElement.clientHeight;
     };
-
-    // 9. Touch Protection for Message Window & H-Scenes on Android
-    const _Window_Message_update = Window_Message.prototype.update;
-    Window_Message.prototype.update = function() {
-        if (typeof this.isHidden === "function" && this.isHidden()) {
-            if (TouchInput.isTriggered() || TouchInput.isPressed() || TouchInput.isCancelled()) {
-                if (typeof this.showAllWindow === "function") {
-                    this.showAllWindow();
-                }
-            }
-        }
-        _Window_Message_update.apply(this, arguments);
-    };
-
-    // 10. WebGL Render Error Boundary (Prevents Game Interpreter from Halting)
-    Graphics._onTick = function(deltaTime) {
-        this._fpsCounter.startTick();
-        if (this._tickHandler) {
-            this._tickHandler(deltaTime);
-        }
-        if (this._canRender()) {
-            try {
-                this._app.render();
-            } catch (e) {
-                console.warn("[FixAndroidGraphics] Suppressed WebGL render exception:", e);
-            }
-        }
-        this._fpsCounter.endTick();
-    };
-
-    // 11. Touch Swipe / Tap to Virtual Mouse Wheel (Fixes Still 11/13 "Cuộn lên" on Mobile)
-    (function() {
-        let touchStartY = 0;
-        let lastTouchY = 0;
-        let isSwiping = false;
-
-        window.addEventListener("touchstart", function(e) {
-            if (e.touches && e.touches.length > 0) {
-                touchStartY = e.touches[0].pageY;
-                lastTouchY = touchStartY;
-                isSwiping = false;
-            }
-        }, { passive: true });
-
-        window.addEventListener("touchmove", function(e) {
-            if (e.touches && e.touches.length > 0) {
-                const currentY = e.touches[0].pageY;
-                const diffY = currentY - lastTouchY;
-                if (Math.abs(currentY - touchStartY) > 10) {
-                    isSwiping = true;
-                    // Swiping up (finger moves up -> diffY < 0 -> scroll up / wheelY < 0)
-                    // Swiping down (finger moves down -> diffY > 0 -> scroll down / wheelY > 0)
-                    if (diffY < -4) {
-                        TouchInput._newState.wheelY = -120;
-                    } else if (diffY > 4) {
-                        TouchInput._newState.wheelY = 120;
-                    }
-                    lastTouchY = currentY;
-                }
-            }
-        }, { passive: true });
-
-        window.addEventListener("touchend", function(e) {
-            if (!isSwiping) {
-                // Tapping on screen also sends a wheel up signal to break view-shift loops
-                TouchInput._newState.wheelY = -120;
-            }
-            isSwiping = false;
-        }, { passive: true });
-    })();
 })();

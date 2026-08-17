@@ -100,12 +100,23 @@ def generate_and_inject_icons(app_dir: Path, game_dir: Path):
                 }
             }
             pl["CFBundleIconFiles"] = icon_files
+            pl["GCSupportsGameMode"] = True
+            pl["GCSupportedGameControllers"] = [
+                {"ProfileName": "ExtendedGamepad"},
+                {"ProfileName": "DirectionalGamepad"}
+            ]
+            pl["GCSupportsControllerUserInteraction"] = True
+            pl["UIRequiresFullScreen"] = True
+            pl["UIViewControllerBasedStatusBarAppearance"] = True
+            pl["UIStatusBarHidden"] = True
+            pl["CADisableMinimumFrameDurationOnPhone"] = True
 
             with open(plist_path, 'wb') as fp:
                 plistlib.dump(pl, fp)
-            print("  [OK] Đã cập nhật Info.plist với CFBundleIcons")
+            print("  [OK] Đã cập nhật Info.plist với CFBundleIcons, Game Mode & Hiding Home Bar")
         except Exception as e:
             print(f"  [!] Cảnh báo patch Info.plist: {e}")
+
 
 def setup_ios_audio_aliases_and_mapping(temp_www: Path):
     """Tạo bản sao ASCII an toàn cho toàn bộ file Audio có ký tự tiếng Nhật và sinh plugin map"""

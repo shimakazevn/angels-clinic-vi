@@ -13,9 +13,14 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         return true
     }
 
+    override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return .all
+    }
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .landscape
     }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
