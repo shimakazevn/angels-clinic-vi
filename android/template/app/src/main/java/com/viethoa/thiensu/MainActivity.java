@@ -65,6 +65,12 @@ public class MainActivity extends Activity {
         );
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        }
+
         mWebView = new WebView(this);
         mWebView.setBackgroundColor(Color.BLACK);
         mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -77,6 +83,7 @@ public class MainActivity extends Activity {
                 hideSystemUI();
             }
         });
+
 
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -211,6 +218,15 @@ public class MainActivity extends Activity {
             mWebView.resumeTimers();
         }
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
 
     @Override
     protected void onPause() {
